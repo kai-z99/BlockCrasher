@@ -1,6 +1,7 @@
 
 #include "Player.h"
 #include "PlayerMovementHandler.h"
+#include <cmath>
 
 
 PlayerMovementHandler::PlayerMovementHandler()
@@ -8,53 +9,60 @@ PlayerMovementHandler::PlayerMovementHandler()
 
 void PlayerMovementHandler::HandlePlayerMovement(Player* p)
 {
-    if (IsKeyDown(KEY_W) && IsKeyDown(KEY_D))
-    {
-        p->Move(3, -3);
-        p->SetDirection(NE);
-    }
-    else if (IsKeyDown(KEY_S) && IsKeyDown(KEY_D))
-    {
-        p->Move(3, 3);
-        p->SetDirection(SE);
-    }
-    else if (IsKeyDown(KEY_S) && IsKeyDown(KEY_A))
-    {
-        p->Move(-3, 3);
-        p->SetDirection(SW);
-    }
-    else if (IsKeyDown(KEY_W) && IsKeyDown(KEY_A))
-    {
-        p->Move(-3, -3);
-        p->SetDirection(NW);
-    }
+    float moveSpeed = 6.0;
+    int dx = 0;
+    int dy = 0;
 
-    else if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
+    if (IsKeyDown(KEY_A))
     {
-    }
-
-    else if (IsKeyDown(KEY_W) && IsKeyDown(KEY_S))
-    {
-    }
-
-    else if (IsKeyDown(KEY_A))
-    {
-        p->Move(-3, 0);
+        dx -= moveSpeed;
         p->SetDirection(W);
     }
-    else if (IsKeyDown(KEY_W))
+    if (IsKeyDown(KEY_D))
     {
-        p->Move(0, -3);
-        p->SetDirection(N);
-    }
-    else if (IsKeyDown(KEY_D))
-    {
-        p->Move(3, 0);
+        dx += moveSpeed;
         p->SetDirection(E);
     }
-    else if (IsKeyDown(KEY_S))
+    if (IsKeyDown(KEY_W))
     {
-        p->Move(0, 3);
+        dy -= moveSpeed;
+        p->SetDirection(N);
+    }
+    if (IsKeyDown(KEY_S))
+    {
+        dy += moveSpeed;
         p->SetDirection(S);
     }
+
+    // Normalize diagonal speed
+    if (dx != 0 && dy != 0)
+    {
+        float norm = std::sqrt(dx * dx + dy * dy);
+        dx = (dx / norm) * moveSpeed;
+        dy = (dy / norm) * moveSpeed;
+
+        if (dx > 0 && dy < 0)
+        {
+            p->SetDirection(NE);
+        }
+
+        else if (dx < 0 && dy > 0)
+        {
+            p->SetDirection(SW);
+        }
+
+        else if (dx > 0 && dy > 0)
+        {
+            p->SetDirection(SE);
+        }
+
+        else if (dx < 0 && dy < 0)
+        {
+            p->SetDirection(NW);
+        }
+    }
+
+ 
+
+    p->Move(dx, dy);
 }
