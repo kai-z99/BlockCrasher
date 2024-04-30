@@ -28,8 +28,7 @@ void PlayerMovementHandler::HandlePlayerMovement(Player* p)
         p->Move(-3, -3);
         p->SetDirection(NW);
     }
-    //change 1 sdfef
-    //dsaads
+
     else if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
     {
     }
