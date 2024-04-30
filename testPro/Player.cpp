@@ -6,6 +6,7 @@ Player::Player(float x, float y)
 	this->currentPosition = { x,y };
 	this->currentDirection = N;
 	this->movementHandler = PlayerMovementHandler();
+	this->isBoosting = false;
 }
 
 void Player::Move(double x, double y)
@@ -85,7 +86,7 @@ void Player::Draw()
 	
 	
 
-	DrawTriangle(v1, v2, v3, MAROON);
+	DrawTriangle(v1, v2, v3, WHITE);
 }
 
 void Player::SetDirection(Direction d)

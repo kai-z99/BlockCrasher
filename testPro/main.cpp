@@ -13,7 +13,7 @@ int main() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
         p.Draw();
         p.HandleMovement();
         EndDrawing();

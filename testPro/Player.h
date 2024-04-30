@@ -9,6 +9,7 @@ private:
 	PlayerMovementHandler movementHandler;
 	Vector2 currentPosition;
 	Direction currentDirection;
+	bool isBoosting;
 
 public:
 	Player(float x, float y);
