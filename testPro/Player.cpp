@@ -24,6 +24,7 @@ void Player::Draw()
 	float HITBOX_SCALE = 10.0;
 	float x = this->currentPosition.x;
 	float y = this->currentPosition.y;
+	
 
 	switch (this->currentDirection)
 	{
@@ -87,6 +88,24 @@ void Player::Draw()
 	
 
 	DrawTriangle(v1, v2, v3, WHITE);
+	
+	//DrawRectangle(300, 300, 50, 50, WHITE);
+	//Rectangle testRec = { 600,600, 50,50};
+	//Vector2 testOrigin = { 25,25 };
+	//DrawRectanglePro(testRec, testOrigin, 45, WHITE);
+	//DrawCircle(300, 300, 5, RED);
+	//DrawCircle(600, 600, 5, BLUE);
+	
+	Rectangle tailRec = { x, y, 10, 10 }; // Centering the rectangle on x, y
+	Vector2 tailOrigin = { 5, 5 }; // Origin at the center of the rectangle
+
+	float rotation = 0;
+	if (this->currentDirection == NE || this->currentDirection == SE || this->currentDirection == SW || this->currentDirection == NW)
+	{
+		rotation = 45;
+	}
+
+	DrawRectanglePro(tailRec, tailOrigin, rotation, WHITE);
 }
 
 void Player::SetDirection(Direction d)

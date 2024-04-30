@@ -17,4 +17,5 @@ public:
 	void Draw();
 	void SetDirection(Direction d);
 	void HandleMovement();
+	bool CheckCollision();
 };
