@@ -48,11 +48,11 @@ int main() {
     return 0;
 }
 
-// to do, demonstrate collition of a rotatting rectangle. (diffoicult) chocie bweteen point triangle, point poly, circle rec
+// to do, demonstrate collition of a rotatting rectangle. (diffoicult) 
 // do this with point poly
 // 
 // chidlren of obsatcle like rotationg square, large tower roattor, bullet, etc
 //game class
 //dash ability
-//make hitbox accurate
 //make dynamic polygon obsatcle
+//ADD MORE COMMENTS

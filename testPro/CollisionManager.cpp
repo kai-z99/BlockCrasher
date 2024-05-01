@@ -21,6 +21,7 @@ bool CollisionManager::CheckCollisions(Player* p, std::vector<Obstacle*> Obstacl
 {
 	for (Obstacle* ob : ObstacleList)
 	{
+		//Depending on ObstacleType, check collisions.
 		switch (ob->GetType())
 		{
 		case Circle:
