@@ -1,11 +1,11 @@
 #include "Obstacle.h"
 
-float Obstacle::GetPosX() const
+float Obstacle::GetPosX()
 {
     return this->obstaclePosition.x;
 }
 
-float Obstacle::GetPosY() const
+float Obstacle::GetPosY()
 {
     return this->obstaclePosition.y;
 }

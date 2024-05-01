@@ -13,8 +13,8 @@ protected:
 
 public:
 	virtual void Draw() = 0;
-	float GetPosX() const;
-	float GetPosY() const;
+	float GetPosX();
+	float GetPosY();
 	ObstacleType GetType() const;
 	void SetColor(Color c);
 	
