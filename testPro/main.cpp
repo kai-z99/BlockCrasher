@@ -3,6 +3,7 @@
 #include <vector>
 #include "Player.h"
 #include "CircleObstacle.h"
+#include "StaticRectangleObstacle.h"
 #include "CollisionManager.h"
 
 
@@ -16,22 +17,31 @@ int main() {
 
     Player p = Player(200, 200);
     CircleObstacle c = CircleObstacle(300, 300, 50);
+    StaticRectangleObstacle s = StaticRectangleObstacle(600,600, 50, 30);
+
     CollisionManager z = CollisionManager();
     std::vector<Obstacle*> v;
     v.push_back(&c);
+    v.push_back(&s);
     
-    float angle = 0;
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(BLACK);
         c.Draw();
-        p.Draw();
+        s.Draw();
         p.HandleMovement();
+        DrawCircle(600, 600, 5, RED);
+
         if (z.CheckCollisions(&p, v))
         {
-            std::cout << "Collision\n";
+            p.SetColor(RED);
         }
-        
+
+        else
+        {
+            p.SetColor(WHITE);
+        }
+        p.Draw();
         EndDrawing();
     }
     CloseWindow();
@@ -39,9 +49,10 @@ int main() {
 }
 
 // to do, demonstrate collition of a rotatting rectangle. (diffoicult) chocie bweteen point triangle, point poly, circle rec
+// do this with point poly
 // 
-// then make obstable class
 // chidlren of obsatcle like rotationg square, large tower roattor, bullet, etc
 //game class
 //dash ability
 //make hitbox accurate
+//make dynamic polygon obsatcle

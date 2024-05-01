@@ -8,6 +8,7 @@ Player::Player(float x, float y)
 	this->movementHandler = PlayerMovementHandler();
 	this->isBoosting = false;
 	this->hitboxRadius = 8;
+	this->color = WHITE;
 }
 
 void Player::Move(double x, double y)
@@ -87,8 +88,9 @@ void Player::Draw()
 
 	
 	
+	
 
-	DrawTriangle(v1, v2, v3, WHITE);
+	DrawTriangle(v1, v2, v3, this->color);
 	
 	//DrawRectangle(300, 300, 50, 50, WHITE);
 	//Rectangle testRec = { 600,600, 50,50};
@@ -106,7 +108,7 @@ void Player::Draw()
 		rotation = 45;
 	}
 
-	DrawRectanglePro(tailRec, tailOrigin, rotation, WHITE);
+	DrawRectanglePro(tailRec, tailOrigin, rotation, this->color);
 }
 
 void Player::SetDirection(Direction d)
@@ -117,6 +119,11 @@ void Player::SetDirection(Direction d)
 void Player::HandleMovement()
 {
 	this->movementHandler.HandlePlayerMovement(this);
+}
+
+void Player::SetColor(Color c)
+{
+	this->color = c;
 }
 
 float Player::GetPosX()

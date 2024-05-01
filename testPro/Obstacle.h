@@ -9,12 +9,14 @@ class Obstacle
 protected:
 	Vector2 obstaclePosition;
 	ObstacleType type;
+	Color color;
 
 public:
 	virtual void Draw() = 0;
-	float GetPosX();
-	float GetPosY();
-	ObstacleType GetType();
+	float GetPosX() const;
+	float GetPosY() const;
+	ObstacleType GetType() const;
+	void SetColor(Color c);
 	
 
 };

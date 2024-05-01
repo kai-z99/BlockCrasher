@@ -1,17 +1,22 @@
 #include "Obstacle.h"
 
-float Obstacle::GetPosX()
+float Obstacle::GetPosX() const
 {
     return this->obstaclePosition.x;
 }
 
-float Obstacle::GetPosY()
+float Obstacle::GetPosY() const
 {
     return this->obstaclePosition.y;
 }
 
-ObstacleType Obstacle::GetType()
+ObstacleType Obstacle::GetType() const
 {
     return this->type;
+}
+
+void Obstacle::SetColor(Color c)
+{
+    this->color = c;
 }
 

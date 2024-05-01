@@ -134,6 +134,7 @@
     <ClCompile Include="Obstacle.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMovementHandler.cpp" />
+    <ClCompile Include="StaticRectangleObstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircleObstacle.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="ObstacleTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMovementHandler.h" />
+    <ClInclude Include="StaticRectangleObstacle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

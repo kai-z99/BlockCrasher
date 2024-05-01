@@ -9,6 +9,7 @@ private:
 	PlayerMovementHandler movementHandler;
 	Vector2 currentPosition;
 	Direction currentDirection;
+	Color color;
 	bool isBoosting;
 	float hitboxRadius;
 
@@ -18,6 +19,7 @@ public:
 	void Draw();
 	void SetDirection(Direction d);
 	void HandleMovement();
+	void SetColor(Color c);
 	float GetPosX();
 	float GetPosY();
 	float GetHitboxRadius();

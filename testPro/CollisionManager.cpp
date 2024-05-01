@@ -1,5 +1,5 @@
 #include "CollisionManager.h"
-
+#include <iostream>
 
 bool CollisionManager::CheckCircleObstacleCollisions(Player* p, CircleObstacle* c)
 {
@@ -9,6 +9,14 @@ bool CollisionManager::CheckCircleObstacleCollisions(Player* p, CircleObstacle* 
 	return CheckCollisionCircles(playerPos, p->GetHitboxRadius(), obstaclePos, c->GetRadius());
 }
 
+bool CollisionManager::CheckStaticRectangleObstacleCollisions(Player* p, StaticRectangleObstacle* s)
+{
+	Vector2 playerPos = { p->GetPosX(), p->GetPosY() };
+	Rectangle rec = { s->GetPosX() - (s->GetWidth()/2), s->GetPosY() - (s->GetHeight()/2), s->GetWidth(), s->GetHeight()};
+
+	return CheckCollisionCircleRec(playerPos, p->GetHitboxRadius(), rec);
+}
+
 bool CollisionManager::CheckCollisions(Player* p, std::vector<Obstacle*> ObstacleList)
 {
 	for (Obstacle* ob : ObstacleList)
@@ -16,12 +24,23 @@ bool CollisionManager::CheckCollisions(Player* p, std::vector<Obstacle*> Obstacl
 		switch (ob->GetType())
 		{
 		case Circle:
-			return CheckCircleObstacleCollisions(p, dynamic_cast<CircleObstacle*>(ob));
+			if (CheckCircleObstacleCollisions(p, dynamic_cast<CircleObstacle*>(ob)))
+			{
+				return true;
+			}
+			break;
+
+		case StaticRectangle:
+			if (CheckStaticRectangleObstacleCollisions(p, dynamic_cast<StaticRectangleObstacle*>(ob)))
+			{
+				return true;
+			}
 			break;
 
 		default:
-			return false;
 			break;
 		}
 	}
+
+	return false;
 }
