@@ -7,6 +7,7 @@ Player::Player(float x, float y)
 	this->currentDirection = N;
 	this->movementHandler = PlayerMovementHandler();
 	this->isBoosting = false;
+	this->hitboxRadius = 8;
 }
 
 void Player::Move(double x, double y)
@@ -116,4 +117,19 @@ void Player::SetDirection(Direction d)
 void Player::HandleMovement()
 {
 	this->movementHandler.HandlePlayerMovement(this);
+}
+
+float Player::GetPosX()
+{
+	return this->currentPosition.x;
+}
+
+float Player::GetPosY()
+{
+	return this->currentPosition.y;
+}
+
+float Player::GetHitboxRadius()
+{
+	return this->hitboxRadius;
 }

@@ -10,6 +10,7 @@ private:
 	Vector2 currentPosition;
 	Direction currentDirection;
 	bool isBoosting;
+	float hitboxRadius;
 
 public:
 	Player(float x, float y);
@@ -17,5 +18,7 @@ public:
 	void Draw();
 	void SetDirection(Direction d);
 	void HandleMovement();
-	bool CheckCollision();
+	float GetPosX();
+	float GetPosY();
+	float GetHitboxRadius();
 };
