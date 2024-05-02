@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="CircleObstacle.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="DynamicShapeObstacle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Obstacle.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="CircleObstacle.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Directions.h" />
+    <ClInclude Include="DynamicShapeObstacle.h" />
     <ClInclude Include="ObstacleTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMovementHandler.h" />

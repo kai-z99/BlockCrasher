@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "CircleObstacle.h"
 #include "StaticRectangleObstacle.h"
+#include "DynamicShapeObstacle.h"
 
 
 bool CollisionManager::CheckCircleObstacleCollisions(Player* p, CircleObstacle* c)
@@ -21,6 +22,11 @@ bool CollisionManager::CheckStaticRectangleObstacleCollisions(Player* p, StaticR
 	return CheckCollisionCircleRec(playerPos, p->GetHitboxRadius(), rec);
 }
 
+bool CollisionManager::CheckDynamicShapeObstacleCollisions(Player* p, DynamicShapeObstacle* d)
+{
+	return CheckCollisionPointPoly({ p->GetPosX(), p->GetPosY() }, &d->GetVertices()[0], d->GetVertices().size());
+}
+
 bool CollisionManager::CheckCollisions(Player* p, std::vector<Obstacle*> ObstacleList)
 {
 	for (Obstacle* ob : ObstacleList)
@@ -37,6 +43,13 @@ bool CollisionManager::CheckCollisions(Player* p, std::vector<Obstacle*> Obstacl
 
 		case StaticRectangle:
 			if (CheckStaticRectangleObstacleCollisions(p, dynamic_cast<StaticRectangleObstacle*>(ob)))
+			{
+				return true;
+			}
+			break;
+
+		case DynamicShape:
+			if (CheckDynamicShapeObstacleCollisions(p, dynamic_cast<DynamicShapeObstacle*>(ob)))
 			{
 				return true;
 			}

@@ -12,6 +12,7 @@ protected:
 	Color color;
 
 public:
+	virtual void Update(unsigned int frame);
 	virtual void Draw() = 0;
 	float GetPosX() const;
 	float GetPosY() const;

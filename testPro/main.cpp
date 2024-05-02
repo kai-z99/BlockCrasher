@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "CircleObstacle.h"
 #include "StaticRectangleObstacle.h"
+#include "DynamicShapeObstacle.h"
 #include "CollisionManager.h"
 
 
@@ -30,14 +31,28 @@ int main() {
     DisableCursor();
     SetTargetFPS(60);
 
+    std::vector<Vector2> v5;
+
+    v5.push_back({700,700});
+    v5.push_back({ 700,900 });
+    v5.push_back({ 900,900 });
+    v5.push_back({ 900,700 });
+    v5.push_back({ 700,700 });
+    
+
+
+
+
     Player p = Player(200, 200);
     CircleObstacle c = CircleObstacle(300, 300, 50);
     StaticRectangleObstacle s = StaticRectangleObstacle(600,600, 50, 30);
+    DynamicShapeObstacle d = DynamicShapeObstacle(800, 800, {800, 800}, v5, 0.01f);
 
     CollisionManager z = CollisionManager();
     std::vector<Obstacle*> v;
     v.push_back(&c);
     v.push_back(&s);
+    v.push_back(&d);
     
     std::vector<Vector2> v2 ;
     Vector2 voff;
@@ -75,6 +90,10 @@ int main() {
         rotate(v2[3], vc, rv);
         rotate(v2[4], vc, rv);
 
+
+        d.Draw();
+        d.Update(frameCount);
+        
         DrawLineStrip(&v2[0], 5, WHITE);
         DrawCircle(510, 510, 5, WHITE);
         if (CheckCollisionPointPoly({ 50,50 }, &v2[1], 4))
@@ -83,7 +102,7 @@ int main() {
         }
 
 
-        if (z.CheckCollisions(&p, v) || CheckCollisionPointPoly({p.GetPosX(),p.GetPosY()}, &v2[0], 5))
+        if (z.CheckCollisions(&p, v))
         {
             p.SetColor(RED);
         }
