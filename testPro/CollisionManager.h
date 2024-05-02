@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
 #include <raylib.h>
-#include "Player.h"
 
+
+class Player;
 class Obstacle;
 class CircleObstacle;
 class StaticRectangleObstacle;
