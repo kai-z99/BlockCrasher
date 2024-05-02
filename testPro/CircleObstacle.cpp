@@ -10,10 +10,10 @@ CircleObstacle::CircleObstacle(float x, float y, float r)
 
 void CircleObstacle::Draw()
 {
-	DrawCircle((int)this->obstaclePosition.x, (int)this->obstaclePosition.y, this->radius, this->color);
+	DrawCircleLines((int)this->obstaclePosition.x, (int)this->obstaclePosition.y, this->radius, this->color);
 }
 
-float CircleObstacle::GetRadius() //why??/ when make const
+float CircleObstacle::GetRadius()
 {
 	return this->radius;
 }

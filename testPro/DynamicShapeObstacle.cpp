@@ -1,6 +1,6 @@
 #include "DynamicShapeObstacle.h"
 
-DynamicShapeObstacle::DynamicShapeObstacle(float x, float y, Vector2 c, const std::vector<Vector2>& v, float rr)
+DynamicShapeObstacle::DynamicShapeObstacle(float x, float y, Vector2 c, const std::vector<Vector2>& v, float rr, float vo)
 {
 	this->obstaclePosition = { x,y };
     this->center = c;
@@ -8,6 +8,7 @@ DynamicShapeObstacle::DynamicShapeObstacle(float x, float y, Vector2 c, const st
 	this->vertices = v;
     this->color = WHITE;
     this->type = DynamicShape;
+    this->volatilaty = vo;
 }
 
 void DynamicShapeObstacle::Draw()
@@ -29,10 +30,11 @@ Vector2 Rotate(Vector2& v, Vector2 c, float angle) //helper
 
 void DynamicShapeObstacle::Update(unsigned int frame)
 {
+    float rotation = this->rotationRate * (cos(frame * this->volatilaty));
     //rotate
     for (Vector2& v : this->vertices)
     {
-        v = Rotate(v, this->center, this->rotationRate);
+        v = Rotate(v, this->center, rotation);
     }
 }
 
