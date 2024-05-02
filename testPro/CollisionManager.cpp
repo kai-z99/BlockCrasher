@@ -1,4 +1,6 @@
 #include "CollisionManager.h"
+#include "CircleObstacle.h"
+#include "StaticRectangleObstacle.h"
 #include <iostream>
 
 bool CollisionManager::CheckCircleObstacleCollisions(Player* p, CircleObstacle* c)

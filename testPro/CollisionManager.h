@@ -2,9 +2,10 @@
 #include <vector>
 #include <raylib.h>
 #include "Player.h"
-#include "Obstacle.h"
-#include "CircleObstacle.h"
-#include "StaticRectangleObstacle.h"
+
+class Obstacle;
+class CircleObstacle;
+class StaticRectangleObstacle;
 
 
 class CollisionManager

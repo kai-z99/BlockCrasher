@@ -1,5 +1,6 @@
-#include "player.h"
 #include <cmath>
+#include "player.h"
+
 
 Player::Player(float x, float y)
 {
@@ -11,7 +12,7 @@ Player::Player(float x, float y)
 	this->color = WHITE;
 }
 
-void Player::Move(double x, double y)
+void Player::Move(float x, float y)
 {
 	this->currentPosition.x += x;
 	this->currentPosition.y += y;

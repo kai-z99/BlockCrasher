@@ -48,7 +48,7 @@ int main() {
     return 0;
 }
 
-// to do, demonstrate collition of a rotatting rectangle. (diffoicult) 
+// to do, demonstrate collition of a rotatting rectangle.
 // do this with point poly
 // 
 // chidlren of obsatcle like rotationg square, large tower roattor, bullet, etc

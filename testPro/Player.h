@@ -3,6 +3,7 @@
 #include "Directions.h"
 #include "PlayerMovementHandler.h"
 
+
 class Player
 {
 private:
@@ -15,7 +16,7 @@ private:
 
 public:
 	Player(float x, float y);
-	void Move(double x, double y);
+	void Move(float x, float y);
 	void Draw();
 	void SetDirection(Direction d);
 	void HandleMovement();

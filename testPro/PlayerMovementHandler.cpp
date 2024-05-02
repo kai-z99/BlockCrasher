@@ -1,7 +1,7 @@
-
+#include <cmath>
 #include "Player.h"
 #include "PlayerMovementHandler.h"
-#include <cmath>
+
 
 
 PlayerMovementHandler::PlayerMovementHandler()
@@ -10,8 +10,8 @@ PlayerMovementHandler::PlayerMovementHandler()
 void PlayerMovementHandler::HandlePlayerMovement(Player* p)
 {
     float moveSpeed = 6.0;
-    int dx = 0;
-    int dy = 0;
+    float dx = 0;
+    float dy = 0;
 
     if (IsKeyDown(KEY_A))
     {
