@@ -7,7 +7,7 @@ CoinItem::CoinItem(float x, float y)
 	this->isCollected = false;
 	this->currentPosition = { x,y };
 	this->hitboxRadius = 11.0f;
-	this->animationState = 0;
+	this->animationState = 1;
 	this->type = Coin;
 }
 
@@ -18,14 +18,58 @@ bool CoinItem::CheckCollision(Player* p)
 
 void CoinItem::Draw()
 {
-	DrawRingLines({ this->currentPosition.x, this->currentPosition.y }, 3, 11, 0, 320, 6, YELLOW);
+	// Offset y for animation state
+	float yOffset = 0;
+
+	switch (this->animationState)
+	{
+	case 1:
+		yOffset = 0.0f;
+		break;
+
+	case 2:
+		yOffset = 1.5f;
+		break;
+
+	case 3:
+		yOffset = 3.0f;
+		break;
+
+	case 4:
+		yOffset = 4.0f;
+		break;
+
+	case 5:
+		yOffset = 3.0f;
+		break;
+
+	case 6:
+		yOffset = 1.5f;
+		break;
+	}
+
+
+	DrawRingLines({ this->currentPosition.x, this->currentPosition.y - yOffset }, 3, 11, 0, 320, 6, YELLOW);
 }
 
 void CoinItem::Update(unsigned int frame, Player* p, LevelHandler* levelHandler)
 {
+	// Check if coin is collected
 	if (this->CheckCollision(p) && this->isCollected == false)
 	{
 		this->isCollected = true;
 		levelHandler->AddCoinsCollected(1);
+	}
+
+	//update animation state
+
+	if (levelHandler->GetCurrentLevelFramecount() % 10 == 0)
+	{
+		this->animationState += 1;
+
+		if (this->animationState > 6)
+		{
+			this->animationState = 1;
+		}
 	}
 }

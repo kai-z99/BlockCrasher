@@ -19,16 +19,22 @@ private:
 	
 public:
 	LevelHandler();
+
 	void LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems);
 	void UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems);
 	void HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p);
+	void ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems);
+
 	void SetLevel(int l);
 	void AddCoinsCollected(int amount);
-	void ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems);
+	
 	unsigned int GetCurrentLevelFramecount() const;
 	int GetCoinsCollected() const;
-	bool currentLevelComplete;
 	Vector2 GetPlayerSpawnpoint() const;
+
+	bool currentLevelComplete;
+	bool levelIsLoaded;
+	
 
 
 };

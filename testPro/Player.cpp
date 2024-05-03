@@ -9,7 +9,7 @@ Player::Player(float x, float y)
 	this->movementHandler = PlayerMovementHandler();
 	this->isBoosting = false;
 	this->hitboxRadius = 8;
-	this->color = WHITE;
+	this->color = BLUE;
 }
 
 void Player::Move(float x, float y)
@@ -86,19 +86,9 @@ void Player::Draw()
 		v3 = { this->currentPosition.x, this->currentPosition.y - 10 };
 		break;
 	}
-
 	
-	
-	
-
-	DrawTriangle(v1, v2, v3, this->color);
-	
-	//DrawRectangle(300, 300, 50, 50, WHITE);
-	//Rectangle testRec = { 600,600, 50,50};
-	//Vector2 testOrigin = { 25,25 };
-	//DrawRectanglePro(testRec, testOrigin, 45, WHITE);
-	//DrawCircle(300, 300, 5, RED);
-	//DrawCircle(600, 600, 5, BLUE);
+	//DrawTriangle(v1, v2, v3, this->color);
+	DrawTriangleLines(v1, v2, v3, this->color);
 	
 	Rectangle tailRec = { x, y, 10, 10 }; // Centering the rectangle on x, y
 	Vector2 tailOrigin = { 5, 5 }; // Origin at the center of the rectangle
@@ -109,7 +99,7 @@ void Player::Draw()
 		rotation = 45;
 	}
 
-	DrawRectanglePro(tailRec, tailOrigin, rotation, this->color);
+	//DrawRectanglePro(tailRec, tailOrigin, rotation, this->color);
 }
 
 void Player::SetDirection(Direction d)

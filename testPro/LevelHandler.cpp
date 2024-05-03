@@ -14,6 +14,7 @@ LevelHandler::LevelHandler()
 	this->currentLevelFramecount = 0;
 	this->currentLevelComplete = false;
 	this->playerSpawnpoint = { 0,0 };
+	this->levelIsLoaded = false;
 }
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -21,7 +22,9 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	switch (this->currentLevel)
 	{
 	case 1:
+		//---------
 		//Obstacles
+		//---------
 		this->playerSpawnpoint = { 100,100 };
 		this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200); // 0
 		// Master Sword's Circle															  // 1
@@ -29,26 +32,35 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,-3 });						  // 3
 		this->obstacleBuilder->ClassicCircle(600, 300, 50, { 4,1 });						  // 4
 
+		//----------
 		//Items
-
-		for (int i = 200; i <= 1000; i += 100)
+		//----------
+		for (int i = 200; i <= 1700; i += 100)
 		{
-			activeItems.push_back(new CoinItem(i,400));
+			activeItems.push_back(new CoinItem(i,800));
+		}
+
+		for (int i = 200; i <= 1700; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, 300));
 		}
 		this->totalCoinsInLevel = activeItems.size(); // temp
 
 		break;
 
 	case 2:
+		//---------
 		//Obstacles
+		//---------
 		this->playerSpawnpoint = { 50,50 };													
 		this->obstacleBuilder->FlyingPentagon(300,300);										// 0
 		this->obstacleBuilder->ClassicCircle(600, 600, 50, {1,1});							// 1
 		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });					// 2
 
 
-		//items
-
+		//----------
+		//Items
+		//----------
 		for (int i = 200; i <= 1000; i += 50)
 		{
 			activeItems.push_back(new CoinItem(i, 400));
@@ -63,6 +75,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	}
 
 	this->obstacleBuilder->Insert(activeObstacles);
+	this->levelIsLoaded = true;
 }
 
 void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -79,6 +92,8 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 
 	activeObstacles.clear();
 	activeItems.clear();
+
+	this->levelIsLoaded = false;
 }
 
 void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p)

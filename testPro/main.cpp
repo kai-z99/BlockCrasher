@@ -12,9 +12,10 @@ int main() {
 
 
 //
-//change movemthandler to be calle inputhandler!
+//change add another handler called otherinput or menu handler 
 // fix dynam,ic obstacle hitbox (4 pints on player)
 //  ball bouncing should probably be a diuffernt level than the sword
 //dash ability
 //ADD MORE COMMENTS
 //levels should be timed
+//add a menu

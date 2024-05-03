@@ -16,7 +16,7 @@ Game::Game()
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Raylib basic window");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -25,7 +25,12 @@ void Game::Run()
         this->HandleInput();
         this->HandleCollisions(); 
         this->Update(frameCount);
-        this->HandleLevel();
+
+        if (this->levelHandler->levelIsLoaded)
+        {
+            this->HandleLevel();
+        }
+        
         this->Draw();
     }
 
@@ -33,6 +38,7 @@ void Game::Run()
     delete this->player;
     delete this->collisionManager;
     delete this->movementHandler;
+    delete this->levelHandler;
 
     for (Obstacle* ob : this->activeObstacles)
     {
@@ -53,14 +59,10 @@ void Game::Init() // temp
     this->movementHandler = new PlayerMovementHandler();
 
     this->levelHandler = new LevelHandler();
-    this->levelHandler->SetLevel(2);                             //temp
+    this->levelHandler->SetLevel(1);                             //temp
     this->levelHandler->LoadCurrentLevel(this->activeObstacles, this->activeItems); //temp
 
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
-
-    //this->activeItems.push_back(new CoinItem(500,500));
-    //this->activeItems.push_back(new CoinItem(700, 500));
-
 }
 
 void Game::Draw()
@@ -86,6 +88,8 @@ void Game::Draw()
         }
     }
 
+    //draw menus if (levelHandler.levelisloaded == false)
+
     EndDrawing();
 }
 
@@ -97,7 +101,6 @@ void Game::Update(unsigned int frame)
 		ob->Update(this->levelHandler->GetCurrentLevelFramecount());
 	}
 
-
     //update item states
     for (Item* it : this->activeItems)
     {
@@ -106,6 +109,7 @@ void Game::Update(unsigned int frame)
 
     if (this->levelHandler->currentLevelComplete)
     {
+        this->levelHandler->UnloadCurrentLevel(this->activeObstacles, this->activeItems);
         this->player->SetColor(GREEN);
     }
 
@@ -127,7 +131,7 @@ void Game::HandleCollisions()
 
     else
     {
-        this->player->SetColor(WHITE);
+        //this->player->SetColor(WHITE);
     }
     
 }
