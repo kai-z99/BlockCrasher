@@ -22,7 +22,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles)
 	case 1:
 		this->playerSpawnpoint = { 100,100 };
 		this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200); // 0
-		// Master Sword Circle																  // 1
+		// Master Sword's Circle															  // 1
 		this->obstacleBuilder->ClassicCircle(300, 600, 50, { -2,1 });						  // 2 
 		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,-3 });						  // 3
 		this->obstacleBuilder->ClassicCircle(600, 300, 50, { 4,1 });						  // 4
@@ -54,7 +54,7 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles)
 	activeObstacles.clear();
 }
 
-void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles)
+void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, Player* p)
 {
 	this->currentLevelFramecount += 1;
 
@@ -73,12 +73,12 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles)
 		for (int i = 2; i <= 4; i++)
 		{
 
-			if (activeObstacles[i]->GetPosX() + 25 > screenWidth || activeObstacles[i]->GetPosX() - 25 < 0)
+			if (activeObstacles[i]->GetPosX() + 50 > screenWidth || activeObstacles[i]->GetPosX() - 50 < 0)
 			{
 				activeObstacles[i]->SetVelocity(-activeObstacles[i]->GetVelocity().x, activeObstacles[i]->GetVelocity().y);
 			}
 
-			if (activeObstacles[i]->GetPosY() + 25 > screenHeight || activeObstacles[i]->GetPosY() - 25 < 0)
+			if (activeObstacles[i]->GetPosY() + 50 > screenHeight || activeObstacles[i]->GetPosY() - 50 < 0)
 			{
 				activeObstacles[i]->SetVelocity(activeObstacles[i]->GetVelocity().x, -activeObstacles[i]->GetVelocity().y);
 			}
@@ -100,7 +100,7 @@ void LevelHandler::SetLevel(int l)
 	this->currentLevel = l;
 }
 
-void LevelHandler::AddCoinCollected(int amount)
+void LevelHandler::AddCoinsCollected(int amount)
 {
 	this->coinsCollectedInLevel += amount;
 }
@@ -118,6 +118,11 @@ void LevelHandler::ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles)
 unsigned int LevelHandler::GetCurrentLevelFramecount() const
 {
 	return this->currentLevelFramecount;
+}
+
+int LevelHandler::GetCoinsCollected() const
+{
+	return this->coinsCollectedInLevel;
 }
 
 Vector2 LevelHandler::GetPlayerSpawnpoint() const

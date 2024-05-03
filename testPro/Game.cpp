@@ -4,7 +4,7 @@
 #include "CollisionManager.h"
 #include "LevelHandler.h"
 #include "Obstacle.h"
-
+#include "CoinItem.h"
 
 
 Game::Game()
@@ -49,13 +49,13 @@ void Game::Init() // temp
     this->movementHandler = new PlayerMovementHandler();
 
     this->levelHandler = new LevelHandler();
-    this->levelHandler->SetLevel(1);
-    this->levelHandler->LoadCurrentLevel(this->activeObstacles);
+    this->levelHandler->SetLevel(1);                             //temp
+    this->levelHandler->LoadCurrentLevel(this->activeObstacles); //temp
 
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
-    
-   
-    //this->levelHandler->UnloadCurrentLevel(this->activeObstacles);
+
+    //this->activeItems.push_back(new CoinItem(500,500));
+    //this->activeItems.push_back(new CoinItem(700, 500));
 
 }
 
@@ -63,25 +63,45 @@ void Game::Draw()
 {
     BeginDrawing();
     ClearBackground(BLACK);
-    
+    //DrawRingLines({100,100}, 3,11, 0, 320, 6, YELLOW);
+    /*DrawRingLines({ 100,120 }, 3, 11, 90, 320+90, 6, YELLOW);
+    DrawRingLines({ 100,140 }, 3, 11, 180, 320+180, 6, YELLOW);
+    DrawRingLines({ 100,160 }, 3, 11, 270, 320+270, 6, YELLOW);*/
+    //draw player
     this->player->Draw();
 
+
+    //draw current obstacles
 	for (Obstacle* ob : this->activeObstacles)
 	{
 		ob->Draw();
 	}
 
-
+    for (Item* it : this->activeItems)
+    {
+        if (!it->isCollected)
+        {
+            it->Draw();
+        }
+    }
 
     EndDrawing();
 }
 
 void Game::Update(unsigned int frame)
 {
+    //update obstacle states
 	for (Obstacle* ob : this->activeObstacles)
 	{
 		ob->Update(this->levelHandler->GetCurrentLevelFramecount());
 	}
+
+
+    //update item states
+    for (Item* it : this->activeItems)
+    {
+        it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
+    }
 
 }
 
@@ -108,5 +128,5 @@ void Game::HandleCollisions()
 
 void Game::HandleLevel()
 {
-    this->levelHandler->HandleCurrentLevel(this->activeObstacles);
+    this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->player);
 }

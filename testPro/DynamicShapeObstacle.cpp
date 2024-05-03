@@ -46,6 +46,7 @@ void DynamicShapeObstacle::Update(unsigned int frame)
     this->center.y += this->velocity.y;
 
     //rotate
+
     float rotation = this->rotationRate * (cos(frame * this->volatility));
 
     for (Vector2& v : this->vertices)

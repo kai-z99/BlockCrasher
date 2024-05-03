@@ -11,11 +11,12 @@ int main() {
 }
 
 
-// 
+// change CollisionManger.CheckCollsions to return int, maybe 0 for no collision, 1 for ob, 2 for coin, etc
 // coin class !!!!!
 // fix dynam,ic obstacle hitbox (4 pints on player)
-// make ball bouncning cleaner on level 2. ALSO ball bouncing should probably be a diuffernt level than the sword
+//  ball bouncing should probably be a diuffernt level than the sword
 //game class
 //dash ability
 //ADD MORE COMMENTS
 // include organize consult
+//levels should be timed

@@ -22,6 +22,6 @@ private:
 public:
 
 	//Check collisions of every object, collision function based on ObstacleType enum
-	bool CheckCollisions(Player* p, std::vector<Obstacle*> ObstacleList);
+	bool CheckCollisions(Player* p, std::vector<Obstacle*> ObstacleList); // this should be int
 	
 };

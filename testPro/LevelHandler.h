@@ -4,6 +4,7 @@
 
 class Obstacle;
 class ObstacleBuilder;
+class Player;
 
 class LevelHandler
 {
@@ -20,11 +21,12 @@ public:
 	LevelHandler();
 	void LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles);
 	void UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles);
-	void HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles);
+	void HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, Player* p);
 	void SetLevel(int l);
-	void AddCoinCollected(int amount);
+	void AddCoinsCollected(int amount);
 	void ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles);
 	unsigned int GetCurrentLevelFramecount() const;
+	int GetCoinsCollected() const;
 	Vector2 GetPlayerSpawnpoint() const;
 
 

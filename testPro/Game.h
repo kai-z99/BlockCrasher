@@ -5,6 +5,7 @@
 
 class Obstacle;
 class Player;
+class Item;
 class CollisionManager;
 class PlayerMovementHandler;
 class LevelHandler;
@@ -24,6 +25,7 @@ private:
 protected:
 	Player* player;
 	std::vector<Obstacle*> activeObstacles;
+	std::vector<Item*> activeItems;
 	CollisionManager* collisionManager;
 	PlayerMovementHandler* movementHandler;
 	LevelHandler* levelHandler;

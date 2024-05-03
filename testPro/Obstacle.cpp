@@ -1,8 +1,5 @@
 #include "Obstacle.h"
 
-void Obstacle::Update(unsigned int frame)
-{
-}
 
 float Obstacle::GetPosX() const
 {
