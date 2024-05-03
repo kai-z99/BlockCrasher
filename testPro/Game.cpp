@@ -5,6 +5,7 @@
 #include "CircleObstacle.h"
 #include "RectangleObstacle.h"
 #include "ObstacleBuilder.h"
+#include "Constants.h"
 
 
 Game::Game()
@@ -15,8 +16,6 @@ Game::Game()
 
 void Game::Run()
 {
-    const int screenWidth = 1920;
-    const int screenHeight = 1080;
     InitWindow(screenWidth, screenHeight, "Raylib basic window");
     //ToggleFullscreen();
     DisableCursor();
@@ -53,9 +52,10 @@ void Game::Init() // temp
     this->movementHandler = new PlayerMovementHandler();
     this->obstacleBuilder = new ObstacleBuilder();
 
-    this->obstacleBuilder->FlyingPentagon(300,300);
+    /*this->obstacleBuilder->FlyingPentagon(300,300);
     this->obstacleBuilder->ClassicCircle(600, 600, 50, {1,1});
-    this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });
+    this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });*/
+    this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200);
     this->obstacleBuilder->Insert(this->activeObstacles);
 }
 

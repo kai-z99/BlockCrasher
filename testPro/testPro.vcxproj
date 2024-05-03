@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="CircleObstacle.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Directions.h" />
     <ClInclude Include="DynamicShapeObstacle.h" />
     <ClInclude Include="Game.h" />

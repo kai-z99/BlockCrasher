@@ -31,20 +31,23 @@ Vector2 Rotate(Vector2& v, Vector2 c, float angle) //helper
 
 void DynamicShapeObstacle::Update(unsigned int frame)
 {
-    //rotate
-    float rotation = this->rotationRate * (cos(frame * this->volatility));
-   
-    for (Vector2& v : this->vertices)
-    {
-        v = Rotate(v, this->center, rotation);
-    }
-
     //move (update pos)
 
     for (Vector2& v : this->vertices)
     {
         v.x += this->velocity.x;
         v.y += this->velocity.y;
+    }
+
+    this->center.x += this->velocity.x;
+    this->center.y += this->velocity.y;
+
+    //rotate
+    float rotation = this->rotationRate * (cos(frame * this->volatility));
+
+    for (Vector2& v : this->vertices)
+    {
+        v = Rotate(v, this->center, rotation);
     }
 }
 
