@@ -14,6 +14,11 @@ float Obstacle::GetPosY() const
     return this->obstaclePosition.y;
 }
 
+Vector2 Obstacle::GetVelocity() const
+{
+    return this->velocity;
+}
+
 void Obstacle::SetPosX(float x)
 {
     this->obstaclePosition.x = x;

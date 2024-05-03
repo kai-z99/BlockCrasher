@@ -95,7 +95,7 @@ void Game::HandleCollisions()
     if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles))
     {
         this->player->SetColor(RED);
-        this->levelHandler->FailCurrentLevel();
+        this->levelHandler->ResetCurrentLevel(this->activeObstacles);
         this->player->SetPosition({ this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y });
     }
 

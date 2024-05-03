@@ -1,6 +1,7 @@
 #include "Constants.h"
 #include "LevelHandler.h"
 #include "ObstacleBuilder.h"
+#include "Obstacle.h"
 
 
 LevelHandler::LevelHandler()
@@ -11,23 +12,21 @@ LevelHandler::LevelHandler()
 	this->coinsCollectedInLevel = 0;
 	this->currentLevelFramecount = 0;
 	this->currentLevelComplete = false;
-	this->levelFail = false;
 	this->playerSpawnpoint = { 0,0 };
 }
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles)
 {
-	this->currentLevelComplete = false;
-	this->levelFail = false;
-
 	switch (this->currentLevel)
 	{
 	case 1:
 		this->playerSpawnpoint = { 100,100 };
 		this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200); // 0
-		this->obstacleBuilder->ClassicCircle(300, 600, 50, { -1,1 });
-		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,-1 });
-		this->obstacleBuilder->ClassicCircle(600, 300, 50, { 1,1 });
+		// Master Sword Circle																  // 1
+		this->obstacleBuilder->ClassicCircle(300, 600, 50, { -2,1 });						  // 2 
+		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,-3 });						  // 3
+		this->obstacleBuilder->ClassicCircle(600, 300, 50, { 4,1 });						  // 4
+
 		break;
 
 	case 2:
@@ -53,26 +52,47 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles)
 	}
 
 	activeObstacles.clear();
-
-	this->coinsCollectedInLevel = 0;
-	this->totalCoinsInLevel = 0;
-	this->currentLevelFramecount = 0;
 }
 
 void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles)
 {
 	this->currentLevelFramecount += 1;
 
-	if (this->levelFail)
-	{
-		this->UnloadCurrentLevel(activeObstacles);
-		this->LoadCurrentLevel(activeObstacles);
-	}
-
-	else if (this->coinsCollectedInLevel >= this->totalCoinsInLevel)
+	if (this->coinsCollectedInLevel >= this->totalCoinsInLevel)
 	{
 		this->currentLevelComplete = true;
 	}
+
+	//level specific handling
+	switch (this->currentLevel)
+	{
+	case 1:
+		//activeObstacles[0]->SetColor(GREEN);
+
+		//Bounce the ballz on the side of the screen
+		for (int i = 2; i <= 4; i++)
+		{
+
+			if (activeObstacles[i]->GetPosX() + 25 > screenWidth || activeObstacles[i]->GetPosX() - 25 < 0)
+			{
+				activeObstacles[i]->SetVelocity(-activeObstacles[i]->GetVelocity().x, activeObstacles[i]->GetVelocity().y);
+			}
+
+			if (activeObstacles[i]->GetPosY() + 25 > screenHeight || activeObstacles[i]->GetPosY() - 25 < 0)
+			{
+				activeObstacles[i]->SetVelocity(activeObstacles[i]->GetVelocity().x, -activeObstacles[i]->GetVelocity().y);
+			}
+
+		}
+
+		break;
+	case 2:
+		break;
+	default:
+		break;
+	}
+
+
 }
 
 void LevelHandler::SetLevel(int l)
@@ -80,14 +100,19 @@ void LevelHandler::SetLevel(int l)
 	this->currentLevel = l;
 }
 
-void LevelHandler::FailCurrentLevel()
-{
-	this->levelFail = true;
-}
-
 void LevelHandler::AddCoinCollected(int amount)
 {
 	this->coinsCollectedInLevel += amount;
+}
+
+void LevelHandler::ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles)
+{
+	this->UnloadCurrentLevel(activeObstacles);
+	this->coinsCollectedInLevel = 0;
+	this->totalCoinsInLevel = 0;
+	this->currentLevelFramecount = 0;
+	this->currentLevelComplete = false;
+	this->LoadCurrentLevel(activeObstacles);
 }
 
 unsigned int LevelHandler::GetCurrentLevelFramecount() const

@@ -17,6 +17,7 @@ public:
 	virtual void Draw() = 0;
 	float GetPosX() const;
 	float GetPosY() const;
+	Vector2 GetVelocity() const;
 	ObstacleType GetType() const;
 
 	void SetPosX(float x);

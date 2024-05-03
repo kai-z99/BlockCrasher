@@ -12,11 +12,9 @@ int main() {
 
 
 // 
-// coin class
-// fix obstaclePosition on rectangle and curcle object (use same idea as dyunamic polygon)
+// coin class !!!!!
 // fix dynam,ic obstacle hitbox (4 pints on player)
-// chidlren of obsatcle like rotationg square, large tower roattor, bullet, etc
-// //make shapes move. (Make update a pure virtual in Obstacle.h, then add movement to the children.)
+// make ball bouncning cleaner on level 2. ALSO ball bouncing should probably be a diuffernt level than the sword
 //game class
 //dash ability
 //ADD MORE COMMENTS

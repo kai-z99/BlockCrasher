@@ -12,7 +12,6 @@ private:
 	bool currentLevelComplete;
 	int coinsCollectedInLevel;
 	int totalCoinsInLevel;
-	bool levelFail;
 	Vector2 playerSpawnpoint;
 	ObstacleBuilder* obstacleBuilder;
 	unsigned int currentLevelFramecount;
@@ -23,8 +22,8 @@ public:
 	void UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles);
 	void HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles);
 	void SetLevel(int l);
-	void FailCurrentLevel();
 	void AddCoinCollected(int amount);
+	void ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles);
 	unsigned int GetCurrentLevelFramecount() const;
 	Vector2 GetPlayerSpawnpoint() const;
 
