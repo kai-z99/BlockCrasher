@@ -33,11 +33,15 @@ void Game::Run()
     delete this->player;
     delete this->collisionManager;
     delete this->movementHandler;
-    //delete this->obstacleBuilder;
 
     for (Obstacle* ob : this->activeObstacles)
     {
         delete ob;
+    }
+
+    for (Item* it : this->activeItems)
+    {
+        delete it;
     }
 
     CloseWindow();
@@ -49,8 +53,8 @@ void Game::Init() // temp
     this->movementHandler = new PlayerMovementHandler();
 
     this->levelHandler = new LevelHandler();
-    this->levelHandler->SetLevel(1);                             //temp
-    this->levelHandler->LoadCurrentLevel(this->activeObstacles); //temp
+    this->levelHandler->SetLevel(2);                             //temp
+    this->levelHandler->LoadCurrentLevel(this->activeObstacles, this->activeItems); //temp
 
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
 
@@ -63,13 +67,9 @@ void Game::Draw()
 {
     BeginDrawing();
     ClearBackground(BLACK);
-    //DrawRingLines({100,100}, 3,11, 0, 320, 6, YELLOW);
-    /*DrawRingLines({ 100,120 }, 3, 11, 90, 320+90, 6, YELLOW);
-    DrawRingLines({ 100,140 }, 3, 11, 180, 320+180, 6, YELLOW);
-    DrawRingLines({ 100,160 }, 3, 11, 270, 320+270, 6, YELLOW);*/
+
     //draw player
     this->player->Draw();
-
 
     //draw current obstacles
 	for (Obstacle* ob : this->activeObstacles)
@@ -77,6 +77,7 @@ void Game::Draw()
 		ob->Draw();
 	}
 
+    //draw current items
     for (Item* it : this->activeItems)
     {
         if (!it->isCollected)
@@ -103,6 +104,11 @@ void Game::Update(unsigned int frame)
         it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
     }
 
+    if (this->levelHandler->currentLevelComplete)
+    {
+        this->player->SetColor(GREEN);
+    }
+
 }
 
 void Game::HandleInput()
@@ -115,7 +121,7 @@ void Game::HandleCollisions()
     if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles))
     {
         this->player->SetColor(RED);
-        this->levelHandler->ResetCurrentLevel(this->activeObstacles);
+        this->levelHandler->ResetCurrentLevel(this->activeObstacles, this->activeItems);
         this->player->SetPosition({ this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y });
     }
 
@@ -128,5 +134,5 @@ void Game::HandleCollisions()
 
 void Game::HandleLevel()
 {
-    this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->player);
+    this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player);
 }
