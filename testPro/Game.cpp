@@ -25,6 +25,7 @@ void Game::Run()
         this->HandleInput();
         this->HandleCollisions(); 
         this->Update(frameCount);
+        this->HandleLevel();
         this->Draw();
     }
 
@@ -44,13 +45,16 @@ void Game::Run()
 
 void Game::Init() // temp
 {
-    this->player = new Player(50, 50);
     this->collisionManager = new CollisionManager();
     this->movementHandler = new PlayerMovementHandler();
-    this->levelHandler = new LevelHandler();
 
-    this->levelHandler->SetLevel(2);
+    this->levelHandler = new LevelHandler();
+    this->levelHandler->SetLevel(1);
     this->levelHandler->LoadCurrentLevel(this->activeObstacles);
+
+    this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
+    
+   
     //this->levelHandler->UnloadCurrentLevel(this->activeObstacles);
 
 }
@@ -67,6 +71,8 @@ void Game::Draw()
 		ob->Draw();
 	}
 
+
+
     EndDrawing();
 }
 
@@ -74,8 +80,9 @@ void Game::Update(unsigned int frame)
 {
 	for (Obstacle* ob : this->activeObstacles)
 	{
-		ob->Update(frame);
+		ob->Update(this->levelHandler->GetCurrentLevelFramecount());
 	}
+
 }
 
 void Game::HandleInput()
@@ -88,6 +95,8 @@ void Game::HandleCollisions()
     if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles))
     {
         this->player->SetColor(RED);
+        this->levelHandler->FailCurrentLevel();
+        this->player->SetPosition({ this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y });
     }
 
     else
@@ -99,5 +108,5 @@ void Game::HandleCollisions()
 
 void Game::HandleLevel()
 {
-    this->levelHandler->HandleCurrentLevel();
+    this->levelHandler->HandleCurrentLevel(this->activeObstacles);
 }

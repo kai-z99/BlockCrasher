@@ -21,6 +21,7 @@ public:
 	void SetDirection(Direction d);
 	void HandleMovement();
 	void SetColor(Color c);
+	void SetPosition(Vector2 pos);
 	float GetPosX();
 	float GetPosY();
 	float GetHitboxRadius();

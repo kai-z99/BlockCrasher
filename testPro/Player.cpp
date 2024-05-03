@@ -127,6 +127,11 @@ void Player::SetColor(Color c)
 	this->color = c;
 }
 
+void Player::SetPosition(Vector2 pos)
+{
+	this->currentPosition = pos;
+}
+
 float Player::GetPosX()
 {
 	return this->currentPosition.x;
