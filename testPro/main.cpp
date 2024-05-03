@@ -1,15 +1,10 @@
 #include <raylib.h>
 #include <iostream>
-#include <vector>
-#include "Player.h"
-#include "CircleObstacle.h"
-#include "RectangleObstacle.h"
-#include "DynamicShapeObstacle.h"
-#include "CollisionManager.h"
+#include "Game.h"
 
 
 int main() {
-    const int screenWidth = 1920;
+    /*const int screenWidth = 1920;
     const int screenHeight = 1080;
     InitWindow(screenWidth, screenHeight, "Raylib basic window");
     ToggleFullscreen();
@@ -67,7 +62,11 @@ int main() {
        
         EndDrawing();
     }
-    CloseWindow();
+    CloseWindow();*/
+
+    Game game = Game();
+    game.Run();
+
     return 0;
 }
 

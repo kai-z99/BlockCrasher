@@ -29,12 +29,39 @@ void Game::Run()
         this->Draw();
     }
 
+
+
+    // decontructor
+    delete this->player;
+    delete this->collisionManager;
+    delete this->movementHandler;
+
+    for (Obstacle* ob : this->activeObstacles)
+    {
+        delete ob;
+    }
+
     CloseWindow();
 }
 
 void Game::Init() // temp
 {
+    this->player = new Player(50, 50);
+    this->collisionManager = new CollisionManager();
+    this->movementHandler = new PlayerMovementHandler();
 
+
+    std::vector<Vector2> v5;
+
+    v5.push_back({ 700,700 });
+    v5.push_back({ 700,900 });
+    v5.push_back({ 900,1000 });
+    v5.push_back({ 1000,900 });
+    v5.push_back({ 900,700 });
+    v5.push_back({ 700,700 });
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(800, 800, { 200, 700 }, v5, 0.01f, 0.01f, { 1,-1 });
+    this->activeObstacles.push_back(d);
 }
 
 void Game::Draw()
