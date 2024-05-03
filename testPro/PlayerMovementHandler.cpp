@@ -3,7 +3,6 @@
 #include "PlayerMovementHandler.h"
 
 
-
 PlayerMovementHandler::PlayerMovementHandler()
 {}
 
@@ -13,22 +12,27 @@ void PlayerMovementHandler::HandlePlayerMovement(Player* p)
     float dx = 0;
     float dy = 0;
 
-    if (IsKeyDown(KEY_A))
+    if (IsKeyDown(KEY_A) && p->GetPosX() > 0)
     {
         dx -= moveSpeed;
         p->SetDirection(W);
     }
-    if (IsKeyDown(KEY_D))
+
+
+    if (IsKeyDown(KEY_D) && p->GetPosX() < 1920)
     {
         dx += moveSpeed;
         p->SetDirection(E);
     }
-    if (IsKeyDown(KEY_W))
+
+
+    if (IsKeyDown(KEY_W) && p->GetPosY() > 0)
     {
         dy -= moveSpeed;
         p->SetDirection(N);
     }
-    if (IsKeyDown(KEY_S))
+
+    if (IsKeyDown(KEY_S) && p->GetPosY() < 1080) 
     {
         dy += moveSpeed;
         p->SetDirection(S);
@@ -61,8 +65,6 @@ void PlayerMovementHandler::HandlePlayerMovement(Player* p)
             p->SetDirection(NW);
         }
     }
-
- 
-
+    
     p->Move(dx, dy);
 }

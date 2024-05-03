@@ -4,9 +4,10 @@
 class CircleObstacle : public Obstacle
 {
 public:
-	CircleObstacle(float x, float y, float r);
+	CircleObstacle(float x, float y, float r, Vector2 v);
 	void Draw() override;
-	float GetRadius();
+	void Update(unsigned int frame) override;
+	float GetRadius() const;
 
 private:
 	float radius;

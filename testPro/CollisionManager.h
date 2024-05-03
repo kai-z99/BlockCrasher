@@ -6,7 +6,7 @@
 class Player;
 class Obstacle;
 class CircleObstacle;
-class StaticRectangleObstacle;
+class RectangleObstacle;
 class DynamicShapeObstacle;
 
 
@@ -16,7 +16,7 @@ class CollisionManager
 private:
 	//Collision checks for different Obstacles
 	bool CheckCircleObstacleCollisions(Player* p, CircleObstacle* c);
-	bool CheckStaticRectangleObstacleCollisions(Player* p, StaticRectangleObstacle* s);
+	bool CheckStaticRectangleObstacleCollisions(Player* p, RectangleObstacle* s);
 	bool CheckDynamicShapeObstacleCollisions(Player* p, DynamicShapeObstacle* d);
 
 public:

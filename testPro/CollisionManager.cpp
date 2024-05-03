@@ -2,7 +2,7 @@
 #include "CollisionManager.h"
 #include "Player.h"
 #include "CircleObstacle.h"
-#include "StaticRectangleObstacle.h"
+#include "RectangleObstacle.h"
 #include "DynamicShapeObstacle.h"
 
 
@@ -14,12 +14,16 @@ bool CollisionManager::CheckCircleObstacleCollisions(Player* p, CircleObstacle* 
 	return CheckCollisionCircles(playerPos, p->GetHitboxRadius(), obstaclePos, c->GetRadius());
 }
 
-bool CollisionManager::CheckStaticRectangleObstacleCollisions(Player* p, StaticRectangleObstacle* s)
+bool CollisionManager::CheckStaticRectangleObstacleCollisions(Player* p, RectangleObstacle* s)
 {
-	Vector2 playerPos = { p->GetPosX(), p->GetPosY() };
+	/*Vector2 playerPos = { p->GetPosX(), p->GetPosY() };
 	Rectangle rec = { s->GetPosX() - (s->GetWidth()/2), s->GetPosY() - (s->GetHeight()/2), s->GetWidth(), s->GetHeight()};
 
-	return CheckCollisionCircleRec(playerPos, p->GetHitboxRadius(), rec);
+	return CheckCollisionCircleRec(playerPos, p->GetHitboxRadius(), rec);*/
+
+	Rectangle rec = { s->GetPosX(), s->GetPosY(), s->GetWidth(), s->GetHeight() };
+	Vector2 playerPos = { p->GetPosX(), p->GetPosY() };
+	return CheckCollisionPointRec(playerPos, rec);
 }
 
 bool CollisionManager::CheckDynamicShapeObstacleCollisions(Player* p, DynamicShapeObstacle* d)
@@ -41,8 +45,8 @@ bool CollisionManager::CheckCollisions(Player* p, std::vector<Obstacle*> Obstacl
 			}
 			break;
 
-		case StaticRectangle:
-			if (CheckStaticRectangleObstacleCollisions(p, dynamic_cast<StaticRectangleObstacle*>(ob)))
+		case DynamicRectangle:
+			if (CheckStaticRectangleObstacleCollisions(p, dynamic_cast<RectangleObstacle*>(ob)))
 			{
 				return true;
 			}

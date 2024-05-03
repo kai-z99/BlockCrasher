@@ -134,22 +134,24 @@
     <ClCompile Include="CircleObstacle.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DynamicShapeObstacle.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Obstacle.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMovementHandler.cpp" />
-    <ClCompile Include="StaticRectangleObstacle.cpp" />
+    <ClCompile Include="RectangleObstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircleObstacle.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Directions.h" />
     <ClInclude Include="DynamicShapeObstacle.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="ObstacleTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMovementHandler.h" />
-    <ClInclude Include="StaticRectangleObstacle.h" />
+    <ClInclude Include="RectangleObstacle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@
 enum ObstacleType
 {
 	Circle,
-	StaticRectangle,
+	DynamicRectangle,
 	DynamicShape,
 
 };

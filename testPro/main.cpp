@@ -3,31 +3,16 @@
 #include <vector>
 #include "Player.h"
 #include "CircleObstacle.h"
-#include "StaticRectangleObstacle.h"
+#include "RectangleObstacle.h"
 #include "DynamicShapeObstacle.h"
 #include "CollisionManager.h"
-
-
-void rotate(Vector2& v, Vector2 c, float angle)
-{
-    float tc = cosf(angle);
-    float ts = sinf(angle);
-    float x_rotated =       ((v.x - c.x) * tc) - ((c.y - v.y) * ts) + c.x;
-    float y_rotated = -c.y + ((c.y - v.y) * tc) + ((v.x - c.x) * ts);
-
-    //float x_rotated = ((v.x - c.x) * cos(angle)) - ((c.y - v.y) * sin(angle));
-    //float y_rotated = ((c.y - v.y) * cos(angle)) - ((v.x - c.x) * sin(angle));
-
-    v.x = x_rotated;
-    v.y = -y_rotated;
-}
 
 
 int main() {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
     InitWindow(screenWidth, screenHeight, "Raylib basic window");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -35,7 +20,7 @@ int main() {
 
     v5.push_back({700,700});
     v5.push_back({ 700,900 });
-    v5.push_back({ 900,900 });
+    v5.push_back({ 900,1000 });
     v5.push_back({ 1000,900 });
     v5.push_back({ 900,700 });
     v5.push_back({ 700,700 });
@@ -43,9 +28,9 @@ int main() {
 
     Player p = Player(200, 200);
 
-    CircleObstacle c = CircleObstacle(300, 300, 50);
-    StaticRectangleObstacle s = StaticRectangleObstacle(600,600, 50, 30);
-    DynamicShapeObstacle d = DynamicShapeObstacle(800, 800, {800, 800}, v5, 0.1f, 0.01f);
+    CircleObstacle c = CircleObstacle(300, 300, 50, {0,1});
+    RectangleObstacle s = RectangleObstacle(600, 600, 50, 30, {1,1});
+    DynamicShapeObstacle d = DynamicShapeObstacle(800, 800, { 200, 700 }, v5, 0.01f, 0.01f, {1,-1});
 
     CollisionManager z = CollisionManager();
 
@@ -59,6 +44,8 @@ int main() {
         frameCount++;
         p.HandleMovement();
         d.Update(frameCount);
+        c.Update(frameCount);
+        s.Update(frameCount);
 
         if (z.CheckCollisions(&p, v))
         {
@@ -77,10 +64,7 @@ int main() {
         s.Draw();
         d.Draw();
         p.Draw();
-        DrawCircle(600, 600, 5, RED);
-     
-        
-        
+       
         EndDrawing();
     }
     CloseWindow();
@@ -93,7 +77,6 @@ int main() {
 // //make shapes move. (Make update a pure virtual in Obstacle.h, then add movement to the children.)
 //game class
 //dash ability
-//make dynamic polygon obsatcle
 //ADD MORE COMMENTS
 //const mystery
 // include organize consult
