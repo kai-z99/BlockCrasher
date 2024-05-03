@@ -4,6 +4,7 @@
 #include <raylib.h>
 
 class Obstacle;
+class ObstacleBuilder;
 class Player;
 class CollisionManager;
 class PlayerMovementHandler;
@@ -24,10 +25,10 @@ protected:
 	std::vector<Obstacle*> activeObstacles;
 	CollisionManager* collisionManager;
 	PlayerMovementHandler* movementHandler;
+	ObstacleBuilder* obstacleBuilder;
 
 public:
 	Game();
 	void Run();
-	
 
 };

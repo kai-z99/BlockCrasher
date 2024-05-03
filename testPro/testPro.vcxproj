@@ -138,6 +138,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Obstacle.h" />
+    <ClCompile Include="ObstacleBuilder.cpp" />
+    <ClCompile Include="ObstacleBuilder.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMovementHandler.cpp" />
     <ClCompile Include="RectangleObstacle.cpp" />

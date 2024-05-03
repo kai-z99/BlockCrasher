@@ -4,6 +4,7 @@
 #include "DynamicShapeObstacle.h"
 #include "CircleObstacle.h"
 #include "RectangleObstacle.h"
+#include "ObstacleBuilder.h"
 
 
 Game::Game()
@@ -35,6 +36,7 @@ void Game::Run()
     delete this->player;
     delete this->collisionManager;
     delete this->movementHandler;
+    delete this->obstacleBuilder;
 
     for (Obstacle* ob : this->activeObstacles)
     {
@@ -49,19 +51,12 @@ void Game::Init() // temp
     this->player = new Player(50, 50);
     this->collisionManager = new CollisionManager();
     this->movementHandler = new PlayerMovementHandler();
+    this->obstacleBuilder = new ObstacleBuilder();
 
-
-    std::vector<Vector2> v5;
-
-    v5.push_back({ 700,700 });
-    v5.push_back({ 700,900 });
-    v5.push_back({ 900,1000 });
-    v5.push_back({ 1000,900 });
-    v5.push_back({ 900,700 });
-    v5.push_back({ 700,700 });
-
-    DynamicShapeObstacle* d = new DynamicShapeObstacle(800, 800, { 200, 700 }, v5, 0.01f, 0.01f, { 1,-1 });
-    this->activeObstacles.push_back(d);
+    this->obstacleBuilder->FlyingPentagon(300,300);
+    this->obstacleBuilder->ClassicCircle(600, 600, 50, {1,1});
+    this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });
+    this->obstacleBuilder->Insert(this->activeObstacles);
 }
 
 void Game::Draw()
