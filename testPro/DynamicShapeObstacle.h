@@ -16,6 +16,6 @@ private:
 	std::vector<Vector2> vertices;
 	Vector2 center;
 	float rotationRate;
-	float volatility;
+	float volatility; //how fast rotation changes directions
 
 };

@@ -39,6 +39,9 @@ void DynamicShapeObstacle::Update(unsigned int frame)
         v.y += this->velocity.y;
     }
 
+    this->obstaclePosition.x += this->velocity.x;
+    this->obstaclePosition.y += this->velocity.y;
+
     this->center.x += this->velocity.x;
     this->center.y += this->velocity.y;
 

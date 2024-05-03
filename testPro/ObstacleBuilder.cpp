@@ -10,7 +10,7 @@ void ObstacleBuilder::Insert(std::vector<Obstacle*>& activeObstacles)
     {
         activeObstacles.push_back(ob);
     }
-
+      
     this->storage.clear();
 }
 

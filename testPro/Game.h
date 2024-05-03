@@ -4,10 +4,10 @@
 #include <raylib.h>
 
 class Obstacle;
-class ObstacleBuilder;
 class Player;
 class CollisionManager;
 class PlayerMovementHandler;
+class LevelHandler;
 
 
 class Game
@@ -19,13 +19,14 @@ private:
 	void Update(unsigned int frame);
 	void HandleInput();
 	void HandleCollisions();
+	void HandleLevel();
 
 protected:
 	Player* player;
 	std::vector<Obstacle*> activeObstacles;
 	CollisionManager* collisionManager;
 	PlayerMovementHandler* movementHandler;
-	ObstacleBuilder* obstacleBuilder;
+	LevelHandler* levelHandler;
 
 public:
 	Game();

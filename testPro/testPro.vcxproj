@@ -135,6 +135,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DynamicShapeObstacle.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Obstacle.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Directions.h" />
     <ClInclude Include="DynamicShapeObstacle.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="LevelHandler.h" />
     <ClInclude Include="ObstacleTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMovementHandler.h" />

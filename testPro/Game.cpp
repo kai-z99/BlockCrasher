@@ -1,11 +1,10 @@
 #include "Game.h"
+#include "Constants.h"
 #include "Player.h"
 #include "CollisionManager.h"
-#include "DynamicShapeObstacle.h"
-#include "CircleObstacle.h"
-#include "RectangleObstacle.h"
-#include "ObstacleBuilder.h"
-#include "Constants.h"
+#include "LevelHandler.h"
+#include "Obstacle.h"
+
 
 
 Game::Game()
@@ -17,7 +16,7 @@ Game::Game()
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Raylib basic window");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -29,13 +28,11 @@ void Game::Run()
         this->Draw();
     }
 
-
-
     // decontructor
     delete this->player;
     delete this->collisionManager;
     delete this->movementHandler;
-    delete this->obstacleBuilder;
+    //delete this->obstacleBuilder;
 
     for (Obstacle* ob : this->activeObstacles)
     {
@@ -50,13 +47,12 @@ void Game::Init() // temp
     this->player = new Player(50, 50);
     this->collisionManager = new CollisionManager();
     this->movementHandler = new PlayerMovementHandler();
-    this->obstacleBuilder = new ObstacleBuilder();
+    this->levelHandler = new LevelHandler();
 
-    /*this->obstacleBuilder->FlyingPentagon(300,300);
-    this->obstacleBuilder->ClassicCircle(600, 600, 50, {1,1});
-    this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });*/
-    this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200);
-    this->obstacleBuilder->Insert(this->activeObstacles);
+    this->levelHandler->SetLevel(2);
+    this->levelHandler->LoadCurrentLevel(this->activeObstacles);
+    //this->levelHandler->UnloadCurrentLevel(this->activeObstacles);
+
 }
 
 void Game::Draw()
@@ -99,4 +95,9 @@ void Game::HandleCollisions()
         this->player->SetColor(WHITE);
     }
     
+}
+
+void Game::HandleLevel()
+{
+    this->levelHandler->HandleCurrentLevel();
 }
