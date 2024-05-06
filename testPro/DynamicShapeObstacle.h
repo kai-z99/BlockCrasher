@@ -7,7 +7,7 @@
 class DynamicShapeObstacle : public Obstacle
 {
 public:
-	DynamicShapeObstacle(float x, float y, Vector2 c, const std::vector<Vector2>& v, float rr, float vo, Vector2 vi);
+	DynamicShapeObstacle(float x, float y, Vector2 c, const std::vector<Vector2>& v, float rr, float vo, Vector2 vi, float ri);
 	void Draw() override;
 	void Update(unsigned int frame) override;
 	std::vector<Vector2> GetVertices() const;

@@ -17,16 +17,16 @@ void GeneralInputHandler::HandleLevelComplete(LevelHandler* levelHandler, std::v
 {
 	if (GetKeyPressed() == KEY_SPACE && levelHandler->GetCurrentLevelState() == Complete)
 	{
-		std::cout << "in";
 		levelHandler->SetLevel(levelHandler->GetCurrentLevel() + 1);
 		levelHandler->ResetCurrentLevel(activeObstacles, activeItems);
-		levelHandler->SetLevelState(Active);
 		player->SetPosition(levelHandler->GetPlayerSpawnpoint());
+
+		levelHandler->SetLevelState(Active);
 	}
 }
-
-void GeneralInputHandler::HandleAllInput(LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
-{
-	this->HandleTryAgain(levelHandler, activeObstacles, activeItems, player);
-	this->HandleLevelComplete(levelHandler, activeObstacles, activeItems, player);
-}
+//
+//void GeneralInputHandler::HandleAllInput(LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
+//{
+//	this->HandleTryAgain(levelHandler, activeObstacles, activeItems, player);
+//	this->HandleLevelComplete(levelHandler, activeObstacles, activeItems, player);
+//}

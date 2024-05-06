@@ -23,8 +23,6 @@ bool CollisionManager::CheckStaticRectangleObstacleCollisions(Player* p, Rectang
 
 bool CollisionManager::CheckDynamicShapeObstacleCollisions(Player* p, DynamicShapeObstacle* d)
 {
-
-
 	return CheckCollisionPointPoly({ p->GetPosX(), p->GetPosY() }, &d->GetVertices()[0], d->GetVertices().size());
 }
 

@@ -7,8 +7,7 @@ Player::Player(float x, float y)
 	this->currentPosition = { x,y };
 	this->currentDirection = N;
 	this->movementHandler = PlayerMovementHandler();
-	this->isBoosting = false;
-	this->hitboxRadius = 8;
+	this->hitboxRadius = 7;
 	this->color = BLUE;
 }
 
@@ -102,14 +101,15 @@ void Player::Draw()
 	//DrawRectanglePro(tailRec, tailOrigin, rotation, this->color);
 }
 
+void Player::DrawHitbox()
+{
+	DrawCircleLines(this->currentPosition.x , this->currentPosition.y, this->hitboxRadius, RED);
+	DrawCircleLines(this->currentPosition.x, this->currentPosition.y, 1,GREEN);
+}
+
 void Player::SetDirection(Direction d)
 {
 	this->currentDirection = d;
-}
-
-void Player::HandleMovement()
-{
-	this->movementHandler.HandlePlayerMovement(this);
 }
 
 void Player::SetColor(Color c)

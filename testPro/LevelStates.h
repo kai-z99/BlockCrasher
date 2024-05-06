@@ -5,4 +5,5 @@ enum LevelState
 	Active,
 	Fail,
 	Complete,
+	Inactive,
 };

@@ -11,17 +11,19 @@ private:
 	Vector2 currentPosition;
 	Direction currentDirection;
 	Color color;
-	bool isBoosting;
 	float hitboxRadius;
+	
 
 public:
 	Player(float x, float y);
 	void Move(float x, float y);
-	void Draw();
-	void SetDirection(Direction d);
-	void HandleMovement();
-	void SetColor(Color c);
 	void SetPosition(Vector2 pos);
+	void SetDirection(Direction d);
+	void SetColor(Color c);
+
+	void Draw();
+	void DrawHitbox(); // debug use only DRAWS CIRCLE HITBOX IN RED, POINT HITBOX IN GREEN
+
 	float GetPosX();
 	float GetPosY();
 	float GetHitboxRadius();

@@ -40,7 +40,7 @@ void ObstacleBuilder::FlyingPentagon(float x, float y)
     v.push_back({ 900,700 });
     v.push_back({ 700,700 });
 
-    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 400, 700 }, v, 0.02f, 0.005f, { 1,-1 });
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 400, 700 }, v, 0.02f, 0.005f, { 1,-1 }, 0);
     this->storage.push_back(d);
 }
 
@@ -67,10 +67,44 @@ void ObstacleBuilder::MasterSword(float x, float y)
         vec.y += y;
     }
 
-    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 50 + x, 100 + y }, v, 0.02f, 0.009f, { 0,0 });
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 50 + x, 100 + y }, v, 0.02f, 0.009f, { 0,0 }, 0);
     CircleObstacle* c = new CircleObstacle(50 + x, 100 + y, 10, { 0,0 });
     this->storage.push_back(d);
     this->storage.push_back(c);
 }
+
+void ObstacleBuilder::HollowBoxPiece(float x, float y, float rr, float ri, float vo, float scale) // good example. talke lots of params
+{
+    std::vector<Vector2> v;
+
+    v.push_back({ 0,0 });
+    v.push_back({ 0,300 });
+    v.push_back({ 120,300 });
+    v.push_back({ 120,240 });
+    v.push_back({ 60,240 });
+    v.push_back({ 60,60 });
+    v.push_back({ 120,60 });
+    v.push_back({ 120,0 });
+    v.push_back({ 0,0 });
+
+
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+    
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle( x, y, { 150*scale + x, 150*scale + y }, v, rr, vo, { 0,0 }, ri);
+    this->storage.push_back(d);
+
+}
+
+
 
 

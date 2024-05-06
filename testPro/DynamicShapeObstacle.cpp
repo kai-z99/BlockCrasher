@@ -1,23 +1,5 @@
 #include "DynamicShapeObstacle.h"
 
-DynamicShapeObstacle::DynamicShapeObstacle(float x, float y, Vector2 c, const std::vector<Vector2>& v, float rr, float vo, Vector2 ve)
-{
-	this->obstaclePosition = { x,y };
-    this->center = c;
-	this->rotationRate = rr;
-	this->vertices = v;
-    this->color = WHITE;
-    this->type = DynamicShape;
-    this->volatility = vo;
-    this->velocity = ve;
-}
-
-void DynamicShapeObstacle::Draw()
-{
-	DrawLineStrip(&this->vertices[0], vertices.size(), this->color);
-}
-
-
 Vector2 Rotate(Vector2& v, Vector2 c, float angle) //helper
 {
     float tc = cosf(angle);
@@ -27,6 +9,30 @@ Vector2 Rotate(Vector2& v, Vector2 c, float angle) //helper
 
     return { x_rotated , -y_rotated };
 }
+
+DynamicShapeObstacle::DynamicShapeObstacle(float x, float y, Vector2 c, const std::vector<Vector2>& v, float rr, float vo, Vector2 ve, float ri)
+{
+	this->obstaclePosition = { x,y };
+    this->center = c;
+	this->rotationRate = rr;
+	this->vertices = v;
+    this->color = WHITE;
+    this->type = DynamicShape;
+    this->volatility = vo;
+    this->velocity = ve;
+
+    for (Vector2& v : this->vertices)
+    {
+        v = Rotate(v, this->center, ri);
+    }
+}
+
+void DynamicShapeObstacle::Draw()
+{
+	DrawLineStrip(&this->vertices[0], vertices.size(), this->color);
+}
+
+
 
 
 void DynamicShapeObstacle::Update(unsigned int frame)

@@ -14,6 +14,19 @@ Game::Game()
 	this->Init();
 }
 
+void Game::Init() // temp
+{
+    this->collisionManager = new CollisionManager();
+    this->movementHandler = new PlayerMovementHandler();
+    this->inputHandler = new GeneralInputHandler();
+
+    this->levelHandler = new LevelHandler();
+    this->levelHandler->SetLevel(1);                                                //temp
+    this->levelHandler->LoadCurrentLevel(this->activeObstacles, this->activeItems); //temp
+
+    this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
+}
+
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Raylib basic window");
@@ -55,73 +68,90 @@ void Game::Run()
     CloseWindow();
 }
 
-void Game::Init() // temp
-{
-    this->collisionManager = new CollisionManager();
-    this->movementHandler = new PlayerMovementHandler();
-    this->inputHandler = new GeneralInputHandler();
 
-    this->levelHandler = new LevelHandler();
-    this->levelHandler->SetLevel(1);                                                //temp
-    this->levelHandler->LoadCurrentLevel(this->activeObstacles, this->activeItems); //temp
-
-    this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
-}
 
 void Game::Draw()
 {
     BeginDrawing();
     ClearBackground(BLACK);
 
+
+    //-------------------------
+    //LEVEL DRAWING
+    //-------------------------
+    // 
     //draw player
     if (this->levelHandler->levelIsLoaded)
     {
         this->player->Draw();
-    }
-    
-    //draw current obstacles
-	for (Obstacle* ob : this->activeObstacles)
-	{
-		ob->Draw();
-	}
+        //this->player->DrawHitbox();
 
-    //draw current items
-    for (Item* it : this->activeItems)
-    {
-        if (!it->isCollected)
+        //draw current obstacles
+        for (Obstacle* ob : this->activeObstacles)
         {
-            it->Draw();
+            ob->Draw();
+        }
+
+        //draw current items
+        for (Item* it : this->activeItems)
+        {
+            if (!it->isCollected)
+            {
+                it->Draw();
+            }
         }
     }
+    
+    //--------------------
+    //UI DRAWING
+    //-----------------------
+    if (this->levelHandler->GetCurrentLevelState() == Complete)
+    {
+        Vector2 textSize = MeasureTextEx(GetFontDefault(), "LEVEL COMPLETE!", 50, 0.0f);
+        DrawText("LEVEL COMPLETE!", (float)screenWidth / 2 - (textSize.x / 2), screenHeight / 2, 50, WHITE);
+
+        textSize = MeasureTextEx(GetFontDefault(), "Press SPACE to go to next level.", 20, 0.0f);
+        DrawText("Press SPACE to go to next level.", (float)screenWidth / 2 - (textSize.x / 2), (screenHeight / 2) + 60, 20, WHITE);
+
+    }
+
+    else if (this->levelHandler->GetCurrentLevelState() == Fail)
+    {
+        Vector2 textSize = MeasureTextEx(GetFontDefault(), "Press SPACE to try again.", 20, 0.0f);
+        DrawText("Press SPACE to try again.", (float)screenWidth / 2 - (textSize.x / 2), (screenHeight / 2) + 60, 20, WHITE);
+    }
+
+    else if (this->levelHandler->GetCurrentLevelState() == Active)
+    {
+        //draw timer, coins collected/c, esc to exit
+    }
+
+    
+
 
     //draw menus if (levelHandler.levelisloaded == false)
+    if (this->levelHandler->GetCurrentLevelState() == Inactive && this->levelHandler->levelIsLoaded == false)
+    {
+        //menu drawing using UIHandler functions
+    }
 
     EndDrawing();
 }
 
 void Game::Update(unsigned int frame)
 {
-    //check level complete
+    //check level complete, unload level if so
     if (this->levelHandler->GetCurrentLevelState() == Complete)
     {
         if (this->levelHandler->levelIsLoaded)
         {
             this->levelHandler->UnloadCurrentLevel(this->activeObstacles, this->activeItems);
         }
-        
-        Vector2 textSize = MeasureTextEx(GetFontDefault(), "LEVEL COMPLETE!", 50, 0.0f);
-        DrawText("LEVEL COMPLETE!", (float)screenWidth / 2 - (textSize.x / 2), screenHeight / 2, 50, WHITE);
-
-        textSize = MeasureTextEx(GetFontDefault(), "Press SPACE to go to next level.", 20, 0.0f);
-        DrawText("Press SPACE to go to next level.", (float)screenWidth / 2 - (textSize.x / 2), (screenHeight / 2) + 60, 20, WHITE);
-        
     }
 
     else if (this->levelHandler->GetCurrentLevelState() == Fail)
     {
         this->player->SetColor(RED);
-        Vector2 textSize = MeasureTextEx(GetFontDefault(), "Press SPACE to try again.", 20, 0.0f);
-        DrawText("Press SPACE to try again.", (float)screenWidth / 2 - (textSize.x / 2), (screenHeight / 2) + 60, 20, WHITE);
     }
 
     else if (this->levelHandler->GetCurrentLevelState() == Active)
@@ -158,13 +188,6 @@ void Game::HandleInput()
     {
         this->inputHandler->HandleLevelComplete(this->levelHandler, this->activeObstacles, this->activeItems, this->player);
     }
-
-
-
-
-
-    //this->inputHandler->HandleAllInput(this->levelHandler, this->activeObstacles, this->activeItems, this->player);
-    
 }
 
 void Game::HandleCollisions()
@@ -172,8 +195,6 @@ void Game::HandleCollisions()
     if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles))
     {
         this->levelHandler->SetLevelState(Fail);
-       /* this->levelHandler->ResetCurrentLevel(this->activeObstacles, this->activeItems);
-        this->player->SetPosition({ this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y });*/
     }
 }
 

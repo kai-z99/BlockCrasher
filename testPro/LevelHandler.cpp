@@ -94,6 +94,45 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		break;
 
+
+	case 4:
+		//---------
+		//Obstacles
+		//---------
+		this->playerSpawnpoint = { 50,50 };
+		this->obstacleBuilder->HollowBoxPiece(screenWidth/2 - 150*3, screenHeight/2 - 150*3, 0.01f, 0, 0, 3);
+		this->obstacleBuilder->HollowBoxPiece(screenWidth/2 - 150*3, screenHeight/2 - 150*3, 0.01f, PI, 0, 3);
+
+		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150, screenHeight / 2 - 150, -0.01f, PI/2, 0.01, 1);
+		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150, screenHeight / 2 - 150, -0.01f, 3*PI/2, 0.01, 1);
+
+		//----------
+		//Items
+		//----------
+		activeItems.push_back(new CoinItem(screenWidth / 2, screenHeight / 2));
+
+		for (int i = screenWidth/2 - 200; i <= screenWidth/2 + 200; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, screenHeight/2 + 200));
+		}
+
+		for (int i = screenWidth / 2 - 200; i <= screenWidth / 2 + 200; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, screenHeight / 2 - 200));
+		}
+
+		this->totalCoinsInLevel = activeItems.size(); // temp
+
+		break;
+
+
+
+
+
+
+
+
+
 	default:
 		break;
 

@@ -62,7 +62,6 @@ void CoinItem::Update(unsigned int frame, Player* p, LevelHandler* levelHandler)
 	}
 
 	//update animation state
-
 	if (levelHandler->GetCurrentLevelFramecount() % 10 == 0)
 	{
 		this->animationState += 1;
