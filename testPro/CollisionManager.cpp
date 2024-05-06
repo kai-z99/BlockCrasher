@@ -16,11 +16,6 @@ bool CollisionManager::CheckCircleObstacleCollisions(Player* p, CircleObstacle* 
 
 bool CollisionManager::CheckStaticRectangleObstacleCollisions(Player* p, RectangleObstacle* s)
 {
-	/*Vector2 playerPos = { p->GetPosX(), p->GetPosY() };
-	Rectangle rec = { s->GetPosX() - (s->GetWidth()/2), s->GetPosY() - (s->GetHeight()/2), s->GetWidth(), s->GetHeight()};
-
-	return CheckCollisionCircleRec(playerPos, p->GetHitboxRadius(), rec);*/
-
 	Rectangle rec = { s->GetPosX(), s->GetPosY(), s->GetWidth(), s->GetHeight() };
 	Vector2 playerPos = { p->GetPosX(), p->GetPosY() };
 	return CheckCollisionPointRec(playerPos, rec);

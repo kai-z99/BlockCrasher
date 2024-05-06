@@ -12,7 +12,7 @@ LevelHandler::LevelHandler()
 	this->totalCoinsInLevel = 1;
 	this->coinsCollectedInLevel = 0;
 	this->currentLevelFramecount = 0;
-	this->currentLevelComplete = false;
+	this->currentLevelState = Active;
 	this->playerSpawnpoint = { 0,0 };
 	this->levelIsLoaded = false;
 }
@@ -28,9 +28,6 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->playerSpawnpoint = { 100,100 };
 		this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200); // 0
 		// Master Sword's Circle															  // 1
-		this->obstacleBuilder->ClassicCircle(300, 600, 50, { -2,1 });						  // 2 
-		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,-3 });						  // 3
-		this->obstacleBuilder->ClassicCircle(600, 300, 50, { 4,1 });						  // 4
 
 		//----------
 		//Items
@@ -69,6 +66,34 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		break;
 
+	case 3:
+		//---------
+		//Obstacles
+		//---------
+		this->playerSpawnpoint = { 100,100 };												  
+		this->obstacleBuilder->ClassicCircle(300, 600, 50, { -2,1 });						  // 0
+		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,-3 });						  // 1
+		this->obstacleBuilder->ClassicCircle(600, 300, 50, { 4,1 });						  // 2
+		this->obstacleBuilder->ClassicCircle(900, 100, 50, { -2,-4 });						  // 3
+		this->obstacleBuilder->ClassicCircle(280, 600, 50, { 1,-3 });						  // 4
+		this->obstacleBuilder->ClassicCircle(1000, 80, 50, { -1,8 });						  // 5
+
+		//----------
+		//Items
+		//----------
+		for (int i = 200; i <= 1700; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, 800));
+		}
+
+		for (int i = 200; i <= 1700; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, 300));
+		}
+		this->totalCoinsInLevel = activeItems.size(); // temp
+
+		break;
+
 	default:
 		break;
 
@@ -97,22 +122,21 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 }
 
 void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p)
-{
+{	
 	this->currentLevelFramecount += 1;
 
+	//check win
 	if (this->coinsCollectedInLevel >= this->totalCoinsInLevel)
 	{
-		this->currentLevelComplete = true;
+		this->currentLevelState = Complete;
 	}
 
 	//level specific handling
 	switch (this->currentLevel)
 	{
-	case 1:
-		//activeObstacles[0]->SetColor(GREEN);
-
+	case 3:
 		//Bounce the ballz on the side of the screen
-		for (int i = 2; i <= 4; i++)
+		for (int i = 0; i <= 5; i++)
 		{
 
 			if (activeObstacles[i]->GetPosX() + 50 > screenWidth || activeObstacles[i]->GetPosX() - 50 < 0)
@@ -147,19 +171,29 @@ void LevelHandler::AddCoinsCollected(int amount)
 	this->coinsCollectedInLevel += amount;
 }
 
+void LevelHandler::SetLevelState(LevelState levelState)
+{
+	this->currentLevelState = levelState;
+}
+
 void LevelHandler::ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
 {
 	this->UnloadCurrentLevel(activeObstacles, activeItems);
 	this->coinsCollectedInLevel = 0;
 	this->totalCoinsInLevel = 0;
 	this->currentLevelFramecount = 0;
-	this->currentLevelComplete = false;
+	this->currentLevelState = Active;
 	this->LoadCurrentLevel(activeObstacles, activeItems);
 }
 
 unsigned int LevelHandler::GetCurrentLevelFramecount() const
 {
 	return this->currentLevelFramecount;
+}
+
+int LevelHandler::GetCurrentLevel() const
+{
+	return this->currentLevel;
 }
 
 int LevelHandler::GetCoinsCollected() const
@@ -170,4 +204,9 @@ int LevelHandler::GetCoinsCollected() const
 Vector2 LevelHandler::GetPlayerSpawnpoint() const
 {
 	return this->playerSpawnpoint;
+}
+
+LevelState LevelHandler::GetCurrentLevelState() const
+{
+	return this->currentLevelState;
 }

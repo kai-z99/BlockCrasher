@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <raylib.h>
+#include "LevelStates.h"
 
 class Obstacle;
 class ObstacleBuilder;
@@ -16,6 +17,7 @@ private:
 	Vector2 playerSpawnpoint;
 	ObstacleBuilder* obstacleBuilder;
 	unsigned int currentLevelFramecount;
+	LevelState currentLevelState;
 	
 public:
 	LevelHandler();
@@ -27,14 +29,14 @@ public:
 
 	void SetLevel(int l);
 	void AddCoinsCollected(int amount);
+	void SetLevelState(LevelState levelState);
 	
 	unsigned int GetCurrentLevelFramecount() const;
+	int GetCurrentLevel() const;
 	int GetCoinsCollected() const;
 	Vector2 GetPlayerSpawnpoint() const;
-
-	bool currentLevelComplete;
-	bool levelIsLoaded;
+	LevelState GetCurrentLevelState() const;
 	
-
+	bool levelIsLoaded;
 
 };

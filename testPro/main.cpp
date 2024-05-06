@@ -19,3 +19,4 @@ int main() {
 //ADD MORE COMMENTS
 //levels should be timed
 //add a menu
+//maze level

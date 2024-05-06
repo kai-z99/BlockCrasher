@@ -14,12 +14,7 @@ RectangleObstacle::RectangleObstacle(float x, float y, float w, float h, Vector2
 
 void RectangleObstacle::Draw()
 {
-	/*Rectangle rec = { this->obstaclePosition.x, this->obstaclePosition.y, this->width, this->height };
-	Vector2 origin = { this->width / 2, this->height / 2 };
-
-	DrawRectanglePro(rec, origin, 0, this->color);*/
-
-	DrawRectangleLines(this->obstaclePosition.x, this->obstaclePosition.y, this->width, this->height, this->color);
+	DrawRectangleLines((int)this->obstaclePosition.x, (int)this->obstaclePosition.y, (int)this->width, (int)this->height, this->color);
 }
 
 void RectangleObstacle::Update(unsigned int frame)

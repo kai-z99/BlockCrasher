@@ -8,6 +8,7 @@ class Player;
 class Item;
 class CollisionManager;
 class PlayerMovementHandler;
+class GeneralInputHandler;
 class LevelHandler;
 
 
@@ -28,6 +29,7 @@ protected:
 	std::vector<Item*> activeItems;
 	CollisionManager* collisionManager;
 	PlayerMovementHandler* movementHandler;
+	GeneralInputHandler* inputHandler;
 	LevelHandler* levelHandler;
 
 public:

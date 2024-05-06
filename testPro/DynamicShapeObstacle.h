@@ -17,5 +17,6 @@ private:
 	Vector2 center;
 	float rotationRate;
 	float volatility; //how fast rotation changes directions
+	
 
 };
