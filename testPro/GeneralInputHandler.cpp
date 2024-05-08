@@ -14,7 +14,7 @@ void GeneralInputHandler::HandleTryAgain(LevelHandler* levelHandler, std::vector
 	}
 }
 
-void GeneralInputHandler::HandleLevelComplete(LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
+void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
 {
 	if (IsKeyPressed(KEY_SPACE) && levelHandler->GetCurrentLevelState() == Complete)
 	{
@@ -23,6 +23,8 @@ void GeneralInputHandler::HandleLevelComplete(LevelHandler* levelHandler, std::v
 		player->SetPosition(levelHandler->GetPlayerSpawnpoint());
 
 		levelHandler->SetLevelState(Active);
+
+		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + 1);
 	}
 }
 void GeneralInputHandler::HandleExitToMenu(LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)

@@ -3,18 +3,20 @@
 #include "ObstacleBuilder.h"
 #include "Obstacle.h"
 #include "CoinItem.h"
-
+#include "StarCoin.h"
+#include "MenuHandler.h"
 
 LevelHandler::LevelHandler()
 {
 	this->obstacleBuilder = new ObstacleBuilder();
-	this->currentLevel = 1;
+	this->currentLevel = 0;
 	this->totalCoinsInLevel = 1;
 	this->coinsCollectedInLevel = 0;
 	this->currentLevelFramecount = 0;
-	this->currentLevelState = Active;
+	this->currentLevelState = Inactive;
 	this->playerSpawnpoint = { 0,0 };
 	this->levelIsLoaded = false;
+	this->currentLevelStarCoinCollected = false;
 }
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -27,7 +29,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//---------
 		this->playerSpawnpoint = { 50,50 };														// 0
 		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,1 });							// 1
-		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });					// 2
+		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });						// 2
 
 
 		//----------
@@ -39,6 +41,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		}
 		this->totalCoinsInLevel = activeItems.size(); // temp
 
+		activeItems.push_back(new StarCoin(100, 100));
 		break;
 
 
@@ -63,7 +66,8 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		{
 			activeItems.push_back(new CoinItem(i, 300.0f));
 		}
-		this->totalCoinsInLevel = activeItems.size(); // temp
+
+		activeItems.push_back(new StarCoin((screenWidth / 2) + 50, (screenHeight / 2) - 130));
 
 		break;
 
@@ -84,7 +88,6 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		{
 			activeItems.push_back(new CoinItem(i, 400));
 		}
-		this->totalCoinsInLevel = activeItems.size(); // temp
 
 		break;
 
@@ -112,7 +115,6 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		{
 			activeItems.push_back(new CoinItem(i, 300));
 		}
-		this->totalCoinsInLevel = activeItems.size(); // temp
 
 		break;
 
@@ -131,7 +133,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//----------
 		//Items                           
 		//----------
-		activeItems.push_back(new CoinItem(screenWidth / 2, screenHeight / 2));
+		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight / 2));
 
 		for (int i = screenWidth/2 - 200; i <= screenWidth/2 + 200; i += 100) // bot row
 		{
@@ -154,7 +156,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		}
 
 
-		this->totalCoinsInLevel = activeItems.size(); // temp
+		
 
 		break;
 
@@ -163,6 +165,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	}
 
+	this->totalCoinsInLevel = activeItems.size() - 1; //-1 because it includes starCoin
 	this->obstacleBuilder->Insert(activeObstacles);
 	this->levelIsLoaded = true;
 }
@@ -185,7 +188,7 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	this->levelIsLoaded = false;
 }
 
-void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p)
+void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p, MenuHandler* menuHandler)
 {	
 	this->currentLevelFramecount += 1;
 
@@ -193,6 +196,13 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	if (this->coinsCollectedInLevel >= this->totalCoinsInLevel)
 	{
 		this->currentLevelState = Complete;
+
+		menuHandler->SetLevelComplete(this->currentLevel);
+		if (this->currentLevelStarCoinCollected)
+		{
+			menuHandler->SetLevelStarCoinCollected(this->currentLevel);
+		}
+			
 	}
 
 	//level specific handling
@@ -244,6 +254,7 @@ void LevelHandler::ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, st
 {
 	this->UnloadCurrentLevel(activeObstacles, activeItems);
 	this->coinsCollectedInLevel = 0;
+	this->currentLevelStarCoinCollected = false;
 	this->totalCoinsInLevel = 0;
 	this->currentLevelFramecount = 0;
 	this->currentLevelState = Active;

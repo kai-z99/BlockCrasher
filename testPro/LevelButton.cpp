@@ -1,6 +1,6 @@
 #include "LevelButton.h"
 
-LevelButton::LevelButton(float x, float y, float w, float h, const char* text, int level, Color color)
+LevelButton::LevelButton(int x, int y, int w, int h, const char* text, int level, Color color)
 {
 	this->x = x;
 	this->y = y;
@@ -9,13 +9,34 @@ LevelButton::LevelButton(float x, float y, float w, float h, const char* text, i
 	this->text = text;
 	this->level = level;
 	this->color = color;
-	this->textDimensions = MeasureTextEx(GetFontDefault(), this->text, 50.0f, 0.0f);
+	this->completed = false; // will reset if we clear the vector of buttons.
+	this->starCoinCollected = false; //same here.
 }
 
 void LevelButton::Draw()
 {
 	DrawRectangleLines(this->x, this->y, this->w, this->h, this->color);
 	DrawText(this->text, this->x + 10.0f, this->y + 9.0f, 50.0f, this->color);
+
+	Color completeCircleColor;
+
+	if (this->starCoinCollected)
+	{
+		completeCircleColor = PINK;
+	}
+
+	else if (this->completed)
+	{
+		completeCircleColor = YELLOW;
+	}
+
+	else
+	{
+		completeCircleColor = BLACK;
+	}
+
+	DrawCircleLines(this->x + this->w - 20.0f, this->y + this->h / 2, 10, completeCircleColor);
+	
 }
 
 void LevelButton::SetColor(Color c)

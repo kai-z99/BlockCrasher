@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "LevelHandler.h"
 
+
 CoinItem::CoinItem(float x, float y)
 {
 	this->isCollected = false;
@@ -49,7 +50,7 @@ void CoinItem::Draw()
 	}
 
 
-	DrawRingLines({ this->currentPosition.x, this->currentPosition.y - yOffset * 1.5f }, 3, 11, 0, 320, 6, YELLOW);
+	DrawRingLines({ this->currentPosition.x, this->currentPosition.y - yOffset * 1.5f }, 3, this->hitboxRadius, 0, 320, 6, YELLOW);
 }
 
 void CoinItem::Update(unsigned int frame, Player* p, LevelHandler* levelHandler)

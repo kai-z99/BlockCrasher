@@ -20,23 +20,20 @@ void Game::Init() // temp
     this->collisionManager = new CollisionManager();
     this->movementHandler = new PlayerMovementHandler();
     this->inputHandler = new GeneralInputHandler();
-    this->menuHandler = new MenuHandler();
-
+    //this->menuHandler = new MenuHandler();
     this->levelHandler = new LevelHandler();
-    this->levelHandler->SetLevel(4);                                                //temp
-    this->levelHandler->LoadCurrentLevel(this->activeObstacles, this->activeItems); //temp
-
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
 
 }
 
 void Game::Run()
 {
-    InitWindow(screenWidth, screenHeight, "Raylib basic window");
+    InitWindow(screenWidth, screenHeight, "Welcome");
     //ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
+    this->menuHandler = new MenuHandler();
     while (!WindowShouldClose()) {
         frameCount++;
         this->HandleInput();
@@ -112,18 +109,18 @@ void Game::Draw()
     //-----------------------
     if (this->levelHandler->GetCurrentLevelState() == Complete) //credit last level
     {
-        Vector2 textSize = MeasureTextEx(GetFontDefault(), "LEVEL COMPLETE!", 50, 0.0f);
-        DrawText("LEVEL COMPLETE!", (float)screenWidth / 2 - (textSize.x / 2), screenHeight / 2, 50, WHITE);
+        int textWidth = MeasureText("LEVEL COMPLETE!", 50);
+        DrawText("LEVEL COMPLETE!", (float)screenWidth / 2 - ((float)textWidth / 2), screenHeight / 2, 50, WHITE);
 
-        textSize = MeasureTextEx(GetFontDefault(), "Press SPACE to go to next level.", 20, 0.0f);
-        DrawText("Press SPACE to go to next level.", (float)screenWidth / 2 - (textSize.x / 2), (screenHeight / 2) + 60, 20, WHITE);
+        textWidth = MeasureText("Press SPACE to go to next level.", 20);
+        DrawText("Press SPACE to go to next level.", (float)screenWidth / 2 - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
 
     }
 
     else if (this->levelHandler->GetCurrentLevelState() == Fail)
     {
-        Vector2 textSize = MeasureTextEx(GetFontDefault(), "Press SPACE to try again.", 20, 0.0f);
-        DrawText("Press SPACE to try again.", (float)screenWidth / 2 - (textSize.x / 2), (screenHeight / 2) + 60, 20, WHITE);
+        int textWidth = MeasureText("Press SPACE to try again.", 20);
+        DrawText("Press SPACE to try again.", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
     }
 
     else if (this->levelHandler->GetCurrentLevelState() == Active)
@@ -172,12 +169,18 @@ void Game::Update(unsigned int frame)
         {
             it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
         }
+
+        //temp
+        if (this->levelHandler->currentLevelStarCoinCollected)
+        {
+            this->player->SetColor(RED);
+        }
     }
 
-    else if (this->levelHandler->GetCurrentLevelState() == Inactive)
-    {
-        
-    }
+    //else if (this->levelHandler->GetCurrentLevelState() == Inactive)
+    //{
+    //    
+    //}
 }
 
 void Game::HandleInput()
@@ -194,7 +197,7 @@ void Game::HandleInput()
 
     else if (this->levelHandler->GetCurrentLevelState() == Complete)
     {
-        this->inputHandler->HandleLevelComplete(this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+        this->inputHandler->HandleLevelComplete(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
     }
 
     this->inputHandler->HandleExitToMenu(this->levelHandler, this->activeObstacles, this->activeItems);
@@ -218,6 +221,6 @@ void Game::HandleCollisions()
 
 void Game::HandleLevel()
 {
-    this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player);
+    this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler);
 }
 

@@ -13,10 +13,9 @@ private:
 	float y;
 	int level;
 	Color color;
-	Vector2 textDimensions;
 
 public:
-	LevelButton(float x, float y, float w, float h, const char* text, int level, Color color);
+	LevelButton(int x, int y, int w, int h, const char* text, int level, Color color);
 
 	void Draw();
 	void SetColor(Color c);
@@ -25,4 +24,7 @@ public:
 	float GetPosX() const;
 	float GetPosY() const;
 	float GetHeight() const;
+
+	bool completed;
+	bool starCoinCollected;
 };

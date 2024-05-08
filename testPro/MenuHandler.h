@@ -10,7 +10,6 @@ private:
 	std::vector<LevelButton*> levelButtons;
 	int currentSelectedLevel;
 
-
 	int levelButtonHeight;
 	int levelButtonWidth;
 
@@ -18,18 +17,21 @@ private:
 
 	void DrawLevelButtons();
 	void DrawSelectedLevelIndicator();
-
-	Vector2 levelSelectTitleDimensions;
-	const char* levelSelectTitleText;
 	void DrawLevelSelectTitle();
+
+	int levelSelectTitleWidth;
+	const char* levelSelectTitleText;
+	
 
 public:
 	MenuHandler();
-	//void AddLevelButton(float x, float y, float w, float h, const char* text, Color color);
-	void DrawLevelSelectMenu();
 
+	void DrawLevelSelectMenu();
 	void SetSelectedLevel(int level);
+	void SetLevelComplete(int level);
+	void SetLevelStarCoinCollected(int level);
 
 	int GetSelectedLevel() const;
 	int GetLevelsOnPage() const;
+
 };

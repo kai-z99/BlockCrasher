@@ -12,7 +12,6 @@ int main() {
 
 
 // fix dynam,ic obstacle hitbox (4 pints on player) TO DO THIS, MAKE DRAWING THE PLAYER DRAW TO THE CENTER. THEN YOU WONT HAVE TO HAVE SEPRATE COLLISION FOR EACH DIRECTION
-// purtple star coins
 //levels should be timed
 //maze level
 //make level appear behind menu when hovering maybe

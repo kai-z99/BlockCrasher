@@ -3,17 +3,16 @@
 #include "Constants.h"
 
 
-
-
 MenuHandler::MenuHandler()
 {
 	this->currentSelectedLevel = 0;
 	this->levelButtonHeight = 60;
 	this->levelButtonWidth = 600;
 	this->levelSelectTitleText = "Select a Level!";
-	this->levelSelectTitleDimensions = MeasureTextEx(GetFontDefault(), this->levelSelectTitleText, 75.0f, 0.0f);
+	this->levelSelectTitleWidth = MeasureText(this->levelSelectTitleText, 75);
+	
 
-	this->InitLevelSelectPage1(); // temp
+	this->InitLevelSelectPage1(); 
 }
 
 void MenuHandler::DrawLevelSelectMenu()
@@ -30,12 +29,13 @@ void MenuHandler::InitLevelSelectPage1()
 	std::vector<const char*> levelNames =
 	{
 		"0: Tutorial",
-		"1: Bounce Dungeon",
-		"2: Sword Swing",
-		"3: PlaceHolder 1",
+		"1: Sword Swing",
+		"2: PlaceHolder 1",
+		"3: Bounce Dungeon",
 		"4: PlaceHolder 2",
 		"5: PlaceHolder 3",
 		"6: PlaceHolder 4",
+		//"Created by Kai @ Van"
 	};
 
 
@@ -59,18 +59,28 @@ void MenuHandler::DrawLevelButtons()
 
 void MenuHandler::DrawSelectedLevelIndicator()
 {
-	DrawCircleLines(600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2), 10, GREEN);
+	DrawCircleLines(600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2), 10, WHITE);
 }
 
 
 void MenuHandler::DrawLevelSelectTitle()
 {
-	DrawText(this->levelSelectTitleText, (screenWidth / 2) - (this->levelButtonWidth / 2) /* middle of screen */ , 100, 75.0f, WHITE);
+	DrawText(this->levelSelectTitleText, (screenWidth / 2) - this->levelSelectTitleWidth / 2, 100, 75, WHITE);
 }
 
 void MenuHandler::SetSelectedLevel(int level)
 {
 	this->currentSelectedLevel = level;
+}
+
+void MenuHandler::SetLevelComplete(int level)
+{
+	this->levelButtons[level]->completed = true;
+}
+
+void MenuHandler::SetLevelStarCoinCollected(int level)
+{
+	this->levelButtons[level]->starCoinCollected = true;
 }
 
 int MenuHandler::GetSelectedLevel() const
