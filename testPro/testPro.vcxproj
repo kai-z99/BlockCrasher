@@ -138,8 +138,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeneralInputHandler.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="LevelButton.cpp" />
     <ClCompile Include="LevelHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="LevelButton.h" />
+    <ClCompile Include="MenuHandler.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Obstacle.h" />
     <ClCompile Include="ObstacleBuilder.cpp" />

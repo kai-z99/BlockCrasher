@@ -10,6 +10,7 @@ class CollisionManager;
 class PlayerMovementHandler;
 class GeneralInputHandler;
 class LevelHandler;
+class MenuHandler;
 
 
 class Game
@@ -31,6 +32,7 @@ protected:
 	PlayerMovementHandler* movementHandler;
 	GeneralInputHandler* inputHandler;
 	LevelHandler* levelHandler;
+	MenuHandler* menuHandler;
 
 public:
 	Game();

@@ -21,6 +21,28 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 {
 	switch (this->currentLevel)
 	{
+	case 0:
+		//---------
+		//Obstacles
+		//---------
+		this->playerSpawnpoint = { 50,50 };														// 0
+		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,1 });							// 1
+		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });					// 2
+
+
+		//----------
+		//Items
+		//----------
+		for (int i = 200; i <= 1000; i += 50)
+		{
+			activeItems.push_back(new CoinItem(i, 400));
+		}
+		this->totalCoinsInLevel = activeItems.size(); // temp
+
+		break;
+
+
+
 	case 1:
 		//---------
 		//Obstacles
@@ -34,12 +56,12 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//----------
 		for (int i = 200; i <= 1700; i += 100)
 		{
-			activeItems.push_back(new CoinItem(i,800));
+			activeItems.push_back(new CoinItem(i,800.0f));
 		}
 
 		for (int i = 200; i <= 1700; i += 100)
 		{
-			activeItems.push_back(new CoinItem(i, 300));
+			activeItems.push_back(new CoinItem(i, 300.0f));
 		}
 		this->totalCoinsInLevel = activeItems.size(); // temp
 
@@ -99,7 +121,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//---------
 		//Obstacles
 		//---------
-		this->playerSpawnpoint = { 50,50 };
+		this->playerSpawnpoint = { 150, screenHeight/2 };
 		this->obstacleBuilder->HollowBoxPiece(screenWidth/2 - 150*3, screenHeight/2 - 150*3, 0.01f, 0, 0, 3);
 		this->obstacleBuilder->HollowBoxPiece(screenWidth/2 - 150*3, screenHeight/2 - 150*3, 0.01f, PI, 0, 3);
 
@@ -107,31 +129,34 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150, screenHeight / 2 - 150, -0.01f, 3*PI/2, 0.01, 1);
 
 		//----------
-		//Items
+		//Items                           
 		//----------
 		activeItems.push_back(new CoinItem(screenWidth / 2, screenHeight / 2));
 
-		for (int i = screenWidth/2 - 200; i <= screenWidth/2 + 200; i += 100)
+		for (int i = screenWidth/2 - 200; i <= screenWidth/2 + 200; i += 100) // bot row
 		{
 			activeItems.push_back(new CoinItem(i, screenHeight/2 + 200));
 		}
 
-		for (int i = screenWidth / 2 - 200; i <= screenWidth / 2 + 200; i += 100)
+		for (int i = screenWidth / 2 - 200; i <= screenWidth / 2 + 200; i += 100) //top row
 		{
 			activeItems.push_back(new CoinItem(i, screenHeight / 2 - 200));
 		}
 
+		for (int i = screenHeight / 2 - 100; i <= screenHeight / 2 + 100; i += 100) //left col
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2 - 200, i));
+		}
+
+		for (int i = screenHeight / 2 - 100; i <= screenHeight / 2 + 100; i += 100) //right col
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2 + 200, i));
+		}
+
+
 		this->totalCoinsInLevel = activeItems.size(); // temp
 
 		break;
-
-
-
-
-
-
-
-
 
 	default:
 		break;

@@ -7,6 +7,7 @@
 #include "Obstacle.h"
 #include "CoinItem.h"
 #include "LevelStates.h"
+#include "MenuHandler.h"
 
 Game::Game()
 {
@@ -19,12 +20,14 @@ void Game::Init() // temp
     this->collisionManager = new CollisionManager();
     this->movementHandler = new PlayerMovementHandler();
     this->inputHandler = new GeneralInputHandler();
+    this->menuHandler = new MenuHandler();
 
     this->levelHandler = new LevelHandler();
-    this->levelHandler->SetLevel(1);                                                //temp
+    this->levelHandler->SetLevel(4);                                                //temp
     this->levelHandler->LoadCurrentLevel(this->activeObstacles, this->activeItems); //temp
 
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
+
 }
 
 void Game::Run()
@@ -76,6 +79,8 @@ void Game::Draw()
     ClearBackground(BLACK);
 
 
+    
+    
     //-------------------------
     //LEVEL DRAWING
     //-------------------------
@@ -105,7 +110,7 @@ void Game::Draw()
     //--------------------
     //UI DRAWING
     //-----------------------
-    if (this->levelHandler->GetCurrentLevelState() == Complete)
+    if (this->levelHandler->GetCurrentLevelState() == Complete) //credit last level
     {
         Vector2 textSize = MeasureTextEx(GetFontDefault(), "LEVEL COMPLETE!", 50, 0.0f);
         DrawText("LEVEL COMPLETE!", (float)screenWidth / 2 - (textSize.x / 2), screenHeight / 2, 50, WHITE);
@@ -126,13 +131,11 @@ void Game::Draw()
         //draw timer, coins collected/c, esc to exit
     }
 
-    
-
-
+   
     //draw menus if (levelHandler.levelisloaded == false)
     if (this->levelHandler->GetCurrentLevelState() == Inactive && this->levelHandler->levelIsLoaded == false)
     {
-        //menu drawing using UIHandler functions
+        this->menuHandler->DrawLevelSelectMenu();
     }
 
     EndDrawing();
@@ -170,6 +173,11 @@ void Game::Update(unsigned int frame)
             it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
         }
     }
+
+    else if (this->levelHandler->GetCurrentLevelState() == Inactive)
+    {
+        
+    }
 }
 
 void Game::HandleInput()
@@ -188,6 +196,16 @@ void Game::HandleInput()
     {
         this->inputHandler->HandleLevelComplete(this->levelHandler, this->activeObstacles, this->activeItems, this->player);
     }
+
+    this->inputHandler->HandleExitToMenu(this->levelHandler, this->activeObstacles, this->activeItems);
+
+    if (this->levelHandler->GetCurrentLevelState() == Inactive)
+    {
+        this->inputHandler->HandleSelectLevelMenu(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+    }
+
+
+
 }
 
 void Game::HandleCollisions()
