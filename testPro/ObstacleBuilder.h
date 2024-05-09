@@ -16,5 +16,7 @@ public:
 	void FlyingPentagon(float x, float y);
 	void MasterSword(float x, float y);
 	void HollowBoxPiece(float x, float y, float rr, float ri, float vo, float scale);
+	void Wheel(float x, float y, float rr, float ri, float vo, float scale);
+	void NinjaStar(float x, float y, float rr, float ri, float vo, float scale);
 
 };

@@ -15,13 +15,6 @@ MenuHandler::MenuHandler()
 	this->InitLevelSelectPage1(); 
 }
 
-void MenuHandler::DrawLevelSelectMenu()
-{
-	this->DrawLevelButtons();
-	this->DrawSelectedLevelIndicator();
-	this->DrawLevelSelectTitle();
-}
-
 void MenuHandler::InitLevelSelectPage1()
 {
 	//make this a for loop maybe
@@ -30,16 +23,16 @@ void MenuHandler::InitLevelSelectPage1()
 	{
 		"0: Tutorial",
 		"1: Sword Swing",
-		"2: PlaceHolder 1",
+		"2: WIP WIP WIP",
 		"3: Bounce Dungeon",
-		"4: PlaceHolder 2",
-		"5: PlaceHolder 3",
+		"4: Cubed",
+		"5: Violent Tides",
 		"6: PlaceHolder 4",
 		//"Created by Kai @ Van"
 	};
 
 
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i <= 6; i++)
 	{
 		this->levelButtons.push_back(new LevelButton(posX, 200 + (100 * (i + 1)), this->levelButtonWidth, this->levelButtonHeight, levelNames[i], 0, WHITE)); // remove level  param most liekl,y
 	}		//										  ^
@@ -48,6 +41,12 @@ void MenuHandler::InitLevelSelectPage1()
 	//														start at y = 200, increment 100 every button
 }
 
+void MenuHandler::DrawLevelSelectMenu()
+{
+	this->DrawLevelButtons();
+	this->DrawSelectedLevelIndicator();
+	this->DrawLevelSelectTitle();
+}
 
 void MenuHandler::DrawLevelButtons()
 {
@@ -59,7 +58,17 @@ void MenuHandler::DrawLevelButtons()
 
 void MenuHandler::DrawSelectedLevelIndicator()
 {
-	DrawCircleLines(600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2), 10, WHITE);
+	//DrawCircleLines(600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2), 10, WHITE);
+
+
+
+	DrawTriangleLines(
+		{ 600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) }, 
+		{ 570, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) - 20},
+		{ 570, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) + 20 },
+		WHITE
+	
+	);
 }
 
 
@@ -67,6 +76,7 @@ void MenuHandler::DrawLevelSelectTitle()
 {
 	DrawText(this->levelSelectTitleText, (screenWidth / 2) - this->levelSelectTitleWidth / 2, 100, 75, WHITE);
 }
+
 
 void MenuHandler::SetSelectedLevel(int level)
 {

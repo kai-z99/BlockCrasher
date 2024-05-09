@@ -105,6 +105,44 @@ void ObstacleBuilder::HollowBoxPiece(float x, float y, float rr, float ri, float
 
 }
 
+void ObstacleBuilder::Wheel(float x, float y, float rr, float ri, float vo, float scale)
+{
+    std::vector<Vector2> v;
+
+    v.push_back({ 10,10 });
+    v.push_back({ 10,200 });
+    v.push_back({ -10,200 });
+    v.push_back({ -10,10 });
+    v.push_back({ -200,10 });
+    v.push_back({ -200,-10 });
+    v.push_back({ -10,-10 });
+    v.push_back({ -10,-200 });
+    v.push_back({ 10,-200 });
+    v.push_back({ 10,-10 });
+    v.push_back({ 200,-10 });
+    v.push_back({ 200, 10 });
+    v.push_back({ 10, 10 });
+
+
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 0 + x, 0 + y }, v, rr, vo, { 0,0 }, ri);
+    CircleObstacle* c = new CircleObstacle(x, y, 20, { 0,0 });
+    this->storage.push_back(d);
+    this->storage.push_back(c);
+
+}
+
 
 
 

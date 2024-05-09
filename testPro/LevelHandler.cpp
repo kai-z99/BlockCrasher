@@ -28,20 +28,22 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 		this->playerSpawnpoint = { 50,50 };														// 0
-		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,1 });							// 1
+		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 0,0 });							// 1
 		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });						// 2
 
 
 		//----------
 		//Items
 		//----------
-		for (int i = 200; i <= 1000; i += 50)
+		for (int i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 400));
 		}
 		this->totalCoinsInLevel = activeItems.size(); // temp
 
-		activeItems.push_back(new StarCoin(100, 100));
+		activeItems.push_back(new StarCoin(screenWidth/2, 800));
+
+		
 		break;
 
 
@@ -124,6 +126,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 		this->playerSpawnpoint = { 150, screenHeight/2 };
+
 		this->obstacleBuilder->HollowBoxPiece(screenWidth/2 - 150*3, screenHeight/2 - 150*3, 0.01f, 0, 0, 3);
 		this->obstacleBuilder->HollowBoxPiece(screenWidth/2 - 150*3, screenHeight/2 - 150*3, 0.01f, PI, 0, 3);
 
@@ -133,8 +136,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//----------
 		//Items                           
 		//----------
-		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight / 2));
-
+		
 		for (int i = screenWidth/2 - 200; i <= screenWidth/2 + 200; i += 100) // bot row
 		{
 			activeItems.push_back(new CoinItem(i, screenHeight/2 + 200));
@@ -155,10 +157,71 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 			activeItems.push_back(new CoinItem(screenWidth / 2 + 200, i));
 		}
 
-
-		
+		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight / 2));
 
 		break;
+
+	case 5:
+		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
+
+		//---------
+		//Obstacles
+		//---------
+
+		this->obstacleBuilder->Wheel(0, (float)screenHeight /2 , 0.015, 0, 0, 2.6); //left
+		this->obstacleBuilder->Wheel((float)screenWidth, (float)screenHeight / 2, 0.015, 0, 0, 2.6); // right
+		this->obstacleBuilder->Wheel((float)screenWidth / 2, 0, 0.015, 0, 0, 2.6); // bot
+		this->obstacleBuilder->Wheel((float)screenWidth / 2, screenHeight, 0.015, 0, 0, 2.6); // top
+
+		//----------
+		//Items                           
+		//----------
+
+		for (int i = 150; i <= 300; i += 50) // mid top
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2, i));
+		}
+
+		for (int i = 800; i <= 950; i += 50) // mid bot
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2, i));
+		}
+
+		for (int i = 200; i <= 900; i += 100) // left row
+		{
+			activeItems.push_back(new CoinItem(200, i));
+		}
+
+		for (int i = 200; i <= 900; i += 100) // right row
+		{
+			activeItems.push_back(new CoinItem(1720, i));
+		}
+
+		activeItems.push_back(new StarCoin(40, screenHeight/2 - 70));
+		break;
+
+	case 6:
+		this->playerSpawnpoint = { 50, screenHeight / 2 };
+
+		//---------
+		//Obstacles
+		//---------
+
+		//bot crushers
+		this->obstacleBuilder->ClassicRectangle(0, screenHeight, 100, (float)screenHeight/2, { 0,-5 }); // left
+		this->obstacleBuilder->ClassicRectangle(screenWidth - 100, screenHeight, 100, (float)screenHeight / 2, { 0,-5 }); // right
+
+		//top crushers
+		this->obstacleBuilder->ClassicRectangle(0, (float)(-screenHeight) / 2, 100, (float)screenHeight / 2, { 0,5 }); // left
+		this->obstacleBuilder->ClassicRectangle(screenWidth - 100, (float)(-screenHeight) / 2, 100, (float)screenHeight / 2, { 0,5 }); // right
+		
+
+		
+		for (int i = 200; i <= 900; i += 100) // right row
+		{
+			activeItems.push_back(new CoinItem(1720, i));
+		}
+
 
 	default:
 		break;
@@ -197,17 +260,25 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	{
 		this->currentLevelState = Complete;
 
+		//mark compelted on menu screen
 		menuHandler->SetLevelComplete(this->currentLevel);
+
 		if (this->currentLevelStarCoinCollected)
 		{
 			menuHandler->SetLevelStarCoinCollected(this->currentLevel);
 		}
-			
 	}
 
 	//level specific handling
 	switch (this->currentLevel)
 	{
+	case 0:
+		//tutorial text
+		DrawText("Collect all coins to complete the level!", 200, 320, 20, WHITE);
+		DrawText("This is an optional Star Coin. Collect it before finishing!", screenWidth/2 - 280, screenHeight/2 + 300, 20, WHITE);
+		DrawText("Careful! Don't get hit by obstacles!", 580, 500, 20, WHITE);
+		break;
+
 	case 3:
 		//Bounce the ballz on the side of the screen
 		for (int i = 0; i <= 5; i++)
@@ -226,8 +297,54 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		}
 
 		break;
-	case 2:
+	case 6:
+		//MAKER THESE FOR LOOPS
+		
+		//check if bottom pillars should swtich velocity
+		if (activeObstacles[0]->GetPosY() <= (float)screenHeight / 2)
+		{
+			activeObstacles[0]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+		}
+
+		if (activeObstacles[0]->GetPosY() >= screenHeight)
+		{
+			activeObstacles[0]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+		}
+
+		if (activeObstacles[1]->GetPosY() <= (float)screenHeight / 2)
+		{
+			activeObstacles[1]->SetVelocity(0, -activeObstacles[1]->GetVelocity().y);
+		}
+
+		if (activeObstacles[1]->GetPosY() >= screenHeight)
+		{
+			activeObstacles[1]->SetVelocity(0, -activeObstacles[1]->GetVelocity().y);
+		}
+
+
+		//check if top pillars should swtich velocity
+		if (activeObstacles[2]->GetPosY() >= 0)
+		{
+			activeObstacles[2]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+		}
+
+		if (activeObstacles[2]->GetPosY() <= -screenHeight/2)
+		{
+			activeObstacles[2]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+		}
+
+		if (activeObstacles[3]->GetPosY() >= 0)
+		{
+			activeObstacles[3]->SetVelocity(0, -activeObstacles[3]->GetVelocity().y);
+		}
+
+		if (activeObstacles[3]->GetPosY() <= -screenHeight / 2)
+		{
+			activeObstacles[3]->SetVelocity(0, -activeObstacles[3]->GetVelocity().y);
+		}
+
 		break;
+
 	default:
 		break;
 	}

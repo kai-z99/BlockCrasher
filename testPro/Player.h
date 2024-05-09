@@ -1,13 +1,11 @@
 #pragma once
 #include <raylib.h>
 #include "Directions.h"
-#include "PlayerMovementHandler.h"
 
 
 class Player
 {
 private:
-	PlayerMovementHandler movementHandler;
 	Vector2 currentPosition;
 	Direction currentDirection;
 	Color color;

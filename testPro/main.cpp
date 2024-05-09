@@ -15,3 +15,8 @@ int main() {
 //levels should be timed
 //maze level
 //make level appear behind menu when hovering maybe
+//implement second menu page (page changer)
+//big wheel obj
+//add sounds
+//combine the input handlers
+//resolve warnings

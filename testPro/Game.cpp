@@ -2,6 +2,7 @@
 #include "Constants.h"
 #include "Player.h"
 #include "CollisionManager.h"
+#include "PlayerMovementHandler.h"
 #include "GeneralInputHandler.h"
 #include "LevelHandler.h"
 #include "Obstacle.h"
@@ -33,7 +34,8 @@ void Game::Run()
     DisableCursor();
     SetTargetFPS(60);
 
-    this->menuHandler = new MenuHandler();
+    this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
+
     while (!WindowShouldClose()) {
         frameCount++;
         this->HandleInput();
@@ -168,12 +170,6 @@ void Game::Update(unsigned int frame)
         for (Item* it : this->activeItems)
         {
             it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
-        }
-
-        //temp
-        if (this->levelHandler->currentLevelStarCoinCollected)
-        {
-            this->player->SetColor(RED);
         }
     }
 

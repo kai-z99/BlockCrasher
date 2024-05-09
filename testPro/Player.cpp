@@ -6,7 +6,6 @@ Player::Player(float x, float y)
 {
 	this->currentPosition = { x,y };
 	this->currentDirection = N;
-	this->movementHandler = PlayerMovementHandler();
 	this->hitboxRadius = 7;
 	this->color = BLUE;
 }

@@ -37,7 +37,7 @@ void GeneralInputHandler::HandleExitToMenu(LevelHandler* levelHandler, std::vect
 }
 void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
 {
-	if (levelHandler->GetCurrentLevelState() == Inactive && IsKeyPressed(KEY_SPACE))
+	if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)))
 	{
 		levelHandler->SetLevel(menuHandler->GetSelectedLevel());
 		levelHandler->ResetCurrentLevel(activeObstacles, activeItems);
@@ -46,12 +46,12 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 		levelHandler->SetLevelState(Active);
 	}
 
-	else if (levelHandler->GetCurrentLevelState() == Inactive && IsKeyPressed(KEY_S) && menuHandler->GetSelectedLevel() != menuHandler->GetLevelsOnPage() - 1) // add or up arrow
+	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) && menuHandler->GetSelectedLevel() != menuHandler->GetLevelsOnPage() - 1) // add or up arrow
 	{
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + 1);
 	}
 
-	else if (levelHandler->GetCurrentLevelState() == Inactive && IsKeyPressed(KEY_W) && menuHandler->GetSelectedLevel() != 0) // add or down arrow
+	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && menuHandler->GetSelectedLevel() != 0) // add or down arrow
 	{
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() - 1);
 	}

@@ -81,5 +81,6 @@ void PlayerMovementHandler::HandlePlayerMovement(Player* p)
     {
         p->SetDirection(NW);
     }
+
     p->Move(dx, dy);
 }
