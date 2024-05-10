@@ -77,9 +77,6 @@ void Game::Draw()
     BeginDrawing();
     ClearBackground(BLACK);
 
-
-    
-    
     //-------------------------
     //LEVEL DRAWING
     //-------------------------

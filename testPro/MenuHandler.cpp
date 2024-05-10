@@ -172,11 +172,6 @@ int MenuHandler::GetSelectedLevel() const
 	return this->currentSelectedLevel;
 }
 
-//int MenuHandler::GetLevelsOnPage() const
-//{
-//	return 7;
-//}
-
 int MenuHandler::GetCurrentPage() const
 {
 	return this->currentPage;

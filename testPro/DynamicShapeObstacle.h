@@ -10,6 +10,8 @@ public:
 	DynamicShapeObstacle(float x, float y, Vector2 c, const std::vector<Vector2>& v, float rr, float vo, Vector2 vi, float ri);
 	void Draw() override;
 	void Update(unsigned int frame) override;
+	void SetPosX(float x); //ovveride
+	void SetPosY(float y); //override
 	std::vector<Vector2> GetVertices() const;
 
 private:

@@ -21,6 +21,7 @@ DynamicShapeObstacle::DynamicShapeObstacle(float x, float y, Vector2 c, const st
     this->volatility = vo;
     this->velocity = ve;
 
+    //set initial rotation
     for (Vector2& v : this->vertices)
     {
         v = Rotate(v, this->center, ri);
@@ -31,8 +32,6 @@ void DynamicShapeObstacle::Draw()
 {
 	DrawLineStrip(&this->vertices[0], vertices.size(), this->color);
 }
-
-
 
 
 void DynamicShapeObstacle::Update(unsigned int frame)
@@ -59,6 +58,32 @@ void DynamicShapeObstacle::Update(unsigned int frame)
     {
         v = Rotate(v, this->center, rotation);
     }
+}
+
+void DynamicShapeObstacle::SetPosX(float x)
+{
+    float diff;
+    for (Vector2& v : this->vertices) //for every vertices
+    {
+        diff = this->center.x - v.x; // check the diff between centre x pos and that vertices x pos
+        v.x = x - diff;              // now move the vertices to x, and offset by diff.
+    }
+
+    this->obstaclePosition.x = x;
+    this->center.x = x;
+}
+
+void DynamicShapeObstacle::SetPosY(float y)
+{
+    float diff;
+    for (Vector2& v : this->vertices)
+    {
+        diff = this->center.y - v.y;
+        v.y = y + diff;
+    }
+
+    this->obstaclePosition.y = y;
+    this->center.y = y;
 }
 
 std::vector<Vector2> DynamicShapeObstacle::GetVertices() const

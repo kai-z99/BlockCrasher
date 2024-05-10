@@ -5,6 +5,7 @@
 #include "CoinItem.h"
 #include "StarCoin.h"
 #include "MenuHandler.h"
+#include "DynamicShapeObstacle.h"
 
 LevelHandler::LevelHandler()
 {
@@ -21,6 +22,11 @@ LevelHandler::LevelHandler()
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
 {
+	//used for level 6
+	float rightMiddle; 
+	float leftMiddle; 
+	float pillarHeight = (float)(screenHeight / 2) + 1;  // one more than half screenheight to avoid seeing bottom of block at peak
+
 	switch (this->currentLevel)
 	{
 	case 0:
@@ -201,27 +207,75 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		break;
 
 	case 6:
-		this->playerSpawnpoint = { 50, screenHeight / 2 };
+		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
 
 		//---------
 		//Obstacles
 		//---------
 
-		//bot crushers
-		this->obstacleBuilder->ClassicRectangle(0, screenHeight, 100, (float)screenHeight/2, { 0,-5 }); // left
-		this->obstacleBuilder->ClassicRectangle(screenWidth - 100, screenHeight, 100, (float)screenHeight / 2, { 0,-5 }); // right
+		//bot crushers (bot start)
 
-		//top crushers
-		this->obstacleBuilder->ClassicRectangle(0, (float)(-screenHeight) / 2, 100, (float)screenHeight / 2, { 0,5 }); // left
-		this->obstacleBuilder->ClassicRectangle(screenWidth - 100, (float)(-screenHeight) / 2, 100, (float)screenHeight / 2, { 0,5 }); // right
+		this->obstacleBuilder->ClassicRectangle(0, screenHeight, 100, pillarHeight, { 0,-5 }); // left										//0
+		this->obstacleBuilder->ClassicRectangle(screenWidth - 100, screenHeight, 100, pillarHeight, { 0,-5 }); // right					//1
+		this->obstacleBuilder->ClassicRectangle(((float)screenWidth / 2) - 50, screenHeight, 100, pillarHeight, { 0,-5 }); // middle		//2
+
+
+		//bot crushers (top start)
+
+		leftMiddle = (((float)screenWidth / 2) + 50) / 2; // using the midpoint formula, where the length is x = screenWidth/2, p1 is x = 100, p2 is x = screenWdith/2 - 50
+		this->obstacleBuilder->ClassicRectangle(leftMiddle - 50, (float)screenHeight / 2, 100, pillarHeight, { 0,5 }); // between left and middle //3
+								
+	
+		rightMiddle = (((float)screenWidth * (3.0f/4.0f)) - 25); // using the midpoint formula, where the length is x = screenWidth, p1 is x = screenWidth/2 + 50, p2 is x = screenWidth - 100
+		this->obstacleBuilder->ClassicRectangle(rightMiddle - 50, (float)screenHeight / 2, 100, pillarHeight, { 0,5 }); // between right and middle //4
+
+
+		
+		//top crushers (bot start)
+
+		this->obstacleBuilder->ClassicRectangle(0, -pillarHeight, 100, pillarHeight, { 0,5 }); // left // 5
+		this->obstacleBuilder->ClassicRectangle(screenWidth - 100, -pillarHeight, 100, pillarHeight, { 0,5 }); // right // 6
+		this->obstacleBuilder->ClassicRectangle(((float)screenWidth / 2) - 50, -pillarHeight, 100, pillarHeight, { 0,5 }); // middle // 7
+		
+		//top crushers (top start)
+		this->obstacleBuilder->ClassicRectangle(leftMiddle - 50, -1, 100, pillarHeight, { 0,-5 }); // between left and middle // 8
+		this->obstacleBuilder->ClassicRectangle(rightMiddle - 50, -1, 100, pillarHeight, { 0,-5 }); // between right and middle // 9
+		//               check def of pillarheight for explanation ^
+
+
+		this->obstacleBuilder->NinjaStar(270.0f, 0.0f, 0.05f, 0.0f, 0.0f, { 0,5 }, 1.0f); // left star // 10, 11
+		this->obstacleBuilder->NinjaStar(1185.0f, 0, 0.05f, 0.0f, 0.0f, { 0,5 }, 1.0f); // right middle star // 12, 13
+		this->obstacleBuilder->NinjaStar(730.0f, screenHeight, 0.05f, 0.0f, 0.0f, { 0,-5 }, 1.0f); // left middle star // 14, 15
+		this->obstacleBuilder->NinjaStar(screenWidth - 270.0f, screenHeight, 0.05f, 0.0f, 0.0f, { 0,-5 }, 1.0f); // right star // 16, 17
+		
 		
 
+
 		
-		for (int i = 200; i <= 900; i += 100) // right row
+		for (int i = 200; i <= 900; i += 100) // left row
 		{
-			activeItems.push_back(new CoinItem(1720, i));
+			activeItems.push_back(new CoinItem(270.0f, i));
 		}
 
+		for (int i = 200; i <= 900; i += 100) // mid left row
+		{
+			activeItems.push_back(new CoinItem(730.0f, i));
+		}
+
+		for (int i = 200; i <= 900; i += 100) // mid right row
+		{
+			activeItems.push_back(new CoinItem(1185.0f, i));
+		}
+
+		for (int i = 200; i <= 900; i += 100) // mid right row
+		{
+			activeItems.push_back(new CoinItem(screenWidth - 270.0f, i));
+		}
+
+		activeItems.push_back(new StarCoin(rightMiddle, 100));
+		
+
+		break;
 
 	default:
 		break;
@@ -301,46 +355,73 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		//MAKER THESE FOR LOOPS
 		
 		//check if bottom pillars should swtich velocity
-		if (activeObstacles[0]->GetPosY() <= (float)screenHeight / 2)
+		for (int i = 0; i <= 4; i++)
 		{
-			activeObstacles[0]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+			//middle of screen
+			if (activeObstacles[i]->GetPosY() <= (float)screenHeight / 2)
+			{
+				activeObstacles[i]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+			}
+
+			//bottom of screen
+			if (activeObstacles[i]->GetPosY() >= screenHeight)
+			{
+				activeObstacles[i]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+			}
+
 		}
 
-		if (activeObstacles[0]->GetPosY() >= screenHeight)
+		//top pillar check
+		for (int i = 5; i <= 9; i++)
 		{
-			activeObstacles[0]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
+			// middle of screen                   v check def of pillarheight for explanation
+			if (activeObstacles[i]->GetPosY() >= -1)
+			{
+				activeObstacles[i]->SetVelocity(0, -activeObstacles[i]->GetVelocity().y);
+			}
+			
+			//bottom of screen													v same here
+			if (activeObstacles[i]->GetPosY() <=  ((float)(-screenHeight) / 2) + 1)
+			{
+				activeObstacles[i]->SetVelocity(0, -activeObstacles[i]->GetVelocity().y);
+			}
+
 		}
 
-		if (activeObstacles[1]->GetPosY() <= (float)screenHeight / 2)
+
+		// top start star checks
+		for (int i = 10; i <= 13; i++)
 		{
-			activeObstacles[1]->SetVelocity(0, -activeObstacles[1]->GetVelocity().y);
+			if (activeObstacles[i]->GetPosY() >= screenHeight + 150) // + 150 since ninja star radius is 150
+			{
+				if (activeObstacles[i]->GetType() == DynamicShape)// check if its a star. If it is, we must use DynamicObstacleObject's SetPosY.
+				{
+					dynamic_cast<DynamicShapeObstacle*>(activeObstacles[i])->SetPosY(-150); 
+				}
+
+				else
+				{
+					activeObstacles[i]->SetPosY(-150); 
+				}
+				
+			}
 		}
 
-		if (activeObstacles[1]->GetPosY() >= screenHeight)
+		// bot start star checks
+		for (int i = 14; i <= 17; i++)
 		{
-			activeObstacles[1]->SetVelocity(0, -activeObstacles[1]->GetVelocity().y);
-		}
+			if (activeObstacles[i]->GetPosY() <= -150) 
+			{
+				if (activeObstacles[i]->GetType() == DynamicShape) 
+				{
+					dynamic_cast<DynamicShapeObstacle*>(activeObstacles[i])->SetPosY(screenHeight + 150);
+				}
 
-
-		//check if top pillars should swtich velocity
-		if (activeObstacles[2]->GetPosY() >= 0)
-		{
-			activeObstacles[2]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
-		}
-
-		if (activeObstacles[2]->GetPosY() <= -screenHeight/2)
-		{
-			activeObstacles[2]->SetVelocity(0, -activeObstacles[2]->GetVelocity().y);
-		}
-
-		if (activeObstacles[3]->GetPosY() >= 0)
-		{
-			activeObstacles[3]->SetVelocity(0, -activeObstacles[3]->GetVelocity().y);
-		}
-
-		if (activeObstacles[3]->GetPosY() <= -screenHeight / 2)
-		{
-			activeObstacles[3]->SetVelocity(0, -activeObstacles[3]->GetVelocity().y);
+				else
+				{
+					activeObstacles[i]->SetPosY(screenHeight + 150);
+				}
+			}
 		}
 
 		break;
