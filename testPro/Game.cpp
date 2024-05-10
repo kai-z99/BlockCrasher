@@ -30,7 +30,7 @@ void Game::Init() // temp
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -181,31 +181,31 @@ void Game::Update(unsigned int frame)
 
 void Game::HandleInput()
 {
-    if (this->levelHandler->GetCurrentLevelState() == Active)
+    switch (this->levelHandler->GetCurrentLevelState())
     {
+    case Active:
         this->movementHandler->HandlePlayerMovement(this->player);
-    }
-    
-    else if (this->levelHandler->GetCurrentLevelState() == Fail)
-    {
-        this->inputHandler->HandleTryAgain(this->levelHandler, this->activeObstacles, this->activeItems, this->player);
-    }
+        break;
 
-    else if (this->levelHandler->GetCurrentLevelState() == Complete)
-    {
+    case Fail:
+        this->inputHandler->HandleTryAgain(this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+        break;
+
+    case Complete:
         this->inputHandler->HandleLevelComplete(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+        break;
+
+    case Inactive:
+        this->inputHandler->HandleSelectLevelMenu(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+        break;
+
+    default:
+        break;
     }
 
     this->inputHandler->HandleExitToMenu(this->levelHandler, this->activeObstacles, this->activeItems);
-
-    if (this->levelHandler->GetCurrentLevelState() == Inactive)
-    {
-        this->inputHandler->HandleSelectLevelMenu(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
-    }
-
-
-
 }
+
 
 void Game::HandleCollisions()
 {

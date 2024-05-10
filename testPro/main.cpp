@@ -20,3 +20,4 @@ int main() {
 //add sounds
 //combine the input handlers
 //resolve warnings
+//create title screen. maybe multiple menuHandler states
