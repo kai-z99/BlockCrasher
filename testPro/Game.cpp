@@ -30,7 +30,7 @@ void Game::Init() // temp
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -134,7 +134,7 @@ void Game::Draw()
     //draw menus if (levelHandler.levelisloaded == false)
     if (this->levelHandler->GetCurrentLevelState() == Inactive && this->levelHandler->levelIsLoaded == false)
     {
-        this->menuHandler->DrawLevelSelectMenu();
+        this->menuHandler->DrawLevelSelectMenu(); // temp page 1
     }
 
     EndDrawing();

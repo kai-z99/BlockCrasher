@@ -37,6 +37,7 @@ void GeneralInputHandler::HandleExitToMenu(LevelHandler* levelHandler, std::vect
 }
 void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
 {
+	//check is level is selected
 	if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)))
 	{
 		levelHandler->SetLevel(menuHandler->GetSelectedLevel());
@@ -46,15 +47,32 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 		levelHandler->SetLevelState(Active);
 	}
 
-	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) && menuHandler->GetSelectedLevel() != menuHandler->GetLevelsOnPage() - 1) // add or up arrow
+	//check scroll down
+	else if ((levelHandler->GetCurrentLevelState() == Inactive) && ((IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN))) && ((menuHandler->GetSelectedLevel() % menuHandler->levelsPerPage) != 6))
 	{
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + 1);
 	}
 
-	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && menuHandler->GetSelectedLevel() != 0) // add or down arrow
+	//check scroll up
+	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && (menuHandler->GetSelectedLevel() % menuHandler->levelsPerPage != 0)  )
 	{
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() - 1);
 	}
+
+	//check menu right
+	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) && (menuHandler->GetCurrentPage() != menuHandler->GetPageAmount())) //cant be on last page
+	{
+		menuHandler->SetCurrentPage(menuHandler->GetCurrentPage() + 1);
+		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + menuHandler->levelsPerPage);
+	}
+
+	//check menu left
+	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) && (menuHandler->GetCurrentPage() != 1) && (menuHandler->GetCurrentPage() != 1)) // cant be on first page
+	{
+		menuHandler->SetCurrentPage(menuHandler->GetCurrentPage() - 1);
+		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() - menuHandler->levelsPerPage);
+	}
+
 
 
 }

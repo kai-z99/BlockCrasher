@@ -1,13 +1,12 @@
 #include "LevelButton.h"
 
-LevelButton::LevelButton(int x, int y, int w, int h, const char* text, int level, Color color)
+LevelButton::LevelButton(int x, int y, int w, int h, const char* text, Color color)
 {
 	this->x = x;
 	this->y = y;
 	this->w = w;
 	this->h = h;
 	this->text = text;
-	this->level = level;
 	this->color = color;
 	this->completed = false; // will reset if we clear the vector of buttons.
 	this->starCoinCollected = false; //same here.
@@ -42,11 +41,6 @@ void LevelButton::Draw()
 void LevelButton::SetColor(Color c)
 {
 	this->color = c;
-}
-
-int LevelButton::GetLevel() const
-{
-	return this->level;
 }
 
 float LevelButton::GetPosX() const
