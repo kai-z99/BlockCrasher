@@ -20,8 +20,8 @@ public:
 	Vector2 GetVelocity() const;
 	ObstacleType GetType() const;
 
-	void SetPosX(float x);
-	void SetPosY(float y);
+	virtual void SetPosX(float x);
+	virtual void SetPosY(float y);
 	void SetColor(Color c);
 	void SetVelocity(float x, float y);
 	

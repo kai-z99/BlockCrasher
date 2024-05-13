@@ -215,9 +215,9 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		//bot crushers (bot start)
 
-		this->obstacleBuilder->ClassicRectangle(0, screenHeight, 100, pillarHeight, { 0,-5 }); // left										//0
+		this->obstacleBuilder->ClassicRectangle(0, screenHeight, 100, pillarHeight, { 0,-5 }); // left									//0
 		this->obstacleBuilder->ClassicRectangle(screenWidth - 100, screenHeight, 100, pillarHeight, { 0,-5 }); // right					//1
-		this->obstacleBuilder->ClassicRectangle(((float)screenWidth / 2) - 50, screenHeight, 100, pillarHeight, { 0,-5 }); // middle		//2
+		this->obstacleBuilder->ClassicRectangle(((float)screenWidth / 2) - 50, screenHeight, 100, pillarHeight, { 0,-5 }); // middle	//2
 
 
 		//bot crushers (top start)
@@ -248,9 +248,10 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->NinjaStar(730.0f, screenHeight, 0.05f, 0.0f, 0.0f, { 0,-5 }, 1.0f); // left middle star // 14, 15
 		this->obstacleBuilder->NinjaStar(screenWidth - 270.0f, screenHeight, 0.05f, 0.0f, 0.0f, { 0,-5 }, 1.0f); // right star // 16, 17
 		
-		
 
-
+		//----------
+		//Items                           
+		//----------
 		
 		for (int i = 200; i <= 900; i += 100) // left row
 		{
@@ -380,7 +381,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 				activeObstacles[i]->SetVelocity(0, -activeObstacles[i]->GetVelocity().y);
 			}
 			
-			//bottom of screen													v same here
+			//top of screen														v same here
 			if (activeObstacles[i]->GetPosY() <=  ((float)(-screenHeight) / 2) + 1)
 			{
 				activeObstacles[i]->SetVelocity(0, -activeObstacles[i]->GetVelocity().y);

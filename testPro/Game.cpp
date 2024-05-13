@@ -104,77 +104,88 @@ void Game::Draw()
     }
     
     //--------------------
-    //UI DRAWING
-    //-----------------------
-    if (this->levelHandler->GetCurrentLevelState() == Complete) //credit last level
+    // UI DRAWING
+    //--------------------
+    switch (this->levelHandler->GetCurrentLevelState())
+    {
+    case Complete:
     {
         int textWidth = MeasureText("LEVEL COMPLETE!", 50);
         DrawText("LEVEL COMPLETE!", (float)screenWidth / 2 - ((float)textWidth / 2), screenHeight / 2, 50, WHITE);
 
         textWidth = MeasureText("Press SPACE to go to next level.", 20);
-        DrawText("Press SPACE to go to next level.", (float)screenWidth / 2 - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
-
+        DrawText("Press SPACE to go to next level.", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
     }
+    break;
 
-    else if (this->levelHandler->GetCurrentLevelState() == Fail)
+    case Fail:
     {
         int textWidth = MeasureText("Press SPACE to try again.", 20);
         DrawText("Press SPACE to try again.", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
     }
+    break;
 
-    else if (this->levelHandler->GetCurrentLevelState() == Active)
+    case Active:
     {
-        //draw timer, coins collected/c, esc to exit
+        // Draw timer, coins collected/c, esc to exit
     }
+    break;
 
-   
-    //draw menus if (levelHandler.levelisloaded == false)
-    if (this->levelHandler->GetCurrentLevelState() == Inactive && this->levelHandler->levelIsLoaded == false)
-    {
-        this->menuHandler->DrawLevelSelectMenu(); // temp page 1
+    case Inactive:
+        //want to use a switch here to check menu state
+        this->menuHandler->DrawCurrentMenu();
+        break;
+
+    default:
+        // Handle any other states if necessary
+        break;
     }
 
     EndDrawing();
+
 }
 
 void Game::Update(unsigned int frame)
 {
-    //check level complete, unload level if so
-    if (this->levelHandler->GetCurrentLevelState() == Complete)
+    switch (this->levelHandler->GetCurrentLevelState())
     {
+    case Complete:
         if (this->levelHandler->levelIsLoaded)
         {
             this->levelHandler->UnloadCurrentLevel(this->activeObstacles, this->activeItems);
         }
-    }
 
-    else if (this->levelHandler->GetCurrentLevelState() == Fail)
-    {
+        break;
+
+    case Fail:
         this->player->SetColor(RED);
-    }
+        break;
 
-    else if (this->levelHandler->GetCurrentLevelState() == Active)
-    {
+    case Active:
         this->player->SetColor(BLUE);
 
-        //update obstacle states
+        // Update obstacle states
         for (Obstacle* ob : this->activeObstacles)
         {
             ob->Update(this->levelHandler->GetCurrentLevelFramecount());
         }
 
-        //update item states
+        // Update item states
         for (Item* it : this->activeItems)
         {
             it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
         }
-    }
 
-    //else if (this->levelHandler->GetCurrentLevelState() == Inactive)
-    //{
-    //    
-    //}
+        break;
+
+    case Inactive:
+        break;
+
+    default:
+        break;
+    }
 }
+
 
 void Game::HandleInput()
 {
@@ -193,14 +204,14 @@ void Game::HandleInput()
         break;
 
     case Inactive:
-        this->inputHandler->HandleSelectLevelMenu(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+        this->inputHandler->HandleCurrentMenu(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
         break;
 
     default:
         break;
     }
 
-    this->inputHandler->HandleExitToMenu(this->levelHandler, this->activeObstacles, this->activeItems);
+    this->inputHandler->HandleBack(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems);
 }
 
 

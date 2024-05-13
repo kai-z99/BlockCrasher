@@ -39,14 +39,48 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 }
 
 
-void GeneralInputHandler::HandleExitToMenu(LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
+void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
 {
 	if (IsKeyPressed(KEY_BACKSPACE))
 	{
-		levelHandler->UnloadCurrentLevel(activeObstacles, activeItems);
-		levelHandler->SetLevelState(Inactive);
+		switch (menuHandler->GetCurrentState())
+		{
+		case Main:
+			break;
+
+		case LevelSelect:
+			menuHandler->SetMenuState(Main);
+			break;
+
+		case InGame:
+			levelHandler->UnloadCurrentLevel(activeObstacles, activeItems);
+			levelHandler->SetLevelState(Inactive);
+			menuHandler->SetMenuState(LevelSelect);
+			break;
+		}
+		
 	}
 }
+
+void GeneralInputHandler::HandleCurrentMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
+{
+	switch (menuHandler->GetCurrentState())
+	{
+	case Main:
+		this->HandleMainMenu(menuHandler);
+		break;
+
+	case LevelSelect:
+		this->HandleSelectLevelMenu(menuHandler, levelHandler, activeObstacles, activeItems, player);
+		break;
+
+	case InGame:
+		//draw timer, pause, etc
+		break;
+	}
+}
+
+
 void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
 {
 	//check is level is selected
@@ -57,6 +91,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 		player->SetPosition(levelHandler->GetPlayerSpawnpoint());
 
 		levelHandler->SetLevelState(Active);
+		menuHandler->SetMenuState(InGame);
 	}
 
 	//check scroll down
@@ -66,7 +101,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 	}
 
 	//check scroll up
-	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && (menuHandler->GetSelectedLevel() % menuHandler->levelsPerPage != 0)  ) // cannot go further than firsr level of each page
+	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && (menuHandler->GetSelectedLevel() % menuHandler->levelsPerPage != 0)) // cannot go further than firsr level of each page
 	{
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() - 1);
 	}
@@ -84,13 +119,12 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 		menuHandler->SetCurrentPage(menuHandler->GetCurrentPage() - 1);
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() - menuHandler->levelsPerPage); // set selected level next pages corresponding level
 	}
-
-
-
 }
-//
-//void GeneralInputHandler::HandleAllInput(LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
-//{
-//	this->HandleTryAgain(levelHandler, activeObstacles, activeItems, player);
-//	this->HandleLevelComplete(levelHandler, activeObstacles, activeItems, player);
-//}
+
+void GeneralInputHandler::HandleMainMenu(MenuHandler* menuHandler)
+{
+	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE))
+	{
+		menuHandler->SetMenuState(LevelSelect);
+	}
+}

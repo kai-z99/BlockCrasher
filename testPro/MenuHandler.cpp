@@ -3,8 +3,10 @@
 #include "Constants.h"
 
 
+
 MenuHandler::MenuHandler()
 {
+	this->currentState = Main;
 	this->currentSelectedLevel = 0;
 	this->currentPage = 1;
 	this->levelButtonHeight = 60;
@@ -14,7 +16,17 @@ MenuHandler::MenuHandler()
 	
 
 	this->InitLevelSelectMenuButtons(); 
+
+
+
+	this->mainMenuTitleText = "Block Crasher!";
+	this->mainMenuTitleTextWidth = MeasureText(this->mainMenuTitleText, 80);
+
 }
+
+//----------
+//LEVEL SELECT
+//----------
 
 void MenuHandler::InitLevelSelectMenuButtons()
 {
@@ -146,6 +158,21 @@ void MenuHandler::DrawPageArrows()
 }
 
 
+void MenuHandler::DrawCurrentMenu()
+{
+	switch (this->currentState)
+	{
+	case Main:
+		this->DrawMainMenu();
+		break;
+
+	case LevelSelect:
+		this->DrawLevelSelectMenu();
+		break;
+	}
+
+}
+
 void MenuHandler::SetSelectedLevel(int level)
 {
 	this->currentSelectedLevel = level;
@@ -181,4 +208,31 @@ int MenuHandler::GetPageAmount() const
 {
 	return ((this->levelButtons.size() - 1) / this->levelsPerPage) + 1; // check this
 }
+
+
+MenuState MenuHandler::GetCurrentState() const
+{
+	return this->currentState;
+}
+
+void MenuHandler::SetMenuState(MenuState state)
+{
+	this->currentState = state;
+}
+
+
+//----------
+//MAIN
+//----------
+void MenuHandler::DrawMainMenu()
+{
+	this->DrawMainMenuTitle();
+}
+
+void MenuHandler::DrawMainMenuTitle()
+{
+	DrawText(this->mainMenuTitleText, (screenWidth / 2) - (this->mainMenuTitleTextWidth / 2), screenHeight / 2, 80, WHITE);
+}
+
+
 
