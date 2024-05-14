@@ -28,7 +28,7 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 		levelHandler->SetLevelState(Active);
 		menuHandler->SetMenuState(InGame);
 
-		//go to next level
+		//go to next level in menu
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + 1);
 
 		//have to check if the level increment caused it to go to next page

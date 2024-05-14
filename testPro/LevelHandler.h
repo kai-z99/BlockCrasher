@@ -20,6 +20,8 @@ private:
 	ObstacleBuilder* obstacleBuilder;
 
 	unsigned int currentLevelFramecount;
+	unsigned int currentLevelTime;
+	unsigned int currentLevelTimeLimit;
 	LevelState currentLevelState;
 	
 public:
@@ -33,8 +35,11 @@ public:
 	void SetLevel(int l);
 	void AddCoinsCollected(int amount);
 	void SetLevelState(LevelState levelState);
+	void SetCurrentLevelTime(int time);
 	
 	unsigned int GetCurrentLevelFramecount() const;
+	unsigned int GetCurrentLevelTime() const;
+	unsigned int GetCurrentLevelTimeLimit() const;
 	int GetCurrentLevel() const;
 	int GetCoinsCollected() const;
 	Vector2 GetPlayerSpawnpoint() const;

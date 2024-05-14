@@ -14,6 +14,8 @@ LevelHandler::LevelHandler()
 	this->totalCoinsInLevel = 1;
 	this->coinsCollectedInLevel = 0;
 	this->currentLevelFramecount = 0;
+	this->currentLevelTime = 0;
+	this->currentLevelTimeLimit = 30;
 	this->currentLevelState = Inactive;
 	this->playerSpawnpoint = { 0,0 };
 	this->levelIsLoaded = false;
@@ -33,9 +35,10 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//---------
 		//Obstacles
 		//---------
-		this->playerSpawnpoint = { 50,50 };														// 0
-		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 0,0 });							// 1
-		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });						// 2
+		this->playerSpawnpoint = { 50,50 };	
+		this->currentLevelTimeLimit = 30;
+		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 0,0 });							// 0
+		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });						// 1
 
 
 		//----------
@@ -48,8 +51,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->totalCoinsInLevel = activeItems.size(); // temp
 
 		activeItems.push_back(new StarCoin(screenWidth/2, 800));
-
-		
+	
 		break;
 
 
@@ -59,6 +61,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 		this->playerSpawnpoint = { 100,100 };
+		this->currentLevelTimeLimit = 30;
 		this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200); // 0
 		// Master Sword's Circle															  // 1
 
@@ -283,6 +286,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	}
 
+	this->currentLevelTime = this->currentLevelTimeLimit;
 	this->totalCoinsInLevel = activeItems.size() - 1; //-1 because it includes starCoin
 	this->obstacleBuilder->Insert(activeObstacles);
 	this->levelIsLoaded = true;
@@ -310,6 +314,12 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 {	
 	this->currentLevelFramecount += 1;
 
+	//decrement timer every second
+	if (this->currentLevelFramecount % 60 == 0 && this->currentLevelTime != 0 && this->currentLevelState == Active)
+	{
+		this->currentLevelTime--;
+	}
+
 	//check win
 	if (this->coinsCollectedInLevel >= this->totalCoinsInLevel)
 	{
@@ -324,12 +334,19 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		}
 	}
 
+	//check timer loss
+	if (this->currentLevelTime == 0)
+	{
+		this->currentLevelState = Fail;
+	}
+
 	//level specific handling
 	switch (this->currentLevel)
 	{
 	case 0:
 		//tutorial text
 		DrawText("Collect all coins to complete the level!", 200, 320, 20, WHITE);
+		DrawText("This is the timer. Don't let it tick to 0!", (screenWidth / 2) - 210, 70, 20, WHITE);
 		DrawText("This is an optional Star Coin. Collect it before finishing!", screenWidth/2 - 280, screenHeight/2 + 300, 20, WHITE);
 		DrawText("Careful! Don't get hit by obstacles!", 580, 500, 20, WHITE);
 		break;
@@ -449,6 +466,11 @@ void LevelHandler::SetLevelState(LevelState levelState)
 	this->currentLevelState = levelState;
 }
 
+void LevelHandler::SetCurrentLevelTime(int time)
+{
+	this->currentLevelTime = time;
+}
+
 void LevelHandler::ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
 {
 	this->UnloadCurrentLevel(activeObstacles, activeItems);
@@ -457,12 +479,23 @@ void LevelHandler::ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, st
 	this->totalCoinsInLevel = 0;
 	this->currentLevelFramecount = 0;
 	this->currentLevelState = Active;
+	this->currentLevelTime = this->currentLevelTimeLimit;
 	this->LoadCurrentLevel(activeObstacles, activeItems);
 }
 
 unsigned int LevelHandler::GetCurrentLevelFramecount() const
 {
 	return this->currentLevelFramecount;
+}
+
+unsigned int LevelHandler::GetCurrentLevelTime() const
+{
+	return this->currentLevelTime;
+}
+
+unsigned int LevelHandler::GetCurrentLevelTimeLimit() const
+{
+	return this->currentLevelTimeLimit;
 }
 
 int LevelHandler::GetCurrentLevel() const

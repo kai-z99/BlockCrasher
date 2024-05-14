@@ -193,6 +193,7 @@ void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler)
 	case InGame:
 		this->DrawInGameTimer(levelHandler);
 		break;
+
 	}
 
 }
@@ -257,9 +258,23 @@ void MenuHandler::DrawMainMenuSubtext()
 //INGAME
 //----------
 
-
 void MenuHandler::DrawInGameTimer(LevelHandler* levelHandler)
 {
-	std::string timer = std::to_string(levelHandler->GetCurrentLevelFramecount() / 60);
-	DrawText(timer.c_str(), 20, 20, 30, WHITE );
+	std::string timer = std::to_string(levelHandler->GetCurrentLevelTime());
+	int timerWidth = MeasureText(timer.c_str(), 30);
+	Color col;
+
+	//make timer red if its down to the last 25% + 1s of remaining time
+	if (levelHandler->GetCurrentLevelTime() < (levelHandler->GetCurrentLevelTimeLimit() / 4) + 1)
+	{
+		col = RED;
+	}
+
+	else
+	{
+		col = WHITE;
+	}
+
+	DrawText(timer.c_str(), (screenWidth / 2) - (timerWidth / 2), 30, 30, col );
+	//DrawText("Active", 50, 50, 50, RED); //debug
 }

@@ -123,14 +123,20 @@ void Game::Draw()
     {
         int textWidth = MeasureText("Press SPACE to try again.", 20);
         DrawText("Press SPACE to try again.", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
+
+        if (this->levelHandler->GetCurrentLevelTime() == 0)
+        {
+            int textWidth = MeasureText("Times Up!", 40);
+            DrawText("Times Up!", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 20, 40, WHITE);
+        }
     }
     break;
 
     default:
-        this->menuHandler->DrawCurrentMenu(this->levelHandler);
         break;
     }
 
+    this->menuHandler->DrawCurrentMenu(this->levelHandler);
     EndDrawing();
 
 }
@@ -148,7 +154,16 @@ void Game::Update(unsigned int frame)
         break;
 
     case Fail:
-        this->player->SetColor(RED);
+        if (this->levelHandler->GetCurrentLevelTime() == 0)
+        {
+            this->player->SetColor(ORANGE);
+        }
+
+        else
+        {
+            this->player->SetColor(RED);
+        }
+       
         break;
 
     case Active:
