@@ -103,6 +103,7 @@ void Game::Draw()
         }
     }
     
+
     //--------------------
     // UI DRAWING
     //--------------------
@@ -125,19 +126,8 @@ void Game::Draw()
     }
     break;
 
-    case Active:
-    {
-        // Draw timer, coins collected/c, esc to exit
-    }
-    break;
-
-    case Inactive:
-        //want to use a switch here to check menu state
-        this->menuHandler->DrawCurrentMenu();
-        break;
-
     default:
-        // Handle any other states if necessary
+        this->menuHandler->DrawCurrentMenu(this->levelHandler);
         break;
     }
 

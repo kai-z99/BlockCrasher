@@ -26,6 +26,7 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 		player->SetPosition(levelHandler->GetPlayerSpawnpoint());
 
 		levelHandler->SetLevelState(Active);
+		menuHandler->SetMenuState(InGame);
 
 		//go to next level
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + 1);
@@ -57,6 +58,9 @@ void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* lev
 			levelHandler->SetLevelState(Inactive);
 			menuHandler->SetMenuState(LevelSelect);
 			break;
+
+		default:
+			break;
 		}
 		
 	}
@@ -74,8 +78,7 @@ void GeneralInputHandler::HandleCurrentMenu(MenuHandler* menuHandler, LevelHandl
 		this->HandleSelectLevelMenu(menuHandler, levelHandler, activeObstacles, activeItems, player);
 		break;
 
-	case InGame:
-		//draw timer, pause, etc
+	default:
 		break;
 	}
 }

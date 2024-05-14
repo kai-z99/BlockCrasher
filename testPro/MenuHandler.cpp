@@ -1,27 +1,47 @@
 #include "MenuHandler.h"
 #include "LevelButton.h"
+#include "LevelHandler.h"
 #include "Constants.h"
+#include <string>
+
+
 
 
 
 MenuHandler::MenuHandler()
 {
 	this->currentState = Main;
+
+	//----------
+	//LEVEL SELECT
+	//----------
 	this->currentSelectedLevel = 0;
 	this->currentPage = 1;
 	this->levelButtonHeight = 60;
 	this->levelButtonWidth = 600;
 	this->levelSelectTitleText = "Select a Level!";
 	this->levelSelectTitleWidth = MeasureText(this->levelSelectTitleText, 75);
-	
-
 	this->InitLevelSelectMenuButtons(); 
 
 
-
-	this->mainMenuTitleText = "Block Crasher!";
+	//----------
+	//MAIN
+	//----------
+	this->mainMenuTitleText = "MenuText";
 	this->mainMenuTitleTextWidth = MeasureText(this->mainMenuTitleText, 80);
+	this->mainMenuSubtext = "Press Space/Enter to start!";
+	this->mainMenuSubtextWidth = MeasureText(this->mainMenuSubtext, 18);
 
+}
+
+MenuState MenuHandler::GetCurrentState() const
+{
+	return this->currentState;
+}
+
+void MenuHandler::SetMenuState(MenuState state)
+{
+	this->currentState = state;
 }
 
 //----------
@@ -158,7 +178,7 @@ void MenuHandler::DrawPageArrows()
 }
 
 
-void MenuHandler::DrawCurrentMenu()
+void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler)
 {
 	switch (this->currentState)
 	{
@@ -168,6 +188,10 @@ void MenuHandler::DrawCurrentMenu()
 
 	case LevelSelect:
 		this->DrawLevelSelectMenu();
+		break;
+
+	case InGame:
+		this->DrawInGameTimer(levelHandler);
 		break;
 	}
 
@@ -210,23 +234,13 @@ int MenuHandler::GetPageAmount() const
 }
 
 
-MenuState MenuHandler::GetCurrentState() const
-{
-	return this->currentState;
-}
-
-void MenuHandler::SetMenuState(MenuState state)
-{
-	this->currentState = state;
-}
-
-
 //----------
 //MAIN
 //----------
 void MenuHandler::DrawMainMenu()
 {
 	this->DrawMainMenuTitle();
+	this->DrawMainMenuSubtext();
 }
 
 void MenuHandler::DrawMainMenuTitle()
@@ -234,5 +248,18 @@ void MenuHandler::DrawMainMenuTitle()
 	DrawText(this->mainMenuTitleText, (screenWidth / 2) - (this->mainMenuTitleTextWidth / 2), screenHeight / 2, 80, WHITE);
 }
 
+void MenuHandler::DrawMainMenuSubtext()
+{
+	DrawText(this->mainMenuSubtext, (screenWidth / 2) - (this->mainMenuSubtextWidth / 2), (screenHeight / 2) + 80, 18, WHITE);
+}
+
+//----------
+//INGAME
+//----------
 
 
+void MenuHandler::DrawInGameTimer(LevelHandler* levelHandler)
+{
+	std::string timer = std::to_string(levelHandler->GetCurrentLevelFramecount() / 60);
+	DrawText(timer.c_str(), 20, 20, 30, WHITE );
+}

@@ -4,6 +4,7 @@
 #include "MenuState.h"
 
 class LevelButton;
+class LevelHandler;
 
 class MenuHandler
 {
@@ -37,10 +38,19 @@ private:
 	//---------
 	const char* mainMenuTitleText;
 	int mainMenuTitleTextWidth;
+
+	const char* mainMenuSubtext;
+	int mainMenuSubtextWidth;
+
 	void DrawMainMenu();
 
 	void DrawMainMenuTitle();
+	void DrawMainMenuSubtext();
 
+	//----------
+	//INGAME
+	//---------
+	void DrawInGameTimer(LevelHandler* levelHandler);
 
 
 public:
@@ -53,7 +63,7 @@ public:
 	//----------
 	const int levelsPerPage = 7;
 
-	void DrawCurrentMenu();
+	void DrawCurrentMenu(LevelHandler* levelHandler);
 
 	void SetSelectedLevel(int level);
 	void SetLevelComplete(int level);
