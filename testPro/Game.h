@@ -22,7 +22,7 @@ private:
 	void Update(unsigned int frame);
 	void HandleInput();
 	void HandleCollisions();
-	void HandleLevel();
+
 
 protected:
 	Player* player;

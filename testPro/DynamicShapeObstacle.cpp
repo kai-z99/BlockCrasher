@@ -63,6 +63,8 @@ void DynamicShapeObstacle::Update(unsigned int frame)
 void DynamicShapeObstacle::SetPosX(float x)
 {
     float diff;
+
+
     for (Vector2& v : this->vertices) //for every vertices
     {
         diff = this->center.x - v.x; // check the diff between centre x pos and that vertices x pos

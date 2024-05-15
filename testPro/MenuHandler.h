@@ -57,13 +57,13 @@ public:
 	MenuHandler();
 	MenuState GetCurrentState() const;
 	void SetMenuState(MenuState state);
+	void DrawCurrentMenu(LevelHandler* levelHandler);
+
 
 	//----------
 	//LEVEL SELECT
 	//----------
 	const int levelsPerPage = 7;
-
-	void DrawCurrentMenu(LevelHandler* levelHandler);
 
 	void SetSelectedLevel(int level);
 	void SetLevelComplete(int level);
@@ -73,12 +73,4 @@ public:
 	int GetSelectedLevel() const;
 	int GetCurrentPage() const;
 	int GetPageAmount() const;
-	
-	//----------
-	//MAIN
-	//---------
-
-	
-
-
 };

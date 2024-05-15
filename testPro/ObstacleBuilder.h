@@ -18,5 +18,6 @@ public:
 	void HollowBoxPiece(float x, float y, float rr, float ri, float vo, float scale);
 	void Wheel(float x, float y, float rr, float ri, float vo, float scale);
 	void NinjaStar(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
+	void RotatingBar(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
 
 };

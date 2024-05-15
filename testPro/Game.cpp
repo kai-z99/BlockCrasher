@@ -39,14 +39,13 @@ void Game::Run()
     while (!WindowShouldClose()) {
         frameCount++;
         this->HandleInput();
-        this->HandleCollisions(); 
-        this->Update(frameCount);
 
         if (this->levelHandler->levelIsLoaded)
         {
-            this->HandleLevel();
+            this->HandleCollisions();
         }
         
+        this->Update(frameCount);
         this->Draw();
     }
 
@@ -136,6 +135,7 @@ void Game::Draw()
         break;
     }
 
+    //draw menu
     this->menuHandler->DrawCurrentMenu(this->levelHandler);
     EndDrawing();
 
@@ -145,6 +145,7 @@ void Game::Update(unsigned int frame)
 {
     switch (this->levelHandler->GetCurrentLevelState())
     {
+    //unload level when level is compelete
     case Complete:
         if (this->levelHandler->levelIsLoaded)
         {
@@ -153,6 +154,7 @@ void Game::Update(unsigned int frame)
 
         break;
 
+    //change player color on fail
     case Fail:
         if (this->levelHandler->GetCurrentLevelTime() == 0)
         {
@@ -163,9 +165,11 @@ void Game::Update(unsigned int frame)
         {
             this->player->SetColor(RED);
         }
-       
+
+        //this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler);
         break;
 
+    //update level when level is active
     case Active:
         this->player->SetColor(BLUE);
 
@@ -181,6 +185,8 @@ void Game::Update(unsigned int frame)
             it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
         }
 
+        // handle the current level specifics
+        this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler);
         break;
 
     case Inactive:
@@ -226,10 +232,5 @@ void Game::HandleCollisions()
     {
         this->levelHandler->SetLevelState(Fail);
     }
-}
-
-void Game::HandleLevel()
-{
-    this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler);
 }
 

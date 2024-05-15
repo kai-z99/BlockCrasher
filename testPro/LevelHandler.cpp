@@ -61,7 +61,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 		this->playerSpawnpoint = { 100,100 };
-		this->currentLevelTimeLimit = 30;
+		this->currentLevelTimeLimit = 20;
 		this->obstacleBuilder->MasterSword((screenWidth / 2) - 50, (screenHeight / 2) - 200); // 0
 		// Master Sword's Circle															  // 1
 
@@ -314,7 +314,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 {	
 	this->currentLevelFramecount += 1;
 
-	//decrement timer every second
+	//decrement timer every second (if not on fail screen)
 	if (this->currentLevelFramecount % 60 == 0 && this->currentLevelTime != 0 && this->currentLevelState == Active)
 	{
 		this->currentLevelTime--;
@@ -369,9 +369,8 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		}
 
 		break;
+
 	case 6:
-		//MAKER THESE FOR LOOPS
-		
 		//check if bottom pillars should swtich velocity
 		for (int i = 0; i <= 4; i++)
 		{

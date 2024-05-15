@@ -179,6 +179,38 @@ void ObstacleBuilder::NinjaStar(float x, float y, float rr, float ri, float vo, 
 
 }
 
+void ObstacleBuilder::RotatingBar(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale)
+{
+    std::vector<Vector2> v;
 
+    v.push_back({ 0,0 });
+    v.push_back({ 50,50 });
+    v.push_back({ 0,150 });
+    v.push_back({ -50,50 });
+    v.push_back({ -150,0 });
+    v.push_back({ -50, 50 });
+    v.push_back({ -150, 0 });
+    v.push_back({ -50,-50 });
+    v.push_back({ 0,-150 });
+    v.push_back({ 50,-50 });
+    v.push_back({ 150, 0 });
+
+
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 0 + x, 0 + y }, v, rr, vo, vi, ri);
+    this->storage.push_back(d);
+
+}
 
 
