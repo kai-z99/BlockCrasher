@@ -21,8 +21,37 @@ MenuHandler::MenuHandler()
 	this->levelButtonWidth = 600;
 	this->levelSelectTitleText = "Select a Level!";
 	this->levelSelectTitleWidth = MeasureText(this->levelSelectTitleText, 75);
-	this->InitLevelSelectMenuButtons(); 
+	
+	this->levelNames =
+	{
+		"0: Tutorial",
+		"1: Sword Swing",
+		"2: WIP WIP WIP",
+		"3: Bounce Dungeon",
+		"4: Cubed",
+		"5: Violent Tides",
+		"6: High Pressure",
 
+		"7: placeholderp2",
+		"8: ph2",
+		"9: 555",
+		"10: test tsewt",
+		"11: r4323e2ref",
+		"12: rwerrew",
+		"13: gogogoog",
+
+		"14: thrid",
+		"15: yap",
+		"16: hhhhh",
+		"17: 3241312132",
+		"18: cmoiw",
+		"19: 21",
+		"20: 211121212"
+
+		//"Created by Kai @ Van"
+	};
+
+	this->InitLevelSelectMenuButtons();
 
 	//----------
 	//MAIN
@@ -52,34 +81,6 @@ void MenuHandler::InitLevelSelectMenuButtons()
 {
 	//make this a for loop maybe
 	int posX = (screenWidth / 2) - (this->levelButtonWidth / 2); // middle of screen
-	std::vector<const char*> levelNames =
-	{
-		"0: Tutorial",
-		"1: Sword Swing",
-		"2: WIP WIP WIP",
-		"3: Bounce Dungeon",
-		"4: Cubed",
-		"5: Violent Tides",
-		"6: High Pressure",
-
-		"7: placeholderp2",
-		"8: ph2",
-		"9: 555",
-		"10: test tsewt",
-		"11: r4323e2ref",
-		"12: rwerrew",
-		"13: gogogoog",
-
-		"14: thrid",
-		"15: yap",
-		"16: hhhhh",
-		"17: 3241312132",
-		"18: cmoiw",
-		"19: 21",
-		"20: 211121212"
-
-		//"Created by Kai @ Van"
-	};
 
 
 	for (int i = 0; i <= 6; i++)
@@ -192,6 +193,7 @@ void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler)
 
 	case InGame:
 		this->DrawInGameTimer(levelHandler);
+		this->DrawLevelName();
 		break;
 
 	}
@@ -277,4 +279,9 @@ void MenuHandler::DrawInGameTimer(LevelHandler* levelHandler)
 
 	DrawText(timer.c_str(), (screenWidth / 2) - (timerWidth / 2), 30, 30, col );
 	//DrawText("Active", 50, 50, 50, RED); //debug
+}
+
+void MenuHandler::DrawLevelName()
+{
+	DrawText(this->levelNames[this->currentSelectedLevel], 30, 30, 30, WHITE);
 }

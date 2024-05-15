@@ -30,7 +30,7 @@ void Game::Init() // temp
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -84,7 +84,7 @@ void Game::Draw()
     if (this->levelHandler->levelIsLoaded)
     {
         this->player->Draw();
-        //this->player->DrawHitbox();
+        this->player->DrawHitbox();
 
         //draw current obstacles
         for (Obstacle* ob : this->activeObstacles)

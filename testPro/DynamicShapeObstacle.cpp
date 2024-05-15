@@ -62,30 +62,30 @@ void DynamicShapeObstacle::Update(unsigned int frame)
 
 void DynamicShapeObstacle::SetPosX(float x)
 {
-    float diff;
+    float diff = x - this->obstaclePosition.x;;
 
 
     for (Vector2& v : this->vertices) //for every vertices
     {
-        diff = this->center.x - v.x; // check the diff between centre x pos and that vertices x pos
-        v.x = x - diff;              // now move the vertices to x, and offset by diff.
+        v.x += diff;              // offset by diff.
     }
 
     this->obstaclePosition.x = x;
-    this->center.x = x;
+    this->center.x += diff;
 }
 
 void DynamicShapeObstacle::SetPosY(float y)
 {
-    float diff;
+    float diff = y - this->obstaclePosition.y;
+
+
     for (Vector2& v : this->vertices)
     {
-        diff = this->center.y - v.y;
-        v.y = y + diff;
+        v.y += diff;
     }
 
     this->obstaclePosition.y = y;
-    this->center.y = y;
+    this->center.y += diff;
 }
 
 std::vector<Vector2> DynamicShapeObstacle::GetVertices() const

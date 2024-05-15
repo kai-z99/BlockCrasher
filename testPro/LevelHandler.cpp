@@ -35,7 +35,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//---------
 		//Obstacles
 		//---------
-		this->playerSpawnpoint = { 50,50 };	
+		this->playerSpawnpoint = { 50,400 };	
 		this->currentLevelTimeLimit = 30;
 		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 0,0 });							// 0
 		this->obstacleBuilder->ClassicRectangle(500, 500, 60, 40, { 0,0 });						// 1
@@ -106,7 +106,9 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//---------
 		//Obstacles
 		//---------
-		this->playerSpawnpoint = { 100,100 };												  
+		this->playerSpawnpoint = { 100,100 };
+		this->currentLevelTimeLimit = 16;
+
 		this->obstacleBuilder->ClassicCircle(300, 600, 50, { -2,1 });						  // 0
 		this->obstacleBuilder->ClassicCircle(600, 600, 50, { 1,-3 });						  // 1
 		this->obstacleBuilder->ClassicCircle(600, 300, 50, { 4,1 });						  // 2

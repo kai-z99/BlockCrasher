@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "CollisionManager.h"
 #include "Player.h"
 #include "CircleObstacle.h"
@@ -23,7 +24,29 @@ bool CollisionManager::CheckStaticRectangleObstacleCollisions(Player* p, Rectang
 
 bool CollisionManager::CheckDynamicShapeObstacleCollisions(Player* p, DynamicShapeObstacle* d)
 {
-	return CheckCollisionPointPoly({ p->GetPosX(), p->GetPosY() }, &d->GetVertices()[0], d->GetVertices().size());
+	bool collided = false;
+
+	std::vector<Vector2> pointsToCheck =
+	{
+		{p->GetPosX(), p->GetPosY() }, //center
+		{p->GetPosX() + 5, p->GetPosY() }, // right
+		{p->GetPosX() - 5, p->GetPosY() }, // left
+		{p->GetPosX(), p->GetPosY() + 5 }, // upper
+		{p->GetPosX(), p->GetPosY() - 5 } // lower
+	};
+
+	for (Vector2 point : pointsToCheck)
+	{
+		collided = CheckCollisionPointPoly(point, &d->GetVertices()[0], d->GetVertices().size());
+
+		if (collided)
+		{
+			break;
+		}
+
+	}
+
+	return collided;
 }
 
 bool CollisionManager::CheckCollisions(Player* p, std::vector<Obstacle*> ObstacleList)

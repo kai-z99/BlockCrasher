@@ -15,6 +15,7 @@ private:
 	//LEVEL SELECT
 	//----------
 	std::vector<LevelButton*> levelButtons;
+	std::vector<const char*> levelNames;
 	int currentSelectedLevel;
 	int currentPage;
 	
@@ -51,6 +52,7 @@ private:
 	//INGAME
 	//---------
 	void DrawInGameTimer(LevelHandler* levelHandler);
+	void DrawLevelName();
 
 
 public:

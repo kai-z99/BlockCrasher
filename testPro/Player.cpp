@@ -22,80 +22,87 @@ void Player::Draw()
 	Vector2 v2;
 	Vector2 v3;
 
-	float HITBOX_SCALE = 10.0;
-	float x = this->currentPosition.x;
-	float y = this->currentPosition.y;
-	
 
-	switch (this->currentDirection)
-	{
-	case N:
-		v1 = { x + 10, y };
-		v2 = { x, y - 20 };
-		v3 = { x - 10, y };
-		break;
+    const float HITBOX_SCALE = 10.0;
+    const float TRIANGLE_BASE = 10.0;
+    const float TRIANGLE_HEIGHT = 20.0;
 
-	case NE:
-		v1 = { x + (20 * cos(PI / 4)), y - (20 * sin(PI / 4)) };
-		v2 = { x + (-10 * cos(PI / 4)), y - (10 * sin(PI / 4)) };
-		v3 = { x + (10 * cos(PI / 4)), y - (-10 * sin(PI / 4)) };
-		break;
+    float x = this->currentPosition.x;
+    float y = this->currentPosition.y;
 
-	case E:
-		v1 = { x, y + 10 };
-		v2 = { x + 20, y };
-		v3 = { x, y - 10 };
-		break;
+    // calculate a offset to position the player at the center
+    float offset = (TRIANGLE_HEIGHT) / 3.0;
+    float diagonalOffset = offset / sqrt(2);
 
-	case SE:
-		v1 = { x + (20 * cos(PI / 4)), y - (-20 * sin(PI / 4)) };
-		v2 = { x + (10 * cos(PI / 4)), y - (10 * sin(PI / 4)) };
-		v3 = { x + (-10 * cos(PI / 4)), y - (-10 * sin(PI / 4)) };
-		break;
+    switch (this->currentDirection)
+    {
+    case N:
+        v1 = { x + TRIANGLE_BASE, y + offset };
+        v2 = { x, y - TRIANGLE_HEIGHT + offset };
+        v3 = { x - TRIANGLE_BASE, y + offset };
+        break;
 
+    case NE:
+        v1 = { x + (TRIANGLE_HEIGHT * cos(PI / 4)) - diagonalOffset, y - (TRIANGLE_HEIGHT * sin(PI / 4)) + diagonalOffset };
+        v2 = { x + (-TRIANGLE_BASE * cos(PI / 4)) - diagonalOffset, y - (TRIANGLE_BASE * sin(PI / 4)) + diagonalOffset };
+        v3 = { x + (TRIANGLE_BASE * cos(PI / 4)) - diagonalOffset, y - (-TRIANGLE_BASE * sin(PI / 4)) + diagonalOffset };
+        break;
 
-	case S:
-		v1 = { x - 10, y };
-		v2 = { x, y + 20 };
-		v3 = { x + 10, y };
-		break;
+    case E:
+        v1 = { x - offset, y + TRIANGLE_BASE };
+        v2 = { x + TRIANGLE_HEIGHT - offset, y };
+        v3 = { x - offset, y - TRIANGLE_BASE };
+        break;
 
-	case SW:
-		v1 = { x + (-20 * cos(PI / 4)), y - (-20 * sin(PI / 4)) };
-		v2 = { x + (10 * cos(PI / 4)), y - (-10 * sin(PI / 4)) };
-		v3 = { x + (-10 * cos(PI / 4)), y - (10 * sin(PI / 4)) };
-		break;
+    case SE:
+        v1 = { x + (TRIANGLE_HEIGHT * cos(PI / 4)) - diagonalOffset, y - (-TRIANGLE_HEIGHT * sin(PI / 4)) - diagonalOffset };
+        v2 = { x + (TRIANGLE_BASE * cos(PI / 4)) - diagonalOffset, y - (TRIANGLE_BASE * sin(PI / 4)) - diagonalOffset };
+        v3 = { x + (-TRIANGLE_BASE * cos(PI / 4)) - diagonalOffset, y - (-TRIANGLE_BASE * sin(PI / 4)) - diagonalOffset };
+        break;
 
-	case W:
-		v1 = { x, y - 10 };
-		v2 = { x - 20, y };
-		v3 = { x, y + 10 };
-		break;
+    case S:
+        v1 = { x - TRIANGLE_BASE, y - offset };
+        v2 = { x, y + TRIANGLE_HEIGHT - offset };
+        v3 = { x + TRIANGLE_BASE, y - offset };
+        break;
 
-	case NW:
-		v1 = { x + (-20 * cos(PI / 4)), y - (20 * sin(PI / 4)) };
-		v2 = { x + (-10 * cos(PI / 4)), y - (-10 * sin(PI / 4)) };
-		v3 = { x + (10 * cos(PI / 4)), y - (10 * sin(PI / 4)) };
-		break;
+    case SW:
+        v1 = { x + (-TRIANGLE_HEIGHT * cos(PI / 4)) + diagonalOffset, y - (-TRIANGLE_HEIGHT * sin(PI / 4)) - diagonalOffset };
+        v2 = { x + (TRIANGLE_BASE * cos(PI / 4)) + diagonalOffset, y - (-TRIANGLE_BASE * sin(PI / 4)) - diagonalOffset };
+        v3 = { x + (-TRIANGLE_BASE * cos(PI / 4)) + diagonalOffset, y - (TRIANGLE_BASE * sin(PI / 4)) - diagonalOffset };
+        break;
 
-	default:
-		v1 = { this->currentPosition.x, this->currentPosition.y + 10 };
-		v2 = { this->currentPosition.x + 20, this->currentPosition.y };
-		v3 = { this->currentPosition.x, this->currentPosition.y - 10 };
-		break;
-	}
-	
+    case W:
+        v1 = { x + offset, y - TRIANGLE_BASE };
+        v2 = { x - TRIANGLE_HEIGHT + offset, y };
+        v3 = { x + offset, y + TRIANGLE_BASE };
+        break;
+
+    case NW:
+        v1 = { x + (-TRIANGLE_HEIGHT * cos(PI / 4)) + diagonalOffset, y - (TRIANGLE_HEIGHT * sin(PI / 4)) + diagonalOffset };
+        v2 = { x + (-TRIANGLE_BASE * cos(PI / 4)) + diagonalOffset, y - (-TRIANGLE_BASE * sin(PI / 4)) + diagonalOffset };
+        v3 = { x + (TRIANGLE_BASE * cos(PI / 4)) + diagonalOffset, y - (TRIANGLE_BASE * sin(PI / 4)) + diagonalOffset };
+        break;
+
+    default:
+        v1 = { this->currentPosition.x, this->currentPosition.y + TRIANGLE_BASE };
+        v2 = { this->currentPosition.x + TRIANGLE_HEIGHT, this->currentPosition.y };
+        v3 = { this->currentPosition.x, this->currentPosition.y - TRIANGLE_BASE };
+        break;
+    }
+
+    DrawTriangleLines(v1, v2, v3, this->color);
 	//DrawTriangle(v1, v2, v3, this->color);
-	DrawTriangleLines(v1, v2, v3, this->color);
 	
-	Rectangle tailRec = { x, y, 10, 10 }; // Centering the rectangle on x, y
-	Vector2 tailOrigin = { 5, 5 }; // Origin at the center of the rectangle
+	
+	//Rectangle tailRec = { x, y, 10, 10 }; // Centering the rectangle on x, y
+	//Vector2 tailOrigin = { 5, 5 }; // Origin at the center of the rectangle
 
-	float rotation = 0;
-	if (this->currentDirection == NE || this->currentDirection == SE || this->currentDirection == SW || this->currentDirection == NW)
-	{
-		rotation = 45;
-	}
+	//float rotation = 0;
+	//if (this->currentDirection == NE || this->currentDirection == SE || this->currentDirection == SW || this->currentDirection == NW)
+	//{
+	//	rotation = 45;
+	//}
 
 	//DrawRectanglePro(tailRec, tailOrigin, rotation, this->color);
 }
@@ -103,7 +110,20 @@ void Player::Draw()
 void Player::DrawHitbox()
 {
 	DrawCircleLines(this->currentPosition.x , this->currentPosition.y, this->hitboxRadius, RED);
-	DrawCircleLines(this->currentPosition.x, this->currentPosition.y, 1,GREEN);
+    // Draw the central point
+    DrawCircleLines(this->currentPosition.x, this->currentPosition.y, 1, GREEN);
+
+    // Draw the right point
+    DrawCircleLines(this->currentPosition.x + 5, this->currentPosition.y, 1, GREEN);
+
+    // Draw the left point
+    DrawCircleLines(this->currentPosition.x - 5, this->currentPosition.y, 1, GREEN);
+
+    // Draw the upper point
+    DrawCircleLines(this->currentPosition.x, this->currentPosition.y + 5, 1, GREEN);
+
+    // Draw the lower point
+    DrawCircleLines(this->currentPosition.x, this->currentPosition.y - 5, 1, GREEN);
 }
 
 void Player::SetDirection(Direction d)
