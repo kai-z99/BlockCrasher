@@ -1,6 +1,7 @@
 #include "CoinItem.h"
 #include "Player.h"
 #include "LevelHandler.h"
+#include "SoundManager.h"
 
 
 CoinItem::CoinItem(float x, float y)
@@ -53,13 +54,14 @@ void CoinItem::Draw()
 	DrawRingLines({ this->currentPosition.x, this->currentPosition.y - yOffset * 1.5f }, 3, this->hitboxRadius, 0, 320, 6, YELLOW);
 }
 
-void CoinItem::Update(unsigned int frame, Player* p, LevelHandler* levelHandler)
+void CoinItem::Update(unsigned int frame, Player* p, LevelHandler* levelHandler, SoundManager* soundManager)
 {
 	// Check if coin is collected
 	if (this->CheckCollision(p) && this->isCollected == false)
 	{
 		this->isCollected = true;
 		levelHandler->AddCoinsCollected(1);
+		soundManager->PlaySoundFile(1);
 	}
 
 	//update animation state

@@ -4,6 +4,7 @@
 
 class Player;
 class LevelHandler;
+class SoundManager;
 
 class Item
 {
@@ -12,7 +13,8 @@ protected:
 	ItemType type;
 	
 public:
-	virtual void Update(unsigned int frame, Player* p, LevelHandler* levelHandler) = 0;
+	virtual void Update(unsigned int frame, Player* p, LevelHandler* levelHandler, SoundManager* soundManager) = 0;
+
 	virtual void Draw() = 0;
 	Vector2 GetCurrentPosition() const;
 	ItemType GetItemType() const;

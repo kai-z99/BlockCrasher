@@ -3,6 +3,7 @@
 
 class Player;
 class LevelHandler;
+class SoundManager;
 
 class CoinItem : public Item
 {
@@ -15,6 +16,6 @@ public:
 	//CoinItem();
 	CoinItem(float x, float y);
 	void Draw() override;
-	void Update(unsigned int frame, Player* p, LevelHandler* levelHandler) override;
+	void Update(unsigned int frame, Player* p, LevelHandler* levelHandler, SoundManager* soundManager) override;
 
 };

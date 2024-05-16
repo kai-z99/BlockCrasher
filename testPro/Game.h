@@ -10,6 +10,7 @@ class PlayerMovementHandler;
 class GeneralInputHandler;
 class LevelHandler;
 class MenuHandler;
+class SoundManager;
 
 
 class Game
@@ -32,6 +33,7 @@ protected:
 	GeneralInputHandler* inputHandler;
 	LevelHandler* levelHandler;
 	MenuHandler* menuHandler;
+	SoundManager* soundManager;
 
 public:
 	Game();

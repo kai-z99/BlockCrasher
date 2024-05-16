@@ -1,5 +1,6 @@
 #include "StarCoin.h"
 #include "LevelHandler.h"
+#include "SoundManager.h"
 
 StarCoin::StarCoin(float x, float y) : CoinItem(x, y)
 {
@@ -43,13 +44,14 @@ void StarCoin::Draw()
 	DrawRingLines({ this->currentPosition.x, this->currentPosition.y - yOffset * 2.0f }, 5, this->hitboxRadius, 0, 320, 8, PINK);
 }
 
-void StarCoin::Update(unsigned int frame, Player* p, LevelHandler* levelHandler)
+void StarCoin::Update(unsigned int frame, Player* p, LevelHandler* levelHandler, SoundManager* soundManager)
 {
 	// Check if coin is collected
 	if (this->CheckCollision(p) && this->isCollected == false)
 	{
 		levelHandler->currentLevelStarCoinCollected = true;
 		this->isCollected = true;
+		soundManager->PlaySoundFile(1);
 	}
 
 	//update animation state

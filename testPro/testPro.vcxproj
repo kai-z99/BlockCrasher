@@ -150,6 +150,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerMovementHandler.cpp" />
     <ClCompile Include="RectangleObstacle.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StarCoin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="PlayerMovementHandler.h" />
     <ClInclude Include="RectangleObstacle.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StarCoin.h" />
   </ItemGroup>
   <ItemGroup>

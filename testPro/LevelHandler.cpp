@@ -6,6 +6,8 @@
 #include "StarCoin.h"
 #include "MenuHandler.h"
 #include "DynamicShapeObstacle.h"
+#include "SoundManager.h"
+
 
 LevelHandler::LevelHandler()
 {
@@ -394,12 +396,14 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		}
 
 		//mid coins
-		activeItems.push_back(new CoinItem(screenWidth/2, (screenHeight / 2) + 50));
-		activeItems.push_back(new CoinItem(screenWidth / 2, (screenHeight / 2) - 50));
-		activeItems.push_back(new CoinItem((screenWidth / 2) + 50, (screenHeight / 2)));
-		activeItems.push_back(new CoinItem((screenWidth / 2) - 50, (screenHeight / 2)));
-
-
+		for (int i = screenWidth / 4; i <= 3 * (screenWidth / 4); i += (screenWidth / 4))
+		{
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 50));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 50));
+			activeItems.push_back(new CoinItem(i + 50, (screenHeight / 2)));
+			activeItems.push_back(new CoinItem(i - 50, (screenHeight / 2)));
+		}
+		
 		activeItems.push_back(new StarCoin(screenWidth/2, (screenHeight / 2) + 300));
 
 		break;

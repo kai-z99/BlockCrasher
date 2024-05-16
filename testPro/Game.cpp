@@ -9,6 +9,7 @@
 #include "CoinItem.h"
 #include "LevelStates.h"
 #include "MenuHandler.h"
+#include "SoundManager.h"
 
 Game::Game()
 {
@@ -23,18 +24,23 @@ void Game::Init()
     this->inputHandler = new GeneralInputHandler();
     //this->menuHandler = new MenuHandler();
     this->levelHandler = new LevelHandler();
+    this->soundManager = new SoundManager();
+
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
 
+
+    
 }
 
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
     this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
+    this->soundManager->PlayMusic(1); //temp
 
     while (!WindowShouldClose()) {
         frameCount++;
@@ -66,6 +72,7 @@ void Game::Run()
         delete it;
     }
 
+    
     CloseWindow();
 }
 
@@ -143,6 +150,9 @@ void Game::Draw()
 
 void Game::Update(unsigned int frame)
 {
+
+    this->soundManager->Update();
+
     switch (this->levelHandler->GetCurrentLevelState())
     {
     //unload level when level is compelete
@@ -182,7 +192,7 @@ void Game::Update(unsigned int frame)
         // Update item states
         for (Item* it : this->activeItems)
         {
-            it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler);
+            it->Update(this->levelHandler->GetCurrentLevelFramecount(), this->player, this->levelHandler, this->soundManager);
         }
 
         // handle the current level specifics
