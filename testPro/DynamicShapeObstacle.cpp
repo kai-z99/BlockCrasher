@@ -1,6 +1,6 @@
 #include "DynamicShapeObstacle.h"
 
-Vector2 Rotate(Vector2& v, Vector2 c, float angle) //helper
+static Vector2 Rotate(Vector2& v, Vector2 c, float angle) //helper
 {
     float tc = cosf(angle);
     float ts = sinf(angle);
@@ -62,7 +62,7 @@ void DynamicShapeObstacle::Update(unsigned int frame)
 
 void DynamicShapeObstacle::SetPosX(float x)
 {
-    float diff = x - this->obstaclePosition.x;;
+    float diff = x - this->obstaclePosition.x;
 
 
     for (Vector2& v : this->vertices) //for every vertices

@@ -26,13 +26,13 @@ MenuHandler::MenuHandler()
 	{
 		"0: Tutorial",
 		"1: Sword Swing",
-		"2: WIP WIP WIP",
+		"2: Big and Small",
 		"3: Bounce Dungeon",
 		"4: Cubed",
 		"5: Violent Tides",
 		"6: High Pressure",
 
-		"7: placeholderp2",
+		"7: Gridlock",
 		"8: ph2",
 		"9: 555",
 		"10: test tsewt",
@@ -56,7 +56,7 @@ MenuHandler::MenuHandler()
 	//----------
 	//MAIN
 	//----------
-	this->mainMenuTitleText = "MenuText";
+	this->mainMenuTitleText = "Welcome to: Block Crasher";
 	this->mainMenuTitleTextWidth = MeasureText(this->mainMenuTitleText, 80);
 	this->mainMenuSubtext = "Press Space/Enter to start!";
 	this->mainMenuSubtextWidth = MeasureText(this->mainMenuSubtext, 18);

@@ -19,5 +19,7 @@ public:
 	void Wheel(float x, float y, float rr, float ri, float vo, float scale);
 	void NinjaStar(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
 	void RotatingBar(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
+	void GridPiece(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale, Vector2 center);
+	void Tree(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
 
 };

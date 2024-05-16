@@ -16,7 +16,7 @@ Game::Game()
 	this->Init();
 }
 
-void Game::Init() // temp
+void Game::Init() 
 {
     this->collisionManager = new CollisionManager();
     this->movementHandler = new PlayerMovementHandler();
@@ -84,7 +84,7 @@ void Game::Draw()
     if (this->levelHandler->levelIsLoaded)
     {
         this->player->Draw();
-        this->player->DrawHitbox();
+        //this->player->DrawHitbox();
 
         //draw current obstacles
         for (Obstacle* ob : this->activeObstacles)
