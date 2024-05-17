@@ -332,7 +332,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 7:
 
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 + 30 };
-		this->currentLevelTimeLimit = 60;
+		this->currentLevelTimeLimit = 45;
 
 		//---------
 		//Obstacles
@@ -411,6 +411,36 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		break;
 
+	case 9:
+		this->playerSpawnpoint = { 200,200 };
+		this->currentLevelTimeLimit = 20;
+		this->currentLevelTheme = MainMenu;
+
+		//---------
+		//Obstacles
+		//---------
+
+		this->obstacleBuilder->Hook((screenWidth / 2) - 25, 1300, 0.002f, PI/2, 0.025f, { 0,0 }, 2); // 0 bot
+		this->obstacleBuilder->Hook(screenWidth + 100, screenHeight / 2, 0.01f, PI, 0.025f, { 0,0 }, 2); // 1 top right
+		this->obstacleBuilder->Hook(-150, screenHeight / 2, 0.005f, 0, 0.025f, { 0,0 }, 2);			//2 left
+		this->obstacleBuilder->Hook(600,-100, 0.005f, -PI / 3, 0.025f, { 0,0 }, 2);				//3 top left
+
+		//----------
+		//Items
+		//----------
+		for (float i = 200; i <= 1700; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, 800.0f));
+		}
+
+		for (float i = 200; i <= 1700; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, 300.0f));
+		}
+
+		activeItems.push_back(new StarCoin(screenWidth - 50, (screenHeight / 2)));
+
+		break;
 	default:
 
 		break;
@@ -602,6 +632,17 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 																				//    movement length/speed                          movement frequency
 		//case x: lateral movement of grid: activeitems[i]->SetVelocity(activeItems[i].GetVelocity().x + (someConstant1 * sin(this->currentLevelFrameCount * someConstant2)), activeItems[i].GetVelocity().y )
 		//also, if you do the same with y-velocity and cosine, you get circular movement. at cos(0), should be maximum y velocity, at sin(0), you start with 0 x velocity.
+
+
+	case 9:
+			activeObstacles[0]->SetPosX(activeObstacles[0]->GetPosX() + (3.0f * cosf(this->currentLevelFramecount * 0.01f)));
+			activeObstacles[1]->SetPosX(activeObstacles[1]->GetPosX() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
+			activeObstacles[1]->SetPosY(activeObstacles[1]->GetPosY() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
+			activeObstacles[2]->SetPosY(activeObstacles[2]->GetPosY() + (2.0f * cosf(this->currentLevelFramecount * 0.015f)));
+			activeObstacles[3]->SetPosX(activeObstacles[3]->GetPosX() + (2.5f * cosf(this->currentLevelFramecount * 0.02f)));
+		
+		break;
+
 	default:
 		break;
 	}
@@ -632,12 +673,14 @@ void LevelHandler::SetCurrentLevelTime(int time)
 void LevelHandler::ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
 {
 	this->UnloadCurrentLevel(activeObstacles, activeItems);
+
 	this->coinsCollectedInLevel = 0;
 	this->currentLevelStarCoinCollected = false;
 	this->totalCoinsInLevel = 0;
 	this->currentLevelFramecount = 0;
 	this->currentLevelState = Active;
 	this->currentLevelTime = this->currentLevelTimeLimit;
+
 	this->LoadCurrentLevel(activeObstacles, activeItems);
 }
 

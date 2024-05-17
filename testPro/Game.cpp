@@ -70,7 +70,7 @@ void Game::Run()
         delete it;
     }
 
-    
+  
     CloseWindow();
 }
 
@@ -161,11 +161,13 @@ void Game::Update(unsigned int frame)
 
     //change player color on fail
     case Fail:
+        //orange on timer death
         if (this->levelHandler->GetCurrentLevelTime() == 0)
         {
             this->player->SetColor(ORANGE);
         }
 
+        //red on collision death
         else
         {
             this->player->SetColor(RED);

@@ -10,19 +10,18 @@ int main() {
     return 0;
 }
 
+//add ~Game destructor
 //upload ChooseLevel sound
 //Time out, retry sounds
 // move with arrow keys too.
-//make tryagain and level complete menus then draw those menus instead of it being hardcoded in game.
+//choose color menu (ColorPicker object, currentColor, Draw())
 //maze level
 //make level appear behind menu when hovering maybe
 //combine the input handlers
-//resolve warnings
-//create title screen. maybe multiple menuHandler states
 //the vortex
 //poke
 // matrix
-// //homing missile
+// homing missile
 //"choose level with WASD / arrow keys. Press SPACE / ENTER to play!" in level select menu
 //reset direction on try again
 //Update to new non placeholder sounds

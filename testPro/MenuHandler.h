@@ -19,7 +19,6 @@ private:
 	int currentSelectedLevel;
 	int currentPage;
 	
-
 	int levelButtonHeight;
 	int levelButtonWidth;
 

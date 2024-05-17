@@ -33,8 +33,8 @@ MenuHandler::MenuHandler()
 		"6: High Pressure",
 
 		"7: Gridlock",
-		"8: ph2",
-		"9: 555",
+		"8: Happy Tree Carol",
+		"9: Deep Terrors",
 		"10: test tsewt",
 		"11: r4323e2ref",
 		"12: rwerrew",
@@ -106,7 +106,6 @@ void MenuHandler::InitLevelSelectMenuButtons()
 
 }																														
 
-
 void MenuHandler::DrawLevelSelectMenu()
 {
 	this->DrawLevelButtons(this->currentPage);
@@ -129,17 +128,11 @@ void MenuHandler::DrawLevelButtons(int page)
 	for (int i = 0 + ((page - 1) * this->levelsPerPage); i <= (6 + ((page - 1) * this->levelsPerPage)); i++)
 	{
 		this->levelButtons[i]->Draw();
-	}
-
-
-	
-	
+	}	
 }
 
 void MenuHandler::DrawSelectedLevelIndicator()
 {
-	//DrawCircleLines(600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2), 10, WHITE);
-
 	DrawTriangleLines(
 		{ 600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) }, 
 		{ 570, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) - 20},
@@ -177,65 +170,6 @@ void MenuHandler::DrawPageArrows()
 		);
 	}
 }
-
-
-void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler)
-{
-	switch (this->currentState)
-	{
-	case Main:
-		this->DrawMainMenu();
-		break;
-
-	case LevelSelect:
-		this->DrawLevelSelectMenu();
-		break;
-
-	case InGame:
-		this->DrawInGameTimer(levelHandler);
-		this->DrawLevelName();
-		break;
-
-	}
-
-}
-
-void MenuHandler::SetSelectedLevel(int level)
-{
-	this->currentSelectedLevel = level;
-}
-
-void MenuHandler::SetLevelComplete(int level)
-{
-	this->levelButtons[level]->completed = true;
-}
-
-void MenuHandler::SetLevelStarCoinCollected(int level)
-{
-	this->levelButtons[level]->starCoinCollected = true;
-}
-
-void MenuHandler::SetCurrentPage(int page)
-{
-	this->currentPage = page;
-}
-
-
-int MenuHandler::GetSelectedLevel() const
-{
-	return this->currentSelectedLevel;
-}
-
-int MenuHandler::GetCurrentPage() const
-{
-	return this->currentPage;
-}
-
-int MenuHandler::GetPageAmount() const
-{
-	return (((int)this->levelButtons.size() - 1) / this->levelsPerPage) + 1; // check this
-}
-
 
 //----------
 //MAIN
@@ -277,7 +211,7 @@ void MenuHandler::DrawInGameTimer(LevelHandler* levelHandler)
 		col = WHITE;
 	}
 
-	DrawText(timer.c_str(), (screenWidth / 2) - (timerWidth / 2), 30, 30, col );
+	DrawText(timer.c_str(), (screenWidth / 2) - (timerWidth / 2), 30, 30, col);
 	//DrawText("Active", 50, 50, 50, RED); //debug
 }
 
@@ -285,3 +219,65 @@ void MenuHandler::DrawLevelName()
 {
 	DrawText(this->levelNames[this->currentSelectedLevel], 30, 30, 30, WHITE);
 }
+
+void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler)
+{
+	switch (this->currentState)
+	{
+	case Main:
+		this->DrawMainMenu();
+		break;
+
+	case LevelSelect:
+		this->DrawLevelSelectMenu();
+		break;
+
+	case InGame:
+		this->DrawInGameTimer(levelHandler);
+		this->DrawLevelName();
+		break;
+
+	case ChooseColor:
+		break;
+
+	}
+
+}
+
+void MenuHandler::SetSelectedLevel(int level)
+{
+	this->currentSelectedLevel = level;
+}
+
+void MenuHandler::SetLevelComplete(int level)
+{
+	this->levelButtons[level]->completed = true;
+}
+
+void MenuHandler::SetLevelStarCoinCollected(int level)
+{
+	this->levelButtons[level]->starCoinCollected = true;
+}
+
+void MenuHandler::SetCurrentPage(int page)
+{
+	this->currentPage = page;
+}
+
+int MenuHandler::GetSelectedLevel() const
+{
+	return this->currentSelectedLevel;
+}
+
+int MenuHandler::GetCurrentPage() const
+{
+	return this->currentPage;
+}
+
+int MenuHandler::GetPageAmount() const
+{
+	return (((int)this->levelButtons.size() - 1) / this->levelsPerPage) + 1; // check this
+}
+
+
+

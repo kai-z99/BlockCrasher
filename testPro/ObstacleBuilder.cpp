@@ -240,7 +240,7 @@ void ObstacleBuilder::GridPiece(float x, float y, float rr, float ri, float vo, 
 void ObstacleBuilder::Tree(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale)
 {
     std::vector<Vector2> v;
-
+    
     v.push_back({ 50, 0 });
     v.push_back({ 50, 150 });
     v.push_back({ 200, 150 });
@@ -349,6 +349,39 @@ void ObstacleBuilder::Tree(float x, float y, float rr, float ri, float vo, Vecto
     DynamicShapeObstacle* d4 = new DynamicShapeObstacle(x - 100, y, { 0 * scale + x, 50 * scale + y }, v4, rr, vo, vi, ri);
     this->storage.push_back(d4);
 
+}
+
+void ObstacleBuilder::Hook(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale)
+{
+    std::vector<Vector2> v;
+
+    v.push_back({ 0, 0 });
+    v.push_back({ 300, 0 });
+    v.push_back({ 350, 50 });
+    v.push_back({ 350, 100 });
+    v.push_back({ 300, 150 });
+    v.push_back({ 250, 100 });
+    v.push_back({ 300, 100 });
+    v.push_back({ 300, 50 });
+    v.push_back({ 0, 50 });
+    v.push_back({ 0, 0 });
+   
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 25 * scale + x, 25 * scale + y }, v, rr, vo, vi, ri);
+//    CircleObstacle* c = new CircleObstacle(x + 25 * scale, y + 25 * scale, 10 * scale, vi);
+    this->storage.push_back(d);
+//    this->storage.push_back(c);
 }
 
 
