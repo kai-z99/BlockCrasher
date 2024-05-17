@@ -37,7 +37,7 @@ bool CollisionManager::CheckDynamicShapeObstacleCollisions(Player* p, DynamicSha
 
 	for (Vector2 point : pointsToCheck)
 	{
-		collided = CheckCollisionPointPoly(point, &d->GetVertices()[0], d->GetVertices().size());
+		collided = CheckCollisionPointPoly(point, &d->GetVertices()[0], (int)d->GetVertices().size());
 
 		if (collided)
 		{

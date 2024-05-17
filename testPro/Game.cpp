@@ -116,22 +116,22 @@ void Game::Draw()
     case Complete:
     {
         int textWidth = MeasureText("LEVEL COMPLETE!", 50);
-        DrawText("LEVEL COMPLETE!", (float)screenWidth / 2 - ((float)textWidth / 2), screenHeight / 2, 50, WHITE);
+        DrawText("LEVEL COMPLETE!", (screenWidth / 2) - (textWidth / 2), screenHeight / 2, 50, WHITE);
 
         textWidth = MeasureText("Press SPACE to go to next level.", 20);
-        DrawText("Press SPACE to go to next level.", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
+        DrawText("Press SPACE to go to next level.", (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
     }
     break;
 
     case Fail:
     {
         int textWidth = MeasureText("Press SPACE to try again.", 20);
-        DrawText("Press SPACE to try again.", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
+        DrawText("Press SPACE to try again.", (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
 
         if (this->levelHandler->GetCurrentLevelTime() == 0)
         {
             int textWidth = MeasureText("Times Up!", 40);
-            DrawText("Times Up!", (float)screenWidth / 2 - ((float)textWidth / 2), (screenHeight / 2) + 20, 40, WHITE);
+            DrawText("Times Up!", (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 20, 40, WHITE);
         }
     }
     break;

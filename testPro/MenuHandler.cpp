@@ -233,7 +233,7 @@ int MenuHandler::GetCurrentPage() const
 
 int MenuHandler::GetPageAmount() const
 {
-	return ((this->levelButtons.size() - 1) / this->levelsPerPage) + 1; // check this
+	return (((int)this->levelButtons.size() - 1) / this->levelsPerPage) + 1; // check this
 }
 
 

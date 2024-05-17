@@ -14,7 +14,7 @@ LevelHandler::LevelHandler()
 {
 	this->obstacleBuilder = new ObstacleBuilder();
 	this->currentLevel = 0;
-	this->totalCoinsInLevel = 1;
+	this->totalCoinsInLevel = 0;
 	this->coinsCollectedInLevel = 0;
 	this->currentLevelFramecount = 0;
 	this->currentLevelTime = 0;
@@ -47,11 +47,10 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Items
 		//----------
 
-		for (int i = 200; i <= 1700; i += 100)
+		for (float i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 400));
 		}
-		this->totalCoinsInLevel = activeItems.size(); // temp
 
 		activeItems.push_back(new StarCoin(screenWidth / 2, 800));
 
@@ -75,12 +74,12 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//----------
 		//Items
 		//----------
-		for (int i = 200; i <= 1700; i += 100)
+		for (float i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 800.0f));
 		}
 
-		for (int i = 200; i <= 1700; i += 100)
+		for (float i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 300.0f));
 		}
@@ -98,20 +97,20 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 		
-		this->obstacleBuilder->RotatingBar(((float)screenWidth / 4) + 50, (float)screenHeight / 2, 0.02, 0, 0, { 0,0 }, 6);						// 1 , 2
-		this->obstacleBuilder->RotatingBar((3 * (float)screenWidth / 4), (float)screenHeight / 2, 0.08, 0, 0.01, { 0,0 }, 4);					// 3 , 4
+		this->obstacleBuilder->RotatingBar(((float)screenWidth / 4) + 50, (float)screenHeight / 2, 0.02f, 0, 0, { 0,0 }, 6);						// 1 , 2
+		this->obstacleBuilder->RotatingBar((3 * (float)screenWidth / 4), (float)screenHeight / 2, 0.08f, 0, 0.01f, { 0,0 }, 4);					// 3 , 4
 
 		//----------
 		//Items
 		//----------
 
 		//big bar
-		for (int i = 190; i <= 900; i += 100)
+		for (float i = 190; i <= 900; i += 100)
 		{
 			activeItems.push_back(new CoinItem((float)screenWidth / 4 + 50, i));
 		}
 
-		for (int i = 180; i <= 900; i += 100)
+		for (float i = 180; i <= 900; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, (float)screenHeight / 2));
 		}
@@ -148,18 +147,18 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Items
 		//----------
 
-		for (int i = 200; i <= 1700; i += 100)
+		for (float i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 800));
 		}
 
-		for (int i = 200; i <= 1700; i += 100)
+		for (float i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 550));
 		}
 
 
-		for (int i = 200; i <= 1700; i += 100)
+		for (float i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 300));
 		}
@@ -180,29 +179,29 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150 * 3, screenHeight / 2 - 150 * 3, 0.01f, 0, 0, 3);
 		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150 * 3, screenHeight / 2 - 150 * 3, 0.01f, PI, 0, 3);
 
-		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150, screenHeight / 2 - 150, -0.01f, PI / 2, 0.01, 1);
-		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150, screenHeight / 2 - 150, -0.01f, 3 * PI / 2, 0.01, 1);
+		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150, screenHeight / 2 - 150, -0.01f, PI / 2, 0.01f, 1);
+		this->obstacleBuilder->HollowBoxPiece(screenWidth / 2 - 150, screenHeight / 2 - 150, -0.01f, 3 * PI / 2, 0.01f, 1);
 
 		//----------
 		//Items                           
 		//----------
 
-		for (int i = screenWidth / 2 - 200; i <= screenWidth / 2 + 200; i += 100) // bot row
+		for (float i = screenWidth / 2 - 200; i <= screenWidth / 2 + 200; i += 100) // bot row
 		{
 			activeItems.push_back(new CoinItem(i, screenHeight / 2 + 200));
 		}
 
-		for (int i = screenWidth / 2 - 200; i <= screenWidth / 2 + 200; i += 100) //top row
+		for (float i = screenWidth / 2 - 200; i <= screenWidth / 2 + 200; i += 100) //top row
 		{
 			activeItems.push_back(new CoinItem(i, screenHeight / 2 - 200));
 		}
 
-		for (int i = screenHeight / 2 - 100; i <= screenHeight / 2 + 100; i += 100) //left col
+		for (float i = screenHeight / 2 - 100; i <= screenHeight / 2 + 100; i += 100) //left col
 		{
 			activeItems.push_back(new CoinItem(screenWidth / 2 - 200, i));
 		}
 
-		for (int i = screenHeight / 2 - 100; i <= screenHeight / 2 + 100; i += 100) //right col
+		for (float i = screenHeight / 2 - 100; i <= screenHeight / 2 + 100; i += 100) //right col
 		{
 			activeItems.push_back(new CoinItem(screenWidth / 2 + 200, i));
 		}
@@ -219,31 +218,31 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 
-		this->obstacleBuilder->Wheel(0, (float)screenHeight / 2, 0.015, 0, 0, 2.6); //left
-		this->obstacleBuilder->Wheel((float)screenWidth, (float)screenHeight / 2, 0.015, 0, 0, 2.6); // right
-		this->obstacleBuilder->Wheel((float)screenWidth / 2, 0, 0.015, 0, 0, 2.6); // bot
-		this->obstacleBuilder->Wheel((float)screenWidth / 2, screenHeight, 0.015, 0, 0, 2.6); // top
+		this->obstacleBuilder->Wheel(0, (float)screenHeight / 2, 0.015f, 0, 0, 2.6f); //left
+		this->obstacleBuilder->Wheel((float)screenWidth, (float)screenHeight / 2, 0.015f, 0, 0, 2.6f); // right
+		this->obstacleBuilder->Wheel((float)screenWidth / 2, 0, 0.015f, 0, 0, 2.6f); // bot
+		this->obstacleBuilder->Wheel((float)screenWidth / 2, screenHeight, 0.015f, 0, 0, 2.6f); // top
 
 		//----------
 		//Items                           
 		//----------
 
-		for (int i = 150; i <= 300; i += 50) // mid top
+		for (float i = 150; i <= 300; i += 50) // mid top
 		{
 			activeItems.push_back(new CoinItem(screenWidth / 2, i));
 		}
 
-		for (int i = 800; i <= 950; i += 50) // mid bot
+		for (float i = 800; i <= 950; i += 50) // mid bot
 		{
 			activeItems.push_back(new CoinItem(screenWidth / 2, i));
 		}
 
-		for (int i = 200; i <= 900; i += 100) // left row
+		for (float i = 200; i <= 900; i += 100) // left row
 		{
 			activeItems.push_back(new CoinItem(200, i));
 		}
 
-		for (int i = 200; i <= 900; i += 100) // right row
+		for (float i = 200; i <= 900; i += 100) // right row
 		{
 			activeItems.push_back(new CoinItem(1720, i));
 		}
@@ -304,22 +303,22 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Items                           
 		//----------
 
-		for (int i = 200; i <= 900; i += 100) // left row
+		for (float i = 200; i <= 900; i += 100) // left row
 		{
 			activeItems.push_back(new CoinItem(270.0f, i));
 		}
 
-		for (int i = 200; i <= 900; i += 100) // mid left row
+		for (float i = 200; i <= 900; i += 100) // mid left row
 		{
 			activeItems.push_back(new CoinItem(730.0f, i));
 		}
 
-		for (int i = 200; i <= 900; i += 100) // mid right row
+		for (float i = 200; i <= 900; i += 100) // mid right row
 		{
 			activeItems.push_back(new CoinItem(1185.0f, i));
 		}
 
-		for (int i = 200; i <= 900; i += 100) // mid right row
+		for (float i = 200; i <= 900; i += 100) // mid right row
 		{
 			activeItems.push_back(new CoinItem(screenWidth - 270.0f, i));
 		}
@@ -339,11 +338,11 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 
-		for (int i = -1000; i < 2920; i += 200) //x
+		for (float i = -1000; i < 2920; i += 200) //x
 		{
-			for (int j = -1000; j < 2580; j += 200) //y
+			for (float j = -1000; j < 2580; j += 200) //y
 			{
-				this->obstacleBuilder->GridPiece(i, j, 0.003, 0, 0.005, { 0,0 }, 1, { screenWidth / 2, screenHeight / 2 });
+				this->obstacleBuilder->GridPiece(i, j, 0.003f, 0, 0.005f, { 0,0 }, 1, { screenWidth / 2, screenHeight / 2 });
 			}
 		}
 
@@ -351,9 +350,9 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Items
 		//---------
 
-		for (int i = (screenWidth/2) - 800; i <= (screenWidth / 2) + 800; i += 400) //x
+		for (float i = (screenWidth/2) - 800; i <= (screenWidth / 2) + 800; i += 400) //x
 		{
-			for (int j = 280; j <= 900; j += 200) //y
+			for (float j = 280; j <= 900; j += 200) //y
 			{
 				activeItems.push_back(new CoinItem(i, j));
 			}
@@ -372,35 +371,35 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//Obstacles
 		//---------
 
-		this->obstacleBuilder->Tree((float)screenWidth / 2, screenHeight, 0.01, PI, 0.01, { 0,0 }, 1.5);
-		this->obstacleBuilder->Tree((float)screenWidth / 4, -100, 0.01, 0, 0.01, { 0,0 }, 1.3);
-		this->obstacleBuilder->Tree(3*(float)screenWidth / 4, -100, 0.01, 0, 0.01, { 0,0 }, 1.3);
+		this->obstacleBuilder->Tree((float)screenWidth / 2, screenHeight, 0.01f, PI, 0.01f, { 0,0 }, 1.5);
+		this->obstacleBuilder->Tree((float)screenWidth / 4, -100, 0.01f, 0, 0.01f, { 0,0 }, 1.3f);
+		this->obstacleBuilder->Tree(3*(float)screenWidth / 4, -100, 0.01f, 0, 0.01f, { 0,0 }, 1.3f);
 
 
 		//---------
 		//Items
 		//---------
 
-		for (int i = (screenWidth / 2) - 800; i <= (screenWidth / 2) + 800; i += 200) // top row
+		for (float i = (screenWidth / 2) - 800; i <= (screenWidth / 2) + 800; i += 200) // top row
 		{
 			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 300));
 			
 		}
 
-		for (int i = (screenWidth / 2) - 800; i < (screenWidth / 2); i += 200) //bot row left
+		for (float i = (screenWidth / 2) - 800; i < (screenWidth / 2); i += 200) //bot row left
 		{
 			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 300));
 
 		}
 
-		for (int i = (screenWidth / 2) + 200; i <= (screenWidth / 2) + 800; i += 200) //bot row right
+		for (float i = (screenWidth / 2) + 200; i <= (screenWidth / 2) + 800; i += 200) //bot row right
 		{
 			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 300));
 
 		}
 
 		//mid coins
-		for (int i = screenWidth / 4; i <= 3 * (screenWidth / 4); i += (screenWidth / 4))
+		for (float i = screenWidth / 4; i <= 3 * (screenWidth / 4); i += (screenWidth / 4))
 		{
 			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 50));
 			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 50));
@@ -419,7 +418,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	}
 
 	this->currentLevelTime = this->currentLevelTimeLimit;
-	this->totalCoinsInLevel = activeItems.size() - 1; //-1 because it includes starCoin
+	this->totalCoinsInLevel = (int)activeItems.size() - 1; //-1 because it includes starCoin
 	this->obstacleBuilder->Insert(activeObstacles);
 	this->levelIsLoaded = true;
 
@@ -447,6 +446,12 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p, MenuHandler* menuHandler, SoundManager* soundManager)
 {	
 	this->currentLevelFramecount += 1;
+
+	//start the current levels theme on frame 1
+	if (this->currentLevelFramecount == 1)
+	{
+		soundManager->PlayMusic(this->currentLevelTheme);
+	}
 
 	//decrement timer every second (if not on fail screen)
 	if (this->currentLevelFramecount % 60 == 0 && this->currentLevelTime != 0 && this->currentLevelState == Active)
@@ -479,12 +484,6 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		this->currentLevelState = Fail;
 	}
 
-
-	//start the current levels theme on frame 1
-	if (this->currentLevelFramecount == 1)
-	{
-		soundManager->PlayMusic(this->currentLevelTheme);
-	}
 	
 	//level specific handling
 	switch (this->currentLevel)
@@ -596,8 +595,8 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 
 		for (Obstacle* ob : activeObstacles)
 		{
-			ob->SetPosY(ob->GetPosY() + (1 * sin(this->currentLevelFramecount * 0.01)));
-			ob->SetPosX(ob->GetPosX() + (1 * cos(this->currentLevelFramecount * 0.01)));
+			ob->SetPosY(ob->GetPosY() + (1 * sinf(this->currentLevelFramecount * 0.01f)));
+			ob->SetPosX(ob->GetPosX() + (1 * cosf(this->currentLevelFramecount * 0.01f)));
 		}
 		break;
 																				//    movement length/speed                          movement frequency

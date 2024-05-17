@@ -1,16 +1,14 @@
 #pragma once
 #include <raylib.h>
 
-
-
 class LevelButton
 {
 private:
 	const char* text;
-	float w;
-	float h;
-	float x;
-	float y;
+	int w;
+	int h;
+	int x;
+	int y;
 	Color color;
 
 public:
@@ -19,9 +17,9 @@ public:
 	void Draw();
 	void SetColor(Color c);
 
-	float GetPosX() const;
-	float GetPosY() const;
-	float GetHeight() const;
+	int GetPosX() const;
+	int GetPosY() const;
+	int GetHeight() const;
 
 	bool completed;
 	bool starCoinCollected;

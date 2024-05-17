@@ -30,7 +30,7 @@ DynamicShapeObstacle::DynamicShapeObstacle(float x, float y, Vector2 c, const st
 
 void DynamicShapeObstacle::Draw()
 {
-	DrawLineStrip(&this->vertices[0], vertices.size(), this->color);
+	DrawLineStrip(&this->vertices[0], (int)vertices.size(), this->color);
 }
 
 
@@ -52,7 +52,7 @@ void DynamicShapeObstacle::Update(unsigned int frame)
 
     //rotate
 
-    float rotation = this->rotationRate * (cos(frame * this->volatility));
+    float rotation = this->rotationRate * (cosf(frame * this->volatility));
 
     for (Vector2& v : this->vertices)
     {

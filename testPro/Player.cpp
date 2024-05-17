@@ -31,8 +31,8 @@ void Player::Draw()
     float y = this->currentPosition.y;
 
     // calculate a offset to position the player at the center
-    float offset = (TRIANGLE_HEIGHT) / 3.0;
-    float diagonalOffset = offset / sqrt(2);
+    float offset = (TRIANGLE_HEIGHT) / 3.0f;
+    float diagonalOffset = offset / sqrtf(2);
 
     switch (this->currentDirection)
     {
@@ -109,21 +109,24 @@ void Player::Draw()
 
 void Player::DrawHitbox()
 {
-	DrawCircleLines(this->currentPosition.x , this->currentPosition.y, this->hitboxRadius, RED);
+    int x = (int)this->currentPosition.x;
+    int y = (int)this->currentPosition.y;
+
+    DrawCircleLines(x, y, this->hitboxRadius, RED);
     // Draw the central point
-    DrawCircleLines(this->currentPosition.x, this->currentPosition.y, 1, GREEN);
+    DrawCircleLines(x, y, 1, GREEN);
 
     // Draw the right point
-    DrawCircleLines(this->currentPosition.x + 5, this->currentPosition.y, 1, GREEN);
+    DrawCircleLines(x + 5, y, 1, GREEN);
 
     // Draw the left point
-    DrawCircleLines(this->currentPosition.x - 5, this->currentPosition.y, 1, GREEN);
+    DrawCircleLines(x - 5, y, 1, GREEN);
 
     // Draw the upper point
-    DrawCircleLines(this->currentPosition.x, this->currentPosition.y + 5, 1, GREEN);
+    DrawCircleLines(x, y + 5, 1, GREEN);
 
     // Draw the lower point
-    DrawCircleLines(this->currentPosition.x, this->currentPosition.y - 5, 1, GREEN);
+    DrawCircleLines(x, y - 5, 1, GREEN);
 }
 
 void Player::SetDirection(Direction d)
