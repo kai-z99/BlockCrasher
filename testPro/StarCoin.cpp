@@ -1,6 +1,7 @@
 #include "StarCoin.h"
 #include "LevelHandler.h"
 #include "SoundManager.h"
+#include "SoundEffect.h"
 
 StarCoin::StarCoin(float x, float y) : CoinItem(x, y)
 {
@@ -51,7 +52,7 @@ void StarCoin::Update(unsigned int frame, Player* p, LevelHandler* levelHandler,
 	{
 		levelHandler->currentLevelStarCoinCollected = true;
 		this->isCollected = true;
-		soundManager->PlaySoundFile(1);
+		soundManager->PlaySoundFile(StarCoinCollect);
 	}
 
 	//update animation state

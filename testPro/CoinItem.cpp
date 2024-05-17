@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "LevelHandler.h"
 #include "SoundManager.h"
+#include "SoundEffect.h"
 
 
 CoinItem::CoinItem(float x, float y)
@@ -61,7 +62,7 @@ void CoinItem::Update(unsigned int frame, Player* p, LevelHandler* levelHandler,
 	{
 		this->isCollected = true;
 		levelHandler->AddCoinsCollected(1);
-		soundManager->PlaySoundFile(1);
+		soundManager->PlaySoundFile(CoinCollect);
 	}
 
 	//update animation state

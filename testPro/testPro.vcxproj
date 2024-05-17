@@ -168,11 +168,13 @@
     <ClInclude Include="LevelStates.h" />
     <ClInclude Include="MenuHandler.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MusicTheme.h" />
     <ClInclude Include="ObstacleTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMovementHandler.h" />
     <ClInclude Include="RectangleObstacle.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StarCoin.h" />
   </ItemGroup>

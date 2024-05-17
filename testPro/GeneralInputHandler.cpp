@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "LevelStates.h"
 #include "MenuHandler.h"
+#include "SoundManager.h"
+#include "SoundEffect.h"
 #include <iostream>
 
 //check if space is pressed on try again screen, if so reset level
@@ -17,7 +19,7 @@ void GeneralInputHandler::HandleTryAgain(LevelHandler* levelHandler, std::vector
 
 
 //check if space is pressed on level complete screen, if so go to next level
-void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
+void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player, SoundManager* soundManager)
 {
 	if (IsKeyPressed(KEY_SPACE) && levelHandler->GetCurrentLevelState() == Complete)
 	{
@@ -36,11 +38,13 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 		{
 			menuHandler->SetCurrentPage(menuHandler->GetCurrentPage() + 1);
 		}
+
+		soundManager->PlaySoundFile(PlayLevel);
 	}
 }
 
 
-void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
+void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, SoundManager* soundManager)
 {
 	if (IsKeyPressed(KEY_BACKSPACE))
 	{
@@ -51,12 +55,14 @@ void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* lev
 
 		case LevelSelect:
 			menuHandler->SetMenuState(Main);
+			soundManager->PlayMusic(MainMenu);
 			break;
 
 		case InGame:
 			levelHandler->UnloadCurrentLevel(activeObstacles, activeItems);
 			levelHandler->SetLevelState(Inactive);
 			menuHandler->SetMenuState(LevelSelect);
+			soundManager->PlayMusic(ChooseLevel); // TEMP, change to ChooseLevel
 			break;
 
 		default:
@@ -66,16 +72,16 @@ void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* lev
 	}
 }
 
-void GeneralInputHandler::HandleCurrentMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
+void GeneralInputHandler::HandleCurrentMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player, SoundManager* soundManager)
 {
 	switch (menuHandler->GetCurrentState())
 	{
 	case Main:
-		this->HandleMainMenu(menuHandler);
+		this->HandleMainMenu(menuHandler, soundManager);
 		break;
 
 	case LevelSelect:
-		this->HandleSelectLevelMenu(menuHandler, levelHandler, activeObstacles, activeItems, player);
+		this->HandleSelectLevelMenu(menuHandler, levelHandler, activeObstacles, activeItems, player, soundManager);
 		break;
 
 	default:
@@ -84,7 +90,7 @@ void GeneralInputHandler::HandleCurrentMenu(MenuHandler* menuHandler, LevelHandl
 }
 
 
-void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
+void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player, SoundManager* soundManager)
 {
 	//check is level is selected
 	if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)))
@@ -95,18 +101,22 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 
 		levelHandler->SetLevelState(Active);
 		menuHandler->SetMenuState(InGame);
+
+		soundManager->PlaySoundFile(PlayLevel);
 	}
 
 	//check scroll down
 	else if ((levelHandler->GetCurrentLevelState() == Inactive) && ((IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN))) && ((menuHandler->GetSelectedLevel() % menuHandler->levelsPerPage) != 6)) // cannot go further than 6th level of each page 
 	{
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + 1);
+		soundManager->PlaySoundFile(SelectLevel);
 	}
 
 	//check scroll up
 	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && (menuHandler->GetSelectedLevel() % menuHandler->levelsPerPage != 0)) // cannot go further than firsr level of each page
 	{
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() - 1);
+		soundManager->PlaySoundFile(SelectLevel);
 	}
 
 	//check menu right
@@ -114,6 +124,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 	{
 		menuHandler->SetCurrentPage(menuHandler->GetCurrentPage() + 1);
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() + menuHandler->levelsPerPage); // set selected level next pages corresponding level
+		soundManager->PlaySoundFile(SelectLevel);
 	}
 
 	//check menu left
@@ -121,13 +132,15 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 	{
 		menuHandler->SetCurrentPage(menuHandler->GetCurrentPage() - 1);
 		menuHandler->SetSelectedLevel(menuHandler->GetSelectedLevel() - menuHandler->levelsPerPage); // set selected level next pages corresponding level
+		soundManager->PlaySoundFile(SelectLevel);
 	}
 }
 
-void GeneralInputHandler::HandleMainMenu(MenuHandler* menuHandler)
+void GeneralInputHandler::HandleMainMenu(MenuHandler* menuHandler, SoundManager* soundManager)
 {
 	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE))
 	{
 		menuHandler->SetMenuState(LevelSelect);
+		soundManager->PlayMusic(ChooseLevel);
 	}
 }

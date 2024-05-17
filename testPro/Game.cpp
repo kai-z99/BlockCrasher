@@ -10,6 +10,7 @@
 #include "LevelStates.h"
 #include "MenuHandler.h"
 #include "SoundManager.h"
+#include "MusicTheme.h"
 
 Game::Game()
 {
@@ -27,9 +28,6 @@ void Game::Init()
     this->soundManager = new SoundManager();
 
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
-
-
-    
 }
 
 void Game::Run()
@@ -40,7 +38,7 @@ void Game::Run()
     SetTargetFPS(60);
 
     this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
-    this->soundManager->PlayMusic(1); //temp
+    this->soundManager->PlayMusic(MainMenu); //temp
 
     while (!WindowShouldClose()) {
         frameCount++;
@@ -150,9 +148,6 @@ void Game::Draw()
 
 void Game::Update(unsigned int frame)
 {
-
-    this->soundManager->Update();
-
     switch (this->levelHandler->GetCurrentLevelState())
     {
     //unload level when level is compelete
@@ -196,7 +191,7 @@ void Game::Update(unsigned int frame)
         }
 
         // handle the current level specifics
-        this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler);
+        this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler, this->soundManager);
         break;
 
     case Inactive:
@@ -205,6 +200,9 @@ void Game::Update(unsigned int frame)
     default:
         break;
     }
+
+    //update music stream
+    this->soundManager->Update();
 }
 
 
@@ -221,26 +219,27 @@ void Game::HandleInput()
         break;
 
     case Complete:
-        this->inputHandler->HandleLevelComplete(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+        this->inputHandler->HandleLevelComplete(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player, this->soundManager);
         break;
 
     case Inactive:
-        this->inputHandler->HandleCurrentMenu(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player);
+        this->inputHandler->HandleCurrentMenu(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->player, this->soundManager);
         break;
 
     default:
         break;
     }
 
-    this->inputHandler->HandleBack(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems);
+    this->inputHandler->HandleBack(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->soundManager);
 }
 
 
 void Game::HandleCollisions()
 {
-    if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles))
+    if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles) && this->levelHandler->GetCurrentLevelState() != Fail)
     {
         this->levelHandler->SetLevelState(Fail);
+        this->soundManager->PlaySoundFile(LevelLose);
     }
 }
 

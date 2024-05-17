@@ -7,6 +7,7 @@
 #include "MenuHandler.h"
 #include "DynamicShapeObstacle.h"
 #include "SoundManager.h"
+#include "SoundEffect.h"
 
 
 LevelHandler::LevelHandler()
@@ -22,6 +23,7 @@ LevelHandler::LevelHandler()
 	this->playerSpawnpoint = { 0,0 };
 	this->levelIsLoaded = false;
 	this->currentLevelStarCoinCollected = false;
+	this->currentLevelTheme = MainMenu;
 }
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -32,6 +34,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 50,400 };
 		this->currentLevelTimeLimit = 60;
+		this->currentLevelTheme = InGame1;
 
 		//---------
 		//Obstacles
@@ -60,6 +63,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 100,100 };
 		this->currentLevelTimeLimit = 20;
+		this->currentLevelTheme = MainMenu;
 
 		//---------
 		//Obstacles
@@ -418,6 +422,8 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	this->totalCoinsInLevel = activeItems.size() - 1; //-1 because it includes starCoin
 	this->obstacleBuilder->Insert(activeObstacles);
 	this->levelIsLoaded = true;
+
+	
 }
 
 void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -438,7 +444,7 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	this->levelIsLoaded = false;
 }
 
-void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p, MenuHandler* menuHandler)
+void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p, MenuHandler* menuHandler, SoundManager* soundManager)
 {	
 	this->currentLevelFramecount += 1;
 
@@ -449,9 +455,13 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	}
 
 	//check win
-	if (this->coinsCollectedInLevel >= this->totalCoinsInLevel)
+	if (this->coinsCollectedInLevel >= this->totalCoinsInLevel && this->currentLevelState != Complete)
 	{
 		this->currentLevelState = Complete;
+
+		//stop the music
+		soundManager->PlaySoundFile(LevelWin);
+		soundManager->StopMusic();
 
 		//mark compelted on menu screen
 		menuHandler->SetLevelComplete(this->currentLevel);
@@ -460,6 +470,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		{
 			menuHandler->SetLevelStarCoinCollected(this->currentLevel);
 		}
+		
 	}
 
 	//check timer loss
@@ -468,6 +479,13 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		this->currentLevelState = Fail;
 	}
 
+
+	//start the current levels theme on frame 1
+	if (this->currentLevelFramecount == 1)
+	{
+		soundManager->PlayMusic(this->currentLevelTheme);
+	}
+	
 	//level specific handling
 	switch (this->currentLevel)
 	{
@@ -589,7 +607,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		break;
 	}
 
-
+	
 }
 
 void LevelHandler::SetLevel(int l)

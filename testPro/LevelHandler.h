@@ -2,12 +2,15 @@
 #include <vector>
 #include <raylib.h>
 #include "LevelStates.h"
+#include "MusicTheme.h"
+
 
 class Obstacle;
 class ObstacleBuilder;
 class Player;
 class Item;
 class MenuHandler;
+class SoundManager;
 
 class LevelHandler
 {
@@ -23,13 +26,16 @@ private:
 	unsigned int currentLevelTime;
 	unsigned int currentLevelTimeLimit;
 	LevelState currentLevelState;
+	MusicTheme currentLevelTheme;
+
+
 	
 public:
 	LevelHandler();
 
 	void LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems);
 	void UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems);
-	void HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p, MenuHandler* menuHandler);
+	void HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p, MenuHandler* menuHandler, SoundManager* soundManager);
 	void ResetCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems);
 
 	void SetLevel(int l);
