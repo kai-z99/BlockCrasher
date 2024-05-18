@@ -7,7 +7,11 @@ Player::Player(float x, float y)
 	this->currentPosition = { x,y };
 	this->currentDirection = N;
 	this->hitboxRadius = 7;
-	this->color = BLUE;
+
+    this->colors = { RED, ORANGE, BLUE, WHITE, GREEN, PURPLE };
+    this->selectedColorIndex = 2; // Blue
+	this->currentColor = this->colors[selectedColorIndex]; //default color is blue
+    
 }
 
 void Player::Move(float x, float y)
@@ -21,7 +25,6 @@ void Player::Draw()
 	Vector2 v1;
 	Vector2 v2;
 	Vector2 v3;
-
 
     const float HITBOX_SCALE = 10.0;
     const float TRIANGLE_BASE = 10.0;
@@ -91,7 +94,7 @@ void Player::Draw()
         break;
     }
 
-    DrawTriangleLines(v1, v2, v3, this->color);
+    DrawTriangleLines(v1, v2, v3, this->currentColor);
 	//DrawTriangle(v1, v2, v3, this->color);
 	
 	
@@ -113,6 +116,7 @@ void Player::DrawHitbox()
     int y = (int)this->currentPosition.y;
 
     DrawCircleLines(x, y, this->hitboxRadius, RED);
+
     // Draw the central point
     DrawCircleLines(x, y, 1, GREEN);
 
@@ -134,9 +138,19 @@ void Player::SetDirection(Direction d)
 	this->currentDirection = d;
 }
 
-void Player::SetColor(Color c)
+void Player::SetCurrentColor(int index)
 {
-	this->color = c;
+	this->currentColor = this->colors[index];
+}
+
+void Player::SetSelectedColorIndex(int index)
+{
+    this->selectedColorIndex = index;
+}
+
+int Player::GetColorCount()
+{
+    return this->colors.size();
 }
 
 void Player::SetPosition(Vector2 pos)

@@ -2,9 +2,9 @@
 
 enum MusicTheme
 {
-	MainMenu,
-	ChooseLevel,
-	InGame1,
-	InGame2,
+	MainMenu_Track,
+	LevelSelect_Track,
+	InGame1_Track,
+	InGame2_Track,
 
 };

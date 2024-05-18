@@ -62,7 +62,7 @@ void CoinItem::Update(unsigned int frame, Player* p, LevelHandler* levelHandler,
 	{
 		this->isCollected = true;
 		levelHandler->AddCoinsCollected(1);
-		soundManager->PlaySoundFile(CoinCollect);
+		soundManager->PlaySoundFile(CoinCollect_Sound);
 	}
 
 	//update animation state

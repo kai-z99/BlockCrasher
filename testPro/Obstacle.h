@@ -22,7 +22,7 @@ public:
 
 	virtual void SetPosX(float x);
 	virtual void SetPosY(float y);
-	void SetColor(Color c);
+	void SetCurrentColor(Color c);
 	void SetVelocity(float x, float y);
 	
 

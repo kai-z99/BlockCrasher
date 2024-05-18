@@ -15,7 +15,7 @@ public:
 	LevelButton(int x, int y, int w, int h, const char* text, Color color);
 
 	void Draw();
-	void SetColor(Color c);
+	void SetCurrentColor(Color c);
 
 	int GetPosX() const;
 	int GetPosY() const;

@@ -52,7 +52,7 @@ void StarCoin::Update(unsigned int frame, Player* p, LevelHandler* levelHandler,
 	{
 		levelHandler->currentLevelStarCoinCollected = true;
 		this->isCollected = true;
-		soundManager->PlaySoundFile(StarCoinCollect);
+		soundManager->PlaySoundFile(StarCoinCollect_Sound);
 	}
 
 	//update animation state

@@ -29,6 +29,14 @@ SoundManager::~SoundManager()
 	CloseAudioDevice();
 	UnloadMusicStream(this->mainMenuMusic);
 	UnloadMusicStream(this->inGameMusic1);
+	UnloadMusicStream(this->levelSelectMusic); 
+	UnloadSound(this->CoinSound);
+	UnloadSound(this->StarCoinSound); 
+	UnloadSound(this->SelectLevelSound); 
+	UnloadSound(this->PlayLevelSound); 
+	UnloadSound(this->LevelWinSound); 
+	UnloadSound(this->LevelLoseSound); 
+
 }
 
 void SoundManager::PlayMusic(MusicTheme theme)
@@ -37,14 +45,14 @@ void SoundManager::PlayMusic(MusicTheme theme)
 
 	switch (theme)
 	{
-	case MainMenu:
+	case MainMenu_Track:
 		this->currentMusic = this->mainMenuMusic;
 		break;
-	case ChooseLevel:
+	case LevelSelect_Track:
 		this->currentMusic = this->levelSelectMusic;
 		break;
 
-	case InGame1:
+	case InGame1_Track:
 		this->currentMusic = this->inGameMusic1;
 		break;
 
@@ -66,27 +74,27 @@ void SoundManager::PlaySoundFile(SoundEffect soundEffect)
 {
 	switch (soundEffect)
 	{
-	case CoinCollect:
+	case CoinCollect_Sound:
 		PlaySound(this->CoinSound);
 		break;
 
-	case StarCoinCollect:
+	case StarCoinCollect_Sound:
 		PlaySound(this->StarCoinSound);
 		break;
 
-	case SelectLevel:
+	case Scroll_Sound:
 		PlaySound(this->SelectLevelSound);
 		break;
 
-	case PlayLevel:
+	case PlayLevel_Sound:
 		PlaySound(this->PlayLevelSound);
 		break;
 
-	case LevelWin:
+	case LevelWin_Sound:
 		PlaySound(this->LevelWinSound);
 		break;
 
-	case LevelLose:
+	case LevelLose_Sound:
 		PlaySound(this->LevelLoseSound);
 		break;
 

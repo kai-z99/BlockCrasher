@@ -23,7 +23,7 @@ LevelHandler::LevelHandler()
 	this->playerSpawnpoint = { 0,0 };
 	this->levelIsLoaded = false;
 	this->currentLevelStarCoinCollected = false;
-	this->currentLevelTheme = MainMenu;
+	this->currentLevelTheme = MainMenu_Track;
 }
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -34,7 +34,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 50,400 };
 		this->currentLevelTimeLimit = 60;
-		this->currentLevelTheme = InGame1;
+		this->currentLevelTheme = InGame1_Track;
 
 		//---------
 		//Obstacles
@@ -62,7 +62,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 100,100 };
 		this->currentLevelTimeLimit = 20;
-		this->currentLevelTheme = MainMenu;
+		this->currentLevelTheme = MainMenu_Track;
 
 		//---------
 		//Obstacles
@@ -414,7 +414,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 9:
 		this->playerSpawnpoint = { 200,200 };
 		this->currentLevelTimeLimit = 20;
-		this->currentLevelTheme = MainMenu;
+		this->currentLevelTheme = MainMenu_Track;
 
 		//---------
 		//Obstacles
@@ -495,7 +495,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		this->currentLevelState = Complete;
 
 		//stop the music
-		soundManager->PlaySoundFile(LevelWin);
+		soundManager->PlaySoundFile(LevelWin_Sound);
 		soundManager->StopMusic();
 
 		//mark compelted on menu screen

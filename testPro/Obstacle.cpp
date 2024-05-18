@@ -31,7 +31,7 @@ ObstacleType Obstacle::GetType() const
     return this->type;
 }
 
-void Obstacle::SetColor(Color c)
+void Obstacle::SetCurrentColor(Color c)
 {
     this->color = c;
 }

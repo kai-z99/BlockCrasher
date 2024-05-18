@@ -38,7 +38,7 @@ void LevelButton::Draw()
 	
 }
 
-void LevelButton::SetColor(Color c)
+void LevelButton::SetCurrentColor(Color c)
 {
 	this->color = c;
 }

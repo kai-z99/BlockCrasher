@@ -18,6 +18,27 @@ Game::Game()
 	this->Init();
 }
 
+Game::~Game()
+{
+    delete this->player;
+    delete this->collisionManager;
+    delete this->inputHandler;
+    delete this->movementHandler;
+    delete this->levelHandler;
+
+    for (Obstacle* ob : this->activeObstacles)
+    {
+        delete ob;
+    }
+
+    for (Item* it : this->activeItems)
+    {
+        delete it;
+    }
+
+
+}
+
 void Game::Init() 
 {
     this->collisionManager = new CollisionManager();
@@ -38,7 +59,7 @@ void Game::Run()
     SetTargetFPS(60);
 
     this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
-    this->soundManager->PlayMusic(MainMenu); //temp
+    this->soundManager->PlayMusic(MainMenu_Track); //temp
 
     while (!WindowShouldClose()) {
         frameCount++;
@@ -53,24 +74,6 @@ void Game::Run()
         this->Draw();
     }
 
-    // decontructor
-    delete this->player;
-    delete this->collisionManager;
-    delete this->inputHandler;
-    delete this->movementHandler;
-    delete this->levelHandler;
-
-    for (Obstacle* ob : this->activeObstacles)
-    {
-        delete ob;
-    }
-
-    for (Item* it : this->activeItems)
-    {
-        delete it;
-    }
-
-  
     CloseWindow();
 }
 
@@ -141,7 +144,7 @@ void Game::Draw()
     }
 
     //draw menu
-    this->menuHandler->DrawCurrentMenu(this->levelHandler);
+    this->menuHandler->DrawCurrentMenu(this->levelHandler, this->player);
     EndDrawing();
 
 }
@@ -164,13 +167,13 @@ void Game::Update(unsigned int frame)
         //orange on timer death
         if (this->levelHandler->GetCurrentLevelTime() == 0)
         {
-            this->player->SetColor(ORANGE);
+            this->player->SetCurrentColor(1); // orange
         }
 
         //red on collision death
         else
         {
-            this->player->SetColor(RED);
+            this->player->SetCurrentColor(0); // red
         }
 
         //this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler);
@@ -178,7 +181,7 @@ void Game::Update(unsigned int frame)
 
     //update level when level is active
     case Active:
-        this->player->SetColor(BLUE);
+        this->player->SetCurrentColor(this->player->selectedColorIndex); 
 
         // Update obstacle states
         for (Obstacle* ob : this->activeObstacles)
@@ -241,7 +244,7 @@ void Game::HandleCollisions()
     if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles) && this->levelHandler->GetCurrentLevelState() != Fail)
     {
         this->levelHandler->SetLevelState(Fail);
-        this->soundManager->PlaySoundFile(LevelLose);
+        this->soundManager->PlaySoundFile(LevelLose_Sound);
     }
 }
 

@@ -1,26 +1,33 @@
 #include "MenuHandler.h"
 #include "LevelButton.h"
 #include "LevelHandler.h"
+#include "Player.h"
 #include "Constants.h"
 #include <string>
 
 
 
-
-
 MenuHandler::MenuHandler()
 {
+	//----------
+	//GENERAL
+	//----------
+
 	this->currentState = Main;
+	this->backButtonText = "BACKSPACE to exit.";
+	this->backButtonTextWidth = MeasureText(this->backButtonText, 20);
 
 	//----------
 	//LEVEL SELECT
 	//----------
+
 	this->currentSelectedLevel = 0;
 	this->currentPage = 1;
 	this->levelButtonHeight = 60;
 	this->levelButtonWidth = 600;
 	this->levelSelectTitleText = "Select a Level!";
 	this->levelSelectTitleWidth = MeasureText(this->levelSelectTitleText, 75);
+	this->levelSelectInstructionText1 = "Choose a level with WASD / arrow keys.\n\n     Press SPACE / ENTER to play!";
 	
 	this->levelNames =
 	{
@@ -56,10 +63,19 @@ MenuHandler::MenuHandler()
 	//----------
 	//MAIN
 	//----------
+
 	this->mainMenuTitleText = "Welcome to: Block Crasher";
 	this->mainMenuTitleTextWidth = MeasureText(this->mainMenuTitleText, 80);
 	this->mainMenuSubtext = "Press Space/Enter to start!";
 	this->mainMenuSubtextWidth = MeasureText(this->mainMenuSubtext, 18);
+
+
+	//----------
+	//CHOOSE COLOR
+	//----------
+
+	this->chooseColorText = "Switch color with WASD / arrow keys!";
+	this->chooseColorTextWidth = MeasureText(this->chooseColorText, 30);
 
 }
 
@@ -73,9 +89,16 @@ void MenuHandler::SetMenuState(MenuState state)
 	this->currentState = state;
 }
 
+void MenuHandler::DrawBackButton()
+{
+	DrawText(this->backButtonText, screenWidth - this->backButtonTextWidth - 20, 20, 20, WHITE);
+}
+
+
 //----------
 //LEVEL SELECT
 //----------
+
 
 void MenuHandler::InitLevelSelectMenuButtons()
 {
@@ -112,6 +135,7 @@ void MenuHandler::DrawLevelSelectMenu()
 	this->DrawSelectedLevelIndicator();
 	this->DrawLevelSelectTitle();
 	this->DrawPageArrows();
+	this->DrawLevelSelectInstruction();
 }
 
 void MenuHandler::DrawLevelButtons(int page)
@@ -171,6 +195,11 @@ void MenuHandler::DrawPageArrows()
 	}
 }
 
+void MenuHandler::DrawLevelSelectInstruction()
+{
+	DrawText(this->levelSelectInstructionText1, 20, screenHeight / 2, 20, WHITE);
+}
+
 //----------
 //MAIN
 //----------
@@ -220,7 +249,59 @@ void MenuHandler::DrawLevelName()
 	DrawText(this->levelNames[this->currentSelectedLevel], 30, 30, 30, WHITE);
 }
 
-void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler)
+//------------
+//CHOOSE COLOR
+//------------
+
+void MenuHandler::DrawChooseColorMenu(Player* p)
+{
+	this->DrawChooseColorBox();
+	this->DrawChooseColorText();
+	this->DrawPlayerChooseColor(p);
+	this->DrawChoosePlayerArrows();
+}
+
+void MenuHandler::DrawChooseColorBox()
+{
+	DrawRectangleLines(screenWidth / 2 - 50, screenHeight / 2 - 50, 100, 100, WHITE);
+}
+
+void MenuHandler::DrawChooseColorText()
+{
+	DrawText(this->chooseColorText, (screenWidth / 2) - (this->chooseColorTextWidth / 2), screenHeight / 2 - 200, 30, WHITE);
+}
+
+void MenuHandler::DrawPlayerChooseColor(Player* p)
+{
+	p->SetPosition({ screenWidth / 2, screenHeight / 2 });
+	p->SetDirection(N);
+	p->Draw();
+}
+
+void MenuHandler::DrawChoosePlayerArrows()
+{
+	DrawTriangleLines
+	(
+		{ ((float)screenWidth / 2) + 200, (screenHeight / 2) + 0 },
+		{ ((float)screenWidth / 2) + 180, (screenHeight / 2) - 25 },
+		{ ((float)screenWidth / 2) + 180, (screenHeight / 2) + 25 },
+		WHITE
+	);
+
+	DrawTriangleLines
+	(
+		{ ((float)screenWidth / 2) - 200, (screenHeight / 2) + 0 },
+		{ ((float)screenWidth / 2) - 180, (screenHeight / 2) - 25 },
+		{ ((float)screenWidth / 2) - 180, (screenHeight / 2) + 25 },
+		WHITE
+	);
+
+}
+
+
+//draw menu func
+
+void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler, Player* player)
 {
 	switch (this->currentState)
 	{
@@ -238,10 +319,17 @@ void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler)
 		break;
 
 	case ChooseColor:
+		this->DrawChooseColorMenu(player);
 		break;
 
 	}
 
+	//draw the go back button
+	if (this->currentState != Main)
+	{
+		this->DrawBackButton();
+
+	}
 }
 
 void MenuHandler::SetSelectedLevel(int level)

@@ -5,12 +5,21 @@
 
 class LevelButton;
 class LevelHandler;
+class Player;
 
 class MenuHandler
 {
 private:
+
+	//----------
+	//GENERAL
+	//----------
 	MenuState currentState;
 
+	void DrawBackButton();
+	const char* backButtonText;
+	int backButtonTextWidth;
+	
 	//----------
 	//LEVEL SELECT
 	//----------
@@ -29,9 +38,13 @@ private:
 	void DrawSelectedLevelIndicator();
 	void DrawLevelSelectTitle();
 	void DrawPageArrows();
+	void DrawLevelSelectInstruction();
 
-	int levelSelectTitleWidth;
 	const char* levelSelectTitleText;
+	int levelSelectTitleWidth;
+	
+	const char* levelSelectInstructionText1;
+	//const char* levelSelectInstructionText2;
 
 	//----------
 	//MAIN
@@ -53,12 +66,25 @@ private:
 	void DrawInGameTimer(LevelHandler* levelHandler);
 	void DrawLevelName();
 
+	//----------
+	//CHOOSE COLOR
+	//---------
+
+	void DrawChooseColorMenu(Player* p);
+	void DrawChooseColorBox();
+	void DrawChooseColorText();
+	void DrawPlayerChooseColor(Player* p);
+	void DrawChoosePlayerArrows();
+
+	const char* chooseColorText;
+	int chooseColorTextWidth;
+
 
 public:
 	MenuHandler();
 	MenuState GetCurrentState() const;
 	void SetMenuState(MenuState state);
-	void DrawCurrentMenu(LevelHandler* levelHandler);
+	void DrawCurrentMenu(LevelHandler* levelHandler, Player* player);
 
 
 	//----------

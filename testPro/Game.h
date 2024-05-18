@@ -37,6 +37,7 @@ protected:
 
 public:
 	Game();
+	~Game();
 	void Run();
 
 };
