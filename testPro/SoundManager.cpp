@@ -12,16 +12,18 @@ SoundManager::SoundManager()
 	this->currentMusic = this->mainMenuMusic; // ddefault song is main menu
 
 	//Sound Effects
-	this->CoinSound = LoadSound("Sounds/1LineClear.mp3");
-	this->StarCoinSound = LoadSound("Sounds/3LineClear.mp3");
-	this->SelectLevelSound = LoadSound("Sounds/EnemyRotate.mp3");
+	this->CoinCollectSound = LoadSound("Sounds/1LineClear.mp3");
+	this->StarCoinCollectSound = LoadSound("Sounds/3LineClear.mp3");
+	this->ScrollSound = LoadSound("Sounds/EnemyRotate.mp3");
 	this->PlayLevelSound = LoadSound("Sounds/EnemySpawn.mp3");
 	this->LevelWinSound = LoadSound("Sounds/Lose.mp3");
 	this->LevelLoseSound = LoadSound("Sounds/Detonate.mp3");
+	this->TransitionSound = LoadSound("Sounds/UndoRotate.mp3");
 
 	SetSoundVolume(this->LevelLoseSound, 0.5f);
-	SetSoundVolume(this->CoinSound, 0.5f);
-	SetSoundVolume(this->StarCoinSound, 0.5f);
+	SetSoundVolume(this->CoinCollectSound, 0.5f);
+	SetSoundVolume(this->StarCoinCollectSound, 0.5f);
+	SetSoundVolume(this->TransitionSound, 0.75f);
 }
 
 SoundManager::~SoundManager()
@@ -30,12 +32,13 @@ SoundManager::~SoundManager()
 	UnloadMusicStream(this->mainMenuMusic);
 	UnloadMusicStream(this->inGameMusic1);
 	UnloadMusicStream(this->levelSelectMusic); 
-	UnloadSound(this->CoinSound);
-	UnloadSound(this->StarCoinSound); 
-	UnloadSound(this->SelectLevelSound); 
+	UnloadSound(this->CoinCollectSound);
+	UnloadSound(this->StarCoinCollectSound); 
+	UnloadSound(this->ScrollSound); 
 	UnloadSound(this->PlayLevelSound); 
 	UnloadSound(this->LevelWinSound); 
 	UnloadSound(this->LevelLoseSound); 
+	UnloadSound(this->TransitionSound);
 
 }
 
@@ -75,15 +78,15 @@ void SoundManager::PlaySoundFile(SoundEffect soundEffect)
 	switch (soundEffect)
 	{
 	case CoinCollect_Sound:
-		PlaySound(this->CoinSound);
+		PlaySound(this->CoinCollectSound);
 		break;
 
 	case StarCoinCollect_Sound:
-		PlaySound(this->StarCoinSound);
+		PlaySound(this->StarCoinCollectSound);
 		break;
 
 	case Scroll_Sound:
-		PlaySound(this->SelectLevelSound);
+		PlaySound(this->ScrollSound);
 		break;
 
 	case PlayLevel_Sound:
@@ -96,6 +99,10 @@ void SoundManager::PlaySoundFile(SoundEffect soundEffect)
 
 	case LevelLose_Sound:
 		PlaySound(this->LevelLoseSound);
+		break;
+
+	case Transition_Sound:
+		PlaySound(TransitionSound);
 		break;
 
 	default:

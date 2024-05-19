@@ -50,6 +50,7 @@ public:
 	int GetCoinsCollected() const;
 	Vector2 GetPlayerSpawnpoint() const;
 	LevelState GetCurrentLevelState() const;
+	MusicTheme GetCurrentMusicTheme() const;
 	
 	bool levelIsLoaded;
 	bool currentLevelStarCoinCollected;

@@ -87,12 +87,12 @@ void Game::Draw()
     //-------------------------
     //LEVEL DRAWING
     //-------------------------
-    // 
+    //            
     //draw player
     if (this->levelHandler->levelIsLoaded)
     {
         this->player->Draw();
-        //this->player->DrawHitbox();
+       // this->player->DrawHitbox();
 
         //draw current obstacles
         for (Obstacle* ob : this->activeObstacles)

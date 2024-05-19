@@ -23,11 +23,12 @@ private:
 	Music levelSelectMusic;
 	Music inGameMusic1;
 
-	Sound CoinSound;
-	Sound StarCoinSound;
-	Sound SelectLevelSound;
+	Sound CoinCollectSound;
+	Sound StarCoinCollectSound;
+	Sound ScrollSound;
 	Sound PlayLevelSound;
 	Sound LevelWinSound;
 	Sound LevelLoseSound;
+	Sound TransitionSound;
 
 };

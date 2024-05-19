@@ -40,6 +40,7 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 		}
 
 		soundManager->PlaySoundFile(PlayLevel_Sound);
+		soundManager->PlayMusic(levelHandler->GetCurrentMusicTheme());
 	}
 }
 
@@ -103,6 +104,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 	//check is level is selected
 	if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)))
 	{
+		//Initiate the level
 		levelHandler->SetLevel(menuHandler->GetSelectedLevel());
 		levelHandler->ResetCurrentLevel(activeObstacles, activeItems);
 		player->SetPosition(levelHandler->GetPlayerSpawnpoint());
@@ -110,7 +112,11 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 		levelHandler->SetLevelState(Active);
 		menuHandler->SetMenuState(InGame);
 
+		//play level sound effect
 		soundManager->PlaySoundFile(PlayLevel_Sound);
+
+		//play the level's theme
+		soundManager->PlayMusic(levelHandler->GetCurrentMusicTheme());
 	}
 
 	//check scroll down
@@ -148,6 +154,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_C)))
 	{
 		menuHandler->SetMenuState(ChooseColor);
+		soundManager->PlaySoundFile(Transition_Sound);
 	}
 
 
@@ -155,10 +162,12 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 
 void GeneralInputHandler::HandleMainMenu(MenuHandler* menuHandler, SoundManager* soundManager)
 {
+	//go to level select menu
 	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE))
 	{
 		menuHandler->SetMenuState(LevelSelect);
 		soundManager->PlayMusic(LevelSelect_Track);
+		soundManager->PlaySoundFile(Transition_Sound);
 	}
 }
 

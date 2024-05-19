@@ -253,7 +253,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 6:
 	{
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
-		this->currentLevelTimeLimit = 25;
+		this->currentLevelTimeLimit = 20;
 
 		float rightMiddle;
 		float leftMiddle;
@@ -365,7 +365,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 8:
 
 		this->playerSpawnpoint = { 200, screenHeight / 2 + 30 };
-		this->currentLevelTimeLimit = 30;
+		this->currentLevelTimeLimit = 25;
 
 		//---------
 		//Obstacles
@@ -478,10 +478,10 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	this->currentLevelFramecount += 1;
 
 	//start the current levels theme on frame 1
-	if (this->currentLevelFramecount == 1)
-	{
-		soundManager->PlayMusic(this->currentLevelTheme);
-	}
+	//if (this->currentLevelFramecount == 1)
+	//{
+	//	soundManager->PlayMusic(this->currentLevelTheme);
+	//}
 
 	//decrement timer every second (if not on fail screen)
 	if (this->currentLevelFramecount % 60 == 0 && this->currentLevelTime != 0 && this->currentLevelState == Active)
@@ -717,4 +717,9 @@ Vector2 LevelHandler::GetPlayerSpawnpoint() const
 LevelState LevelHandler::GetCurrentLevelState() const
 {
 	return this->currentLevelState;
+}
+
+MusicTheme LevelHandler::GetCurrentMusicTheme() const
+{
+	return this->currentLevelTheme;
 }

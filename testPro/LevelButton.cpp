@@ -31,7 +31,7 @@ void LevelButton::Draw()
 
 	else
 	{
-		completeCircleColor = BLACK;
+		completeCircleColor = WHITE;
 	}
 
 	DrawCircleLines(this->x + this->w - 20, this->y + this->h / 2, 10, completeCircleColor);

@@ -12,9 +12,11 @@ int main() {
 
 
 //upload ChooseLevel sound
+// press r to restart
+//press space / enter to confirm color
 //Time out, retry sounds
 // move with arrow keys too.
-//choose color menu (ColorPicker object, currentColor, Draw())
+//draw indicator that ChooseColor exists in LevelSelect
 //maze level
 //make level appear behind menu when hovering maybe
 //combine the input handlers!!!
