@@ -168,7 +168,6 @@
     <ClInclude Include="LevelStates.h" />
     <ClInclude Include="MenuHandler.h" />
     <ClInclude Include="MenuState.h" />
-    <ClInclude Include="MusicTheme.h" />
     <ClInclude Include="ObstacleTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerMovementHandler.h" />

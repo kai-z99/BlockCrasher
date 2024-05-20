@@ -10,7 +10,6 @@
 #include "LevelStates.h"
 #include "MenuHandler.h"
 #include "SoundManager.h"
-#include "MusicTheme.h"
 
 Game::Game()
 {
@@ -59,7 +58,7 @@ void Game::Run()
     SetTargetFPS(60);
 
     this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
-    this->soundManager->PlayMusic(MainMenu_Track); //temp
+    this->soundManager->PlayMusic(0); // 0: main menu track 
 
     while (!WindowShouldClose()) {
         frameCount++;

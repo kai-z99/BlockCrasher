@@ -5,7 +5,6 @@
 #include "MenuHandler.h"
 #include "SoundManager.h"
 #include "SoundEffect.h"
-#include <iostream>
 
 //check if space is pressed on try again screen, if so reset level
 void GeneralInputHandler::HandleTryAgain(LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player)
@@ -40,7 +39,7 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 		}
 
 		soundManager->PlaySoundFile(PlayLevel_Sound);
-		soundManager->PlayMusic(levelHandler->GetCurrentMusicTheme());
+		soundManager->PlayMusic(levelHandler->GetCurrentTrackID());
 	}
 }
 
@@ -56,7 +55,7 @@ void GeneralInputHandler::HandleBack(Player* player, MenuHandler* menuHandler, L
 
 		case LevelSelect:
 			menuHandler->SetMenuState(Main);
-			soundManager->PlayMusic(MainMenu_Track);
+			soundManager->PlayMusic(0); // 0: main menu track
 			break;
 
 		case InGame:
@@ -64,7 +63,7 @@ void GeneralInputHandler::HandleBack(Player* player, MenuHandler* menuHandler, L
 			levelHandler->SetLevelState(Inactive);
 			menuHandler->SetMenuState(LevelSelect);
 			player->SetCurrentColor(player->selectedColorIndex);
-			soundManager->PlayMusic(LevelSelect_Track); 
+			soundManager->PlayMusic(0); 
 			break;
 
 		case ChooseColor:
@@ -121,7 +120,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 		soundManager->PlaySoundFile(PlayLevel_Sound);
 
 		//play the level's theme
-		soundManager->PlayMusic(levelHandler->GetCurrentMusicTheme());
+		soundManager->PlayMusic(levelHandler->GetCurrentTrackID());
 	}
 
 	//check scroll down
@@ -172,7 +171,7 @@ void GeneralInputHandler::HandleMainMenu(MenuHandler* menuHandler, SoundManager*
 	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE))
 	{
 		menuHandler->SetMenuState(LevelSelect);
-		soundManager->PlayMusic(LevelSelect_Track);
+		soundManager->PlayMusic(1); // 1: level select music
 		soundManager->PlaySoundFile(Transition_Sound);
 	}
 }

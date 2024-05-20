@@ -2,8 +2,6 @@
 #include <vector>
 #include <raylib.h>
 #include "LevelStates.h"
-#include "MusicTheme.h"
-
 
 class Obstacle;
 class ObstacleBuilder;
@@ -26,7 +24,7 @@ private:
 	unsigned int currentLevelTime;
 	unsigned int currentLevelTimeLimit;
 	LevelState currentLevelState;
-	MusicTheme currentLevelTheme;
+	int currentTrackID;
 
 
 	
@@ -50,7 +48,7 @@ public:
 	int GetCoinsCollected() const;
 	Vector2 GetPlayerSpawnpoint() const;
 	LevelState GetCurrentLevelState() const;
-	MusicTheme GetCurrentMusicTheme() const;
+	int GetCurrentTrackID() const;
 	
 	bool levelIsLoaded;
 	bool currentLevelStarCoinCollected;

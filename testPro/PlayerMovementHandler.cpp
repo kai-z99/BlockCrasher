@@ -13,22 +13,22 @@ void PlayerMovementHandler::HandlePlayerMovement(Player* p)
     float dx = 0;
     float dy = 0;
 
-    if (IsKeyDown(KEY_A) && p->GetPosX() > 0)
+    if ((IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) && p->GetPosX() > 0)
     {
         dx -= moveSpeed;
     }
 
-    if (IsKeyDown(KEY_D) && p->GetPosX() < screenWidth)
+    if ((IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) && p->GetPosX() < screenWidth)
     {
         dx += moveSpeed;
     }
 
-    if (IsKeyDown(KEY_W) && p->GetPosY() > 0)
+    if ((IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) && p->GetPosY() > 0)
     {
         dy -= moveSpeed;
     }
 
-    if (IsKeyDown(KEY_S) && p->GetPosY() < screenHeight) 
+    if ((IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) && p->GetPosY() < screenHeight)
     {
         dy += moveSpeed;
     }

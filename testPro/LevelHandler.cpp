@@ -23,7 +23,7 @@ LevelHandler::LevelHandler()
 	this->playerSpawnpoint = { 0,0 };
 	this->levelIsLoaded = false;
 	this->currentLevelStarCoinCollected = false;
-	this->currentLevelTheme = MainMenu_Track;
+	this->currentTrackID = 0;
 }
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -34,7 +34,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 50,400 };
 		this->currentLevelTimeLimit = 60;
-		this->currentLevelTheme = InGame1_Track;
+		this->currentTrackID = 1;
 
 		//---------
 		//Obstacles
@@ -62,7 +62,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 100,100 };
 		this->currentLevelTimeLimit = 20;
-		this->currentLevelTheme = MainMenu_Track;
+		this->currentTrackID = 0;
 
 		//---------
 		//Obstacles
@@ -92,7 +92,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
 		this->currentLevelTimeLimit = 30;
-		this->currentLevelTheme = BigAndSmall_Track;
+		this->currentTrackID = 3;
 
 		//---------
 		//Obstacles
@@ -129,7 +129,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 3:
 		this->playerSpawnpoint = { 50, 50};
 		this->currentLevelTimeLimit = 30;
-		this->currentLevelTheme = BounceDungeon_Track;
+		this->currentTrackID = 4;
 
 		//---------
 		//Obstacles
@@ -170,10 +170,10 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		break;
 
 
-	case 4:
+	case 4: // Cubed
 		this->playerSpawnpoint = { 150, screenHeight / 2 };
 		this->currentLevelTimeLimit = 30;
-		this->currentLevelTheme = Cubed_Track;
+		this->currentTrackID = 5;
 
 		//---------
 		//Obstacles
@@ -213,9 +213,10 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		break;
 
-	case 5:
+	case 5: // Violent Tides
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
 		this->currentLevelTimeLimit = 20;
+		this->currentTrackID = 2;
 
 		//---------
 		//Obstacles
@@ -253,10 +254,11 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		activeItems.push_back(new StarCoin(40, screenHeight / 2 - 70));
 		break;
 
-	case 6:
+	case 6: // High pressure
 	{
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
 		this->currentLevelTimeLimit = 20;
+		this->currentTrackID = 2;
 
 		float rightMiddle;
 		float leftMiddle;
@@ -332,11 +334,11 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	}
 
-	case 7:
+	case 7: // Gridlocked
 
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 + 30 };
 		this->currentLevelTimeLimit = 45;
-		this->currentLevelTheme = GridLock_Track;
+		this->currentTrackID = 6;
 
 		//---------
 		//Obstacles
@@ -366,10 +368,11 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	
 		break;
 
-	case 8:
+	case 8: // Happy trees
 
 		this->playerSpawnpoint = { 200, screenHeight / 2 + 30 };
 		this->currentLevelTimeLimit = 25;
+		this->currentTrackID = 6;
 
 		//---------
 		//Obstacles
@@ -418,7 +421,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 9:
 		this->playerSpawnpoint = { 200,200 };
 		this->currentLevelTimeLimit = 20;
-		this->currentLevelTheme = Deserted_Track;
+		this->currentTrackID = 7;
 
 
 		//---------
@@ -457,7 +460,6 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	this->obstacleBuilder->Insert(activeObstacles);
 	this->levelIsLoaded = true;
 
-	
 }
 
 void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -725,7 +727,7 @@ LevelState LevelHandler::GetCurrentLevelState() const
 	return this->currentLevelState;
 }
 
-MusicTheme LevelHandler::GetCurrentMusicTheme() const
+int LevelHandler::GetCurrentTrackID() const
 {
-	return this->currentLevelTheme;
+	return this->currentTrackID;
 }

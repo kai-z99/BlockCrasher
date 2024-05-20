@@ -4,113 +4,97 @@ SoundManager::SoundManager()
 {
 	InitAudioDevice();
 
-	//Music
-	this->mainMenuMusic = LoadMusicStream("Sounds/Music.mp3");
-	this->inGameMusic1 = LoadMusicStream("Sounds/music_credits.mp3");
-	this->levelSelectMusic = LoadMusicStream("Sounds/music_credits.mp3"); //CHANGE
+	//------------------------------------------------------
+	//MUSIC LOADING
+	//------------------------------------------------------
 
-	this->BigAndSmallMusic = LoadMusicStream("Sounds/BigAndSmall_Music.wav");
+	this->mainMenuMusic = LoadMusicStream("Sounds/Music.mp3"); // 0
+	this->tracks.push_back(&this->mainMenuMusic);
+
+	this->levelSelectMusic = LoadMusicStream("Sounds/music_credits.mp3"); // 1
+	this->tracks.push_back(&this->levelSelectMusic);
+
+	this->inGameMusic1 = LoadMusicStream("Sounds/music_credits.mp3"); // 2
+	this->tracks.push_back(&this->inGameMusic1);
+
+	this->BigAndSmallMusic = LoadMusicStream("Sounds/BigAndSmall_Music.wav"); // 3
 	SetMusicVolume(BigAndSmallMusic, 0.4f);
 	SetMusicPitch(BigAndSmallMusic, 1.2f);
+	this->tracks.push_back(&this->BigAndSmallMusic);
 
-	this->BounceDungeon_Music = LoadMusicStream("Sounds/BounceDungeon_Music.wav");
+	this->BounceDungeonMusic = LoadMusicStream("Sounds/BounceDungeon_Music.wav"); // 4
+	this->tracks.push_back(&this->BounceDungeonMusic);
 
-	this->CubedMusic = LoadMusicStream("Sounds/Cubed_Music.mp3");
+	this->CubedMusic = LoadMusicStream("Sounds/Cubed_Music.mp3"); // 5
 	SetMusicVolume(this->CubedMusic, 0.25f);
 	SetMusicPitch(this->CubedMusic, 0.88f);
+	this->tracks.push_back(&this->CubedMusic);
 
-	this->GridLockMusic = LoadMusicStream("Sounds/GridLock_Music.mp3");
+	this->GridLockMusic = LoadMusicStream("Sounds/GridLock_Music.mp3"); // 6
+	this->tracks.push_back(&this->GridLockMusic);
 	
-	this->DesertedMusic = LoadMusicStream("Sounds/Deserted_Music.wav");
+	this->DesertedMusic = LoadMusicStream("Sounds/Deserted_Music.wav"); // 7
 	SetMusicVolume(DesertedMusic, 0.7f);
 	SetMusicPitch(DesertedMusic, 0.7f);
+	this->tracks.push_back(&this->DesertedMusic);
 
-	this->currentMusic = this->mainMenuMusic; // ddefault song is main menu
+	this->currentMusic = this->mainMenuMusic; // default song is main menu
 
-	//Sound Effects
+
+	//------------------------------------------------------
+	//SOUND EFFECT LOADING
+	//------------------------------------------------------
+
 	this->CoinCollectSound = LoadSound("Sounds/1LineClear.mp3");
-	this->StarCoinCollectSound = LoadSound("Sounds/3LineClear.mp3");
-	this->ScrollSound = LoadSound("Sounds/EnemyRotate.mp3");
-	this->PlayLevelSound = LoadSound("Sounds/EnemySpawn.mp3");
-	this->LevelWinSound = LoadSound("Sounds/Lose.mp3");
-	this->LevelLoseSound = LoadSound("Sounds/Detonate.mp3");
-	this->TransitionSound = LoadSound("Sounds/UndoRotate.mp3");
-	this->TimesUpSound = LoadSound("Sounds/Beep.mp3");
-
-	SetSoundVolume(this->LevelLoseSound, 0.5f);
 	SetSoundVolume(this->CoinCollectSound, 0.5f);
+	this->sounds.push_back(&this->CoinCollectSound);
+
+	this->StarCoinCollectSound = LoadSound("Sounds/3LineClear.mp3");
 	SetSoundVolume(this->StarCoinCollectSound, 0.5f);
+	this->sounds.push_back(&this->StarCoinCollectSound);
+
+	this->ScrollSound = LoadSound("Sounds/EnemyRotate.mp3");
+	this->sounds.push_back(&this->ScrollSound);
+
+	this->PlayLevelSound = LoadSound("Sounds/EnemySpawn.mp3");
+	this->sounds.push_back(&this->PlayLevelSound);
+
+	this->LevelWinSound = LoadSound("Sounds/Lose.mp3");
+	this->sounds.push_back(&this->LevelWinSound);
+
+	this->LevelLoseSound = LoadSound("Sounds/Detonate.mp3");
+	SetSoundVolume(this->LevelLoseSound, 0.5f);
+	this->sounds.push_back(&this->LevelLoseSound);
+
+	this->TransitionSound = LoadSound("Sounds/UndoRotate.mp3");
 	SetSoundVolume(this->TransitionSound, 0.75f);
+	this->sounds.push_back(&this->TransitionSound);
+
+	this->TimesUpSound = LoadSound("Sounds/Beep.mp3");
 	SetSoundVolume(this->TimesUpSound, 1.5f);
-
-
-	
+	this->sounds.push_back(&this->TimesUpSound);
 }
 
 SoundManager::~SoundManager()
 {
 	CloseAudioDevice();
 
-	UnloadMusicStream(this->mainMenuMusic);
-	UnloadMusicStream(this->inGameMusic1);
-	UnloadMusicStream(this->levelSelectMusic); 
-	UnloadMusicStream(this->DesertedMusic);
-	UnloadMusicStream(this->GridLockMusic);
-	UnloadMusicStream(this->BigAndSmallMusic);
-	UnloadMusicStream(this->BounceDungeon_Music);
-	UnloadMusicStream(this->CubedMusic);
+	for (Music* m : this->tracks) // unload music
+	{
+		UnloadMusicStream(*m);
+	}
 
-	UnloadSound(this->CoinCollectSound);
-	UnloadSound(this->StarCoinCollectSound); 
-	UnloadSound(this->ScrollSound); 
-	UnloadSound(this->PlayLevelSound); 
-	UnloadSound(this->LevelWinSound); 
-	UnloadSound(this->LevelLoseSound); 
-	UnloadSound(this->TransitionSound);
-	UnloadSound(this->TimesUpSound);
-
+	for (Sound* s : this->sounds) // unload sound effects
+	{
+		UnloadSound(*s);
+	}
 }
 
-void SoundManager::PlayMusic(MusicTheme theme)
+void SoundManager::PlayMusic(int id)
 {
 	StopMusicStream(this->currentMusic); // to reset the song to the beginning
 
-	switch (theme)
-	{
-	case MainMenu_Track:
-		this->currentMusic = this->mainMenuMusic;
-		break;
-	case LevelSelect_Track:
-		this->currentMusic = this->levelSelectMusic;
-		break;
-
-	case InGame1_Track:
-		this->currentMusic = this->inGameMusic1;
-		break;
-
-	case BigAndSmall_Track:
-		this->currentMusic = this->BigAndSmallMusic;
-		break;
-
-	case Deserted_Track:
-		this->currentMusic = this->DesertedMusic;
-		break;
-
-	case GridLock_Track:
-		this->currentMusic = this->GridLockMusic;
-		break;
-
-	case BounceDungeon_Track:
-		this->currentMusic = this->BounceDungeon_Music;
-		break;
-
-	case Cubed_Track:
-		this->currentMusic = this->CubedMusic;
-		break;
-
-	default:
-		break;
-	}
+	this->currentMusic = *this->tracks[id];
 
 	PlayMusicStream(this->currentMusic);
 

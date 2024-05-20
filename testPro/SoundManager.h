@@ -2,7 +2,6 @@
 #include <vector>
 #include <raylib.h>
 #include "SoundEffect.h"
-#include "MusicTheme.h"
 
 
 class SoundManager
@@ -11,7 +10,7 @@ public:
 	SoundManager();
 	~SoundManager();
 	
-	void PlayMusic(MusicTheme theme);
+	void PlayMusic(int id);
 	void StopMusic();
 	void PlaySoundFile(SoundEffect soundEffect);
 	
@@ -20,19 +19,20 @@ public:
 
 private:
 	Music currentMusic;
-	std::vector<Music> tracks; // beta
+	std::vector<Music*> tracks; // beta
 
 	Music mainMenuMusic;
 	Music levelSelectMusic;
 
 	Music inGameMusic1;
 	Music BigAndSmallMusic;
-	Music BounceDungeon_Music;
+	Music BounceDungeonMusic;
 	Music CubedMusic;
 	Music GridLockMusic;
 	Music DesertedMusic;
 	
 	
+	std::vector<Sound*> sounds;
 
 	Sound CoinCollectSound;
 	Sound StarCoinCollectSound;
