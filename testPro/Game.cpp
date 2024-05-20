@@ -173,7 +173,9 @@ void Game::Update(unsigned int frame)
         //red on collision death
         else
         {
-            this->player->SetCurrentColor(0); // red
+           // this->player->SetCurrentColor(0); // red
+            if (this->frameCount % 4 == 0) this->player->RotateColorChannels(); // rainbow effect. Mod 4 to slow it down.
+            
         }
 
         //this->levelHandler->HandleCurrentLevel(this->activeObstacles, this->activeItems, this->player, this->menuHandler);
@@ -235,7 +237,7 @@ void Game::HandleInput()
         break;
     }
 
-    this->inputHandler->HandleBack(this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->soundManager);
+    this->inputHandler->HandleBack(this->player, this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->soundManager);
 }
 
 

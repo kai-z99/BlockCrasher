@@ -40,11 +40,12 @@ private:
 	void DrawPageArrows();
 	void DrawLevelSelectInstruction();
 
+
 	const char* levelSelectTitleText;
 	int levelSelectTitleWidth;
 	
 	const char* levelSelectInstructionText1;
-	//const char* levelSelectInstructionText2;
+	
 
 	//----------
 	//MAIN
@@ -72,12 +73,19 @@ private:
 
 	void DrawChooseColorMenu(Player* p);
 	void DrawChooseColorBox();
-	void DrawChooseColorText();
+	void DrawChooseColorText(); // arrows to change colors
+	void DrawChooseColorText2(); // enter / space to confirm
 	void DrawPlayerChooseColor(Player* p);
-	void DrawChoosePlayerArrows();
+	void DrawChooseColorArrows();
+	
 
 	const char* chooseColorText;
 	int chooseColorTextWidth;
+
+	const char* chooseColorText2;
+	int chooseColorTextWidth2;
+
+	
 
 
 public:
@@ -100,4 +108,10 @@ public:
 	int GetSelectedLevel() const;
 	int GetCurrentPage() const;
 	int GetPageAmount() const;
+
+	//----------
+	//CHOOSE COLOR
+	//----------
+
+	int initialColorIndex; // the intial color the player is when you enter the menu
 };

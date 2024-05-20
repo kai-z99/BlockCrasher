@@ -45,7 +45,7 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 }
 
 
-void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, SoundManager* soundManager)
+void GeneralInputHandler::HandleBack(Player* player, MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, SoundManager* soundManager)
 {
 	if (IsKeyPressed(KEY_BACKSPACE))
 	{
@@ -63,11 +63,16 @@ void GeneralInputHandler::HandleBack(MenuHandler* menuHandler, LevelHandler* lev
 			levelHandler->UnloadCurrentLevel(activeObstacles, activeItems);
 			levelHandler->SetLevelState(Inactive);
 			menuHandler->SetMenuState(LevelSelect);
+			player->SetCurrentColor(player->selectedColorIndex);
 			soundManager->PlayMusic(LevelSelect_Track); 
+			break;
 
 		case ChooseColor:
+			//if the player pressed backspace, set the players color to what it was originally when they entered the menu. (enter would not make this change as it confirms the color)
+			player->SetCurrentColor(menuHandler->initialColorIndex);
+			player->SetSelectedColorIndex(menuHandler->initialColorIndex);
 			menuHandler->SetMenuState(LevelSelect);
-			//soundManager->PlayMusic(ChooseLevel); resets the music loop if you do this
+			break;
 
 		default:
 			break;
@@ -90,7 +95,7 @@ void GeneralInputHandler::HandleCurrentMenu(MenuHandler* menuHandler, LevelHandl
 		break;
 
 	case ChooseColor:
-		this->HandleChooseColorMenu(player, soundManager);
+		this->HandleChooseColorMenu(player, soundManager, menuHandler);
 		break;
 
 	default:
@@ -153,6 +158,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 
 	else if (levelHandler->GetCurrentLevelState() == Inactive && (IsKeyPressed(KEY_C)))
 	{
+		menuHandler->initialColorIndex = player->selectedColorIndex; // Store the initial color the player is in initialColorIndex.
 		menuHandler->SetMenuState(ChooseColor);
 		soundManager->PlaySoundFile(Transition_Sound);
 	}
@@ -171,7 +177,7 @@ void GeneralInputHandler::HandleMainMenu(MenuHandler* menuHandler, SoundManager*
 	}
 }
 
-void GeneralInputHandler::HandleChooseColorMenu(Player* p, SoundManager* soundManager)
+void GeneralInputHandler::HandleChooseColorMenu(Player* p, SoundManager* soundManager, MenuHandler* menuHandler)
 {
 	//check right
 	if ((IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) /* && ()*/)
@@ -208,6 +214,11 @@ void GeneralInputHandler::HandleChooseColorMenu(Player* p, SoundManager* soundMa
 		soundManager->PlaySoundFile(Scroll_Sound);
 	}
 
-	
+	else if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER))
+	{
+		// See HandleBack to revert color to prevoius state.
+		menuHandler->SetMenuState(LevelSelect);
+		soundManager->PlaySoundFile(Transition_Sound);
+	}
 
 }

@@ -27,7 +27,7 @@ MenuHandler::MenuHandler()
 	this->levelButtonWidth = 600;
 	this->levelSelectTitleText = "Select a Level!";
 	this->levelSelectTitleWidth = MeasureText(this->levelSelectTitleText, 75);
-	this->levelSelectInstructionText1 = "Choose a level with WASD / arrow keys.\n\n     Press SPACE / ENTER to play!";
+	this->levelSelectInstructionText1 = "Choose a level with WASD / ARROW KEYS.\n\n     Press SPACE / ENTER to play!\n\n    Press 'C' to change player color!";
 	
 	this->levelNames =
 	{
@@ -56,6 +56,8 @@ MenuHandler::MenuHandler()
 		"20: 211121212"
 
 		//"Created by Kai @ Van"
+
+		
 	};
 
 	this->InitLevelSelectMenuButtons();
@@ -74,8 +76,12 @@ MenuHandler::MenuHandler()
 	//CHOOSE COLOR
 	//----------
 
-	this->chooseColorText = "Switch color with WASD / arrow keys!";
+	this->chooseColorText = "Switch color with WASD / ARROW KEYS!";
 	this->chooseColorTextWidth = MeasureText(this->chooseColorText, 30);
+	this->chooseColorText2 = "Press ENTER / SPACE to confirm!";
+	this->chooseColorTextWidth2 = MeasureText(this->chooseColorText2, 30);
+
+	this->initialColorIndex = 2; // the game starts as blue as the player color.
 
 }
 
@@ -200,6 +206,7 @@ void MenuHandler::DrawLevelSelectInstruction()
 	DrawText(this->levelSelectInstructionText1, 20, screenHeight / 2, 20, WHITE);
 }
 
+
 //----------
 //MAIN
 //----------
@@ -257,8 +264,9 @@ void MenuHandler::DrawChooseColorMenu(Player* p)
 {
 	this->DrawChooseColorBox();
 	this->DrawChooseColorText();
+	this->DrawChooseColorText2();
 	this->DrawPlayerChooseColor(p);
-	this->DrawChoosePlayerArrows();
+	this->DrawChooseColorArrows();
 }
 
 void MenuHandler::DrawChooseColorBox()
@@ -271,6 +279,11 @@ void MenuHandler::DrawChooseColorText()
 	DrawText(this->chooseColorText, (screenWidth / 2) - (this->chooseColorTextWidth / 2), screenHeight / 2 - 200, 30, WHITE);
 }
 
+void MenuHandler::DrawChooseColorText2()
+{
+	DrawText(this->chooseColorText2, (screenWidth / 2) - (this->chooseColorTextWidth2 / 2), screenHeight / 2 + 200, 30, WHITE);
+}
+
 void MenuHandler::DrawPlayerChooseColor(Player* p)
 {
 	p->SetPosition({ screenWidth / 2, screenHeight / 2 });
@@ -278,7 +291,7 @@ void MenuHandler::DrawPlayerChooseColor(Player* p)
 	p->Draw();
 }
 
-void MenuHandler::DrawChoosePlayerArrows()
+void MenuHandler::DrawChooseColorArrows()
 {
 	DrawTriangleLines
 	(
@@ -297,6 +310,8 @@ void MenuHandler::DrawChoosePlayerArrows()
 	);
 
 }
+
+
 
 
 //draw menu func

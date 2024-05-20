@@ -21,7 +21,10 @@ public:
 	void SetPosition(Vector2 pos);
 	void SetDirection(Direction d);
 	void SetCurrentColor(int index); // from the colors vector
+	void SetCurrentColor(Color c); // from a color obj
 	void SetSelectedColorIndex(int index); // for memory
+	void RotateColorChannels();
+	
 	int GetColorCount();
 
 	void Draw();
@@ -30,6 +33,8 @@ public:
 	float GetPosX();
 	float GetPosY();
 	float GetHitboxRadius();
+	Color GetCurrentColor() const;
+	
 
 	int selectedColorIndex;
 };

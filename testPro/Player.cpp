@@ -8,10 +8,9 @@ Player::Player(float x, float y)
 	this->currentDirection = N;
 	this->hitboxRadius = 7;
 
-    this->colors = { RED, ORANGE, BLUE, WHITE, GREEN, PURPLE };
+    this->colors = { RED, ORANGE, BLUE, SKYBLUE, DARKBLUE, PURPLE, VIOLET, DARKPURPLE, BEIGE, BROWN, GRAY, YELLOW, GOLD, PINK, GREEN, LIME, DARKGREEN };
     this->selectedColorIndex = 2; // Blue
-	this->currentColor = this->colors[selectedColorIndex]; //default color is blue
-    
+	this->currentColor = this->colors[selectedColorIndex]; //default color is  
 }
 
 void Player::Move(float x, float y)
@@ -143,9 +142,29 @@ void Player::SetCurrentColor(int index)
 	this->currentColor = this->colors[index];
 }
 
+void Player::SetCurrentColor(Color c)
+{
+    this->currentColor = c;
+}
+
 void Player::SetSelectedColorIndex(int index)
 {
     this->selectedColorIndex = index;
+}
+
+void Player::RotateColorChannels()
+{
+    //Color c = this->colors[this->selectedColorIndex];
+    Color c = this->currentColor;
+    unsigned char rTg = c.r;
+    unsigned char gTb = c.g;
+    unsigned char bTr = c.b;
+
+    c.r = bTr;
+    c.g = rTg;
+    c.b = gTb;
+
+    this->currentColor = c;
 }
 
 int Player::GetColorCount()
@@ -171,4 +190,9 @@ float Player::GetPosY()
 float Player::GetHitboxRadius()
 {
 	return this->hitboxRadius;
+}
+
+Color Player::GetCurrentColor() const
+{
+    return this->currentColor;
 }
