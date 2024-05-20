@@ -92,6 +92,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
 		this->currentLevelTimeLimit = 30;
+		this->currentLevelTheme = BigAndSmall_Track;
 
 		//---------
 		//Obstacles
@@ -128,6 +129,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 3:
 		this->playerSpawnpoint = { 50, 50};
 		this->currentLevelTimeLimit = 30;
+		this->currentLevelTheme = BounceDungeon_Track;
 
 		//---------
 		//Obstacles
@@ -171,6 +173,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 4:
 		this->playerSpawnpoint = { 150, screenHeight / 2 };
 		this->currentLevelTimeLimit = 30;
+		this->currentLevelTheme = Cubed_Track;
 
 		//---------
 		//Obstacles
@@ -333,6 +336,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 + 30 };
 		this->currentLevelTimeLimit = 45;
+		this->currentLevelTheme = GridLock_Track;
 
 		//---------
 		//Obstacles
@@ -414,7 +418,8 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 9:
 		this->playerSpawnpoint = { 200,200 };
 		this->currentLevelTimeLimit = 20;
-		this->currentLevelTheme = MainMenu_Track;
+		this->currentLevelTheme = Deserted_Track;
+
 
 		//---------
 		//Obstacles
@@ -509,9 +514,10 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	}
 
 	//check timer loss
-	if (this->currentLevelTime == 0)
+	if (this->currentLevelTime == 0 && this->currentLevelState != Fail)
 	{
 		this->currentLevelState = Fail;
+		soundManager->PlaySoundFile(TimesUp_Sound);
 	}
 
 	

@@ -8,6 +8,7 @@ enum SoundEffect
 	PlayLevel_Sound,
 	LevelWin_Sound,
 	LevelLose_Sound,
+	TimesUp_Sound,
 	Transition_Sound,
 
 };

@@ -164,17 +164,16 @@ void Game::Update(unsigned int frame)
 
     //change player color on fail
     case Fail:
-        //orange on timer death
+        // on timer death
         if (this->levelHandler->GetCurrentLevelTime() == 0)
         {
-            this->player->SetCurrentColor(1); // orange
+            this->player->RotateColorChannels(1); // single switch
         }
 
-        //red on collision death
+        // on collision death
         else
         {
-           // this->player->SetCurrentColor(0); // red
-            if (this->frameCount % 4 == 0) this->player->RotateColorChannels(); // rainbow effect. Mod 4 to slow it down.
+            if (this->frameCount % 4 == 0) this->player->RotateColorChannels(0); // rainbow effect. Mod 4 to slow it down.
             
         }
 

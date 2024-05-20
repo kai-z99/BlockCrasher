@@ -23,7 +23,7 @@ public:
 	void SetCurrentColor(int index); // from the colors vector
 	void SetCurrentColor(Color c); // from a color obj
 	void SetSelectedColorIndex(int index); // for memory
-	void RotateColorChannels();
+	void RotateColorChannels(int type); // 0 is from currentColor, 1 is from selectedColor.
 	
 	int GetColorCount();
 

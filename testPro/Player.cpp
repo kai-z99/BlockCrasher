@@ -152,10 +152,19 @@ void Player::SetSelectedColorIndex(int index)
     this->selectedColorIndex = index;
 }
 
-void Player::RotateColorChannels()
+void Player::RotateColorChannels(int type)
 {
-    //Color c = this->colors[this->selectedColorIndex];
-    Color c = this->currentColor;
+    Color c;
+
+    if (type == 0) // causes continous switching
+    {
+        c = this->currentColor;
+    }
+    else // causes single switch
+    {
+        c = this->colors[this->selectedColorIndex];
+    }
+   
     unsigned char rTg = c.r;
     unsigned char gTb = c.g;
     unsigned char bTr = c.b;
