@@ -40,8 +40,8 @@ SoundManager::SoundManager()
 	SetMusicPitch(DesertedMusic, 0.7f);
 	this->tracks.push_back(&this->DesertedMusic);
 
-	this->HappyTreeMusic = LoadMusicStream("Sounds/HappyTree_Music.mp3"); // 8
-	SetMusicVolume(HappyTreeMusic, 0.5f);
+	this->HappyTreeMusic = LoadMusicStream("Sounds/HappyTree_Music2.wav"); // 8
+	SetMusicVolume(HappyTreeMusic, 0.2f);
 	SetMusicPitch(HappyTreeMusic, 1.25f);
 	this->tracks.push_back(&this->HappyTreeMusic);
 
@@ -52,6 +52,16 @@ SoundManager::SoundManager()
 	this->ViolentTidesMusic = LoadMusicStream("Sounds/ViolentTides_Music.mp3"); // 10
 	SetMusicVolume(ViolentTidesMusic, 0.2f);
 	this->tracks.push_back(&this->ViolentTidesMusic);
+
+	this->VortexMusic = LoadMusicStream("Sounds/Vortex_Music.mp3"); // 11
+	SetMusicVolume(VortexMusic, 0.4f);
+	this->tracks.push_back(&this->VortexMusic);
+
+	this->SwordSwingMusic = LoadMusicStream("Sounds/SwordSwing_Music.mp3"); // 12
+	SetMusicVolume(this->SwordSwingMusic, 0.4f);
+	this->tracks.push_back(&this->SwordSwingMusic);
+
+
 
 
 	this->currentMusic = this->mainMenuMusic; // default song is main menu
@@ -80,7 +90,8 @@ SoundManager::SoundManager()
 	this->sounds.push_back(&this->LevelWinSound);
 
 	this->LevelLoseSound = LoadSound("Sounds/Detonate.mp3");
-	SetSoundVolume(this->LevelLoseSound, 0.5f);
+	SetSoundVolume(this->LevelLoseSound, 0.3f);
+	SetSoundPitch(this->LevelLoseSound, 1.5f);
 	this->sounds.push_back(&this->LevelLoseSound);
 
 	this->TransitionSound = LoadSound("Sounds/UndoRotate.mp3");

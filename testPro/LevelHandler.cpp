@@ -62,7 +62,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 100,100 };
 		this->currentLevelTimeLimit = 20;
-		this->currentTrackID = 0;
+		this->currentTrackID = 12;
 
 		//---------
 		//Obstacles
@@ -452,8 +452,8 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 10:
 		this->playerSpawnpoint = { 200, screenHeight / 2 };
-		this->currentLevelTimeLimit = 60;
-		this->currentTrackID = 9;
+		this->currentLevelTimeLimit = 40;
+		this->currentTrackID = 11;
 
 		//---------
 		//Obstacles
@@ -482,8 +482,8 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		for (int i = 0; i < 7; ++i) // 7 segments, spaced for 8
 		{
-			float angle = i * PI / 4;
-			this->obstacleBuilder->VortexPiece((screenWidth / 2) - 200, (screenHeight / 2) - 600, -0.02f, angle, 0.003f, { 0,0 }, 2, { screenWidth / 2, screenHeight / 2 });
+			float angle = i * PI / 4; //					 +4 makes the gap spawn a lil closer on level start  v
+			this->obstacleBuilder->VortexPiece((screenWidth / 2) - 200, (screenHeight / 2) - 600, -0.02f, angle + 4, 0.003f, { 0,0 }, 2, { screenWidth / 2, screenHeight / 2 });
 		}
 
 		this->obstacleBuilder->ClassicCircle(screenWidth / 2, screenHeight / 2, 10, {0,0});

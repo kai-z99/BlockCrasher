@@ -21,7 +21,7 @@ int main() {
 //maze level
 //make level appear behind menu when hovering maybe
 //combine the input handlers!!!
-//the vortex
+//the storm
 //poke
 // matrix
 // homing missile

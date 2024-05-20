@@ -33,6 +33,8 @@ private:
 	Music HappyTreeMusic;
 	Music DesertedMusic;
 	Music ViolentTidesMusic;
+	Music VortexMusic;
+	Music SwordSwingMusic;
 	
 	std::vector<Sound*> sounds;
 
