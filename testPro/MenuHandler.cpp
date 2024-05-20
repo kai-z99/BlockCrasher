@@ -42,7 +42,7 @@ MenuHandler::MenuHandler()
 		"7: Gridlock",
 		"8: Happy Tree Carol",
 		"9: Deep Terrors",
-		"10: Tornado of Doom",
+		"10: The Vortex",
 		"11: r4323e2ref",
 		"12: rwerrew",
 		"13: gogogoog",

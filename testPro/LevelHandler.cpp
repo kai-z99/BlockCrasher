@@ -420,7 +420,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 9:
 		this->playerSpawnpoint = { 200,200 };
-		this->currentLevelTimeLimit = 20;
+		this->currentLevelTimeLimit = 19;
 		this->currentTrackID = 7;
 
 		//---------
@@ -452,7 +452,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 10:
 		this->playerSpawnpoint = { 200, screenHeight / 2 };
-		this->currentLevelTimeLimit = 40;
+		this->currentLevelTimeLimit = 32;
 		this->currentTrackID = 11;
 
 		//---------
@@ -515,7 +515,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight / 2));
 
 		//CROSS
-		for (float i = 100; i <= 400; i += 50)
+		for (float i = 100; i <= 400; i += 100)
 		{
 			activeItems.push_back(new CoinItem((screenWidth / 4) + i, 70 + i)); // top left
 			activeItems.push_back(new CoinItem((screenWidth / 4) + (screenWidth / 2) - i, 70 + i)); // top right
@@ -596,7 +596,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	}
 
 	//check timer loss
-	if (this->currentLevelTime == 0 && this->currentLevelState != Fail)
+	else if (this->currentLevelTime == 0 && this->currentLevelState != Fail)
 	{
 		this->currentLevelState = Fail;
 		soundManager->PlaySoundFile(TimesUp_Sound);

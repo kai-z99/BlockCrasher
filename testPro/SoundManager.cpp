@@ -20,8 +20,8 @@ SoundManager::SoundManager()
 	this->tracks.push_back(&this->TutorialMusic);
 
 	this->BigAndSmallMusic = LoadMusicStream("Sounds/BigAndSmall_Music.wav"); // 3
-	SetMusicVolume(BigAndSmallMusic, 0.4f);
-	SetMusicPitch(BigAndSmallMusic, 1.2f);
+	SetMusicVolume(this->BigAndSmallMusic, 0.4f);
+	SetMusicPitch(this->BigAndSmallMusic, 1.2f);
 	this->tracks.push_back(&this->BigAndSmallMusic);
 
 	this->BounceDungeonMusic = LoadMusicStream("Sounds/BounceDungeon_Music.wav"); // 4
@@ -36,29 +36,30 @@ SoundManager::SoundManager()
 	this->tracks.push_back(&this->GridLockMusic);
 	
 	this->DesertedMusic = LoadMusicStream("Sounds/Deserted_Music.wav"); // 7
-	SetMusicVolume(DesertedMusic, 0.7f);
-	SetMusicPitch(DesertedMusic, 0.7f);
+	SetMusicVolume(this->DesertedMusic, 0.7f);
+	SetMusicPitch(this->DesertedMusic, 0.7f);
 	this->tracks.push_back(&this->DesertedMusic);
 
 	this->HappyTreeMusic = LoadMusicStream("Sounds/HappyTree_Music2.wav"); // 8
-	SetMusicVolume(HappyTreeMusic, 0.2f);
-	SetMusicPitch(HappyTreeMusic, 1.25f);
+	SetMusicVolume(this->HappyTreeMusic, 0.2f);
+	SetMusicPitch(this->HappyTreeMusic, 1.25f);
 	this->tracks.push_back(&this->HappyTreeMusic);
 
 	this->HighPressureMusic = LoadMusicStream("Sounds/HighPressure_Music.mp3"); // 9
-	SetMusicVolume(HighPressureMusic, 0.3f);
+	SetMusicVolume(this->HighPressureMusic, 0.3f);
 	this->tracks.push_back(&this->HighPressureMusic);
 
 	this->ViolentTidesMusic = LoadMusicStream("Sounds/ViolentTides_Music.mp3"); // 10
-	SetMusicVolume(ViolentTidesMusic, 0.2f);
+	SetMusicVolume(this->ViolentTidesMusic, 0.2f);
 	this->tracks.push_back(&this->ViolentTidesMusic);
 
 	this->VortexMusic = LoadMusicStream("Sounds/Vortex_Music.mp3"); // 11
-	SetMusicVolume(VortexMusic, 0.4f);
+	SetMusicVolume(this->VortexMusic, 0.4f);
 	this->tracks.push_back(&this->VortexMusic);
 
 	this->SwordSwingMusic = LoadMusicStream("Sounds/SwordSwing_Music.mp3"); // 12
 	SetMusicVolume(this->SwordSwingMusic, 0.4f);
+	SetMusicPitch(this->SwordSwingMusic, 1.25f);
 	this->tracks.push_back(&this->SwordSwingMusic);
 
 

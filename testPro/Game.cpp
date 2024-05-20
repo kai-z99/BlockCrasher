@@ -53,7 +53,7 @@ void Game::Init()
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -63,13 +63,14 @@ void Game::Run()
     while (!WindowShouldClose()) {
         frameCount++;
         this->HandleInput();
+        this->Update(frameCount);
 
         if (this->levelHandler->levelIsLoaded)
         {
             this->HandleCollisions();
         }
         
-        this->Update(frameCount);
+        
         this->Draw();
     }
 
