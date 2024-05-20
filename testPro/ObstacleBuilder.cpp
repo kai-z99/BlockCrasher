@@ -384,4 +384,34 @@ void ObstacleBuilder::Hook(float x, float y, float rr, float ri, float vo, Vecto
 //    this->storage.push_back(c);
 }
 
+void ObstacleBuilder::VortexPiece(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale, Vector2 center)
+{
+    std::vector<Vector2> v;
+
+    v.push_back({ 0, 50 });
+    v.push_back({ 50, 0 });
+    v.push_back({ 150, 0 });
+    v.push_back({ 200, 50 });
+    v.push_back({ 160, 50 });
+    v.push_back({ 120, 30 });
+    v.push_back({ 80, 30 });
+    v.push_back({ 40, 50 });
+    v.push_back({ 0, 50 });
+
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, center, v, rr, vo, vi, ri);
+    this->storage.push_back(d);
+}
+
 

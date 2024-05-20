@@ -24,13 +24,15 @@ private:
 	Music mainMenuMusic;
 	Music levelSelectMusic;
 
-	Music inGameMusic1;
+	Music TutorialMusic;
 	Music BigAndSmallMusic;
 	Music BounceDungeonMusic;
 	Music CubedMusic;
+	Music HighPressureMusic;
 	Music GridLockMusic;
+	Music HappyTreeMusic;
 	Music DesertedMusic;
-	
+	Music ViolentTidesMusic;
 	
 	std::vector<Sound*> sounds;
 

@@ -34,7 +34,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 50,400 };
 		this->currentLevelTimeLimit = 60;
-		this->currentTrackID = 1;
+		this->currentTrackID = 2;
 
 		//---------
 		//Obstacles
@@ -216,7 +216,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	case 5: // Violent Tides
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
 		this->currentLevelTimeLimit = 20;
-		this->currentTrackID = 2;
+		this->currentTrackID = 10;
 
 		//---------
 		//Obstacles
@@ -258,7 +258,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	{
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 };
 		this->currentLevelTimeLimit = 20;
-		this->currentTrackID = 2;
+		this->currentTrackID = 9;
 
 		float rightMiddle;
 		float leftMiddle;
@@ -372,7 +372,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		this->playerSpawnpoint = { 200, screenHeight / 2 + 30 };
 		this->currentLevelTimeLimit = 25;
-		this->currentTrackID = 6;
+		this->currentTrackID = 8;
 
 		//---------
 		//Obstacles
@@ -423,7 +423,6 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->currentLevelTimeLimit = 20;
 		this->currentTrackID = 7;
 
-
 		//---------
 		//Obstacles
 		//---------
@@ -436,6 +435,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//----------
 		//Items
 		//----------
+
 		for (float i = 200; i <= 1700; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, 800.0f));
@@ -449,6 +449,86 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		activeItems.push_back(new StarCoin(screenWidth - 50, (screenHeight / 2)));
 
 		break;
+
+	case 10:
+		this->playerSpawnpoint = { 200, screenHeight / 2 };
+		this->currentLevelTimeLimit = 60;
+		this->currentTrackID = 9;
+
+		//---------
+		//Obstacles
+		//---------
+
+		// center vortex 4 pieces
+		for (float angle = 0; angle < 2 * PI; angle += PI / 2) // 4 segments, so PI / 2 each time, exclude 2PI to prevent overlap.
+		{
+			this->obstacleBuilder->VortexPiece((screenWidth / 2) - 50, (screenHeight / 2) - 120, 0.02f, angle, 0.01f, { 0,0 }, 0.5f, { screenWidth / 2, screenHeight / 2 });
+		}
+
+		// layer 2 (from center) 3 pieces
+		for (float angle = 0; angle <= 2 * PI; angle += 2 * PI / 3)  // 3 segemnts, so 2PI/3 each time
+		{
+			this->obstacleBuilder->VortexPiece((screenWidth / 2) - 100, (screenHeight / 2) - 250, -0.02f, angle, 0.005f, { 0,0 }, 1, { screenWidth / 2, screenHeight / 2 });
+		}
+		
+		// layer 3 (from center) 5 pieces
+
+		for (float angle = 0; angle <= 2 * PI; angle += 2 * PI / 5) // 5 segments, so 2pi/5 each time
+		{
+			this->obstacleBuilder->VortexPiece((screenWidth / 2) - 150, (screenHeight / 2) - 400, 0.02f, angle, -0.005f, { 0,0 }, 1.5, { screenWidth / 2, screenHeight / 2 });
+		}
+
+		// layer 4 (from center) 8 - 1 pieces
+
+		for (int i = 0; i < 7; ++i) // 7 segments, spaced for 8
+		{
+			float angle = i * PI / 4;
+			this->obstacleBuilder->VortexPiece((screenWidth / 2) - 200, (screenHeight / 2) - 600, -0.02f, angle, 0.003f, { 0,0 }, 2, { screenWidth / 2, screenHeight / 2 });
+		}
+
+		this->obstacleBuilder->ClassicCircle(screenWidth / 2, screenHeight / 2, 10, {0,0});
+
+		//----------
+		//Items
+		//----------
+
+		for (float i = (screenWidth / 2) + 100; i <= 1920 - 400; i += 100) // right part of cross
+		{
+			activeItems.push_back(new CoinItem(i, screenHeight / 2));
+		}
+
+		for (float i = (screenWidth / 2) - 100; i >= 400; i -= 100) // left p.o.c
+		{
+			activeItems.push_back(new CoinItem(i, screenHeight / 2));
+		}
+
+		for (float i = (screenHeight / 2) + 100; i <= screenHeight; i += 100) // bot p.o.c
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2, i));
+		}
+
+		for (float i = (screenHeight / 2) - 100; i >= 100; i -= 100) // top p.o.c
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2, i));
+		}
+
+		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight / 2));
+
+		//CROSS
+		for (float i = 100; i <= 400; i += 50)
+		{
+			activeItems.push_back(new CoinItem((screenWidth / 4) + i, 70 + i)); // top left
+			activeItems.push_back(new CoinItem((screenWidth / 4) + (screenWidth / 2) - i, 70 + i)); // top right
+			activeItems.push_back(new CoinItem((screenWidth / 4) + i, screenHeight - 70 - i)); // bot left
+			activeItems.push_back(new CoinItem((screenWidth / 4) + (screenWidth / 2) - i, screenHeight - 70 - i)); // bot right
+
+
+		}
+
+		break;
+
+
+
 	default:
 
 		break;
@@ -643,6 +723,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 
 
 	case 9:
+		//hook movements
 			activeObstacles[0]->SetPosX(activeObstacles[0]->GetPosX() + (3.0f * cosf(this->currentLevelFramecount * 0.01f)));
 			activeObstacles[1]->SetPosX(activeObstacles[1]->GetPosX() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
 			activeObstacles[1]->SetPosY(activeObstacles[1]->GetPosY() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
@@ -650,6 +731,17 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 			activeObstacles[3]->SetPosX(activeObstacles[3]->GetPosX() + (2.5f * cosf(this->currentLevelFramecount * 0.02f)));
 		
 		break;
+
+	case 10:
+
+		//smooth right left right... movement
+		for (Obstacle* ob : activeObstacles)
+		{
+			ob->SetPosX(ob->GetPosX() + (1 * cosf(this->currentLevelFramecount * 0.01f)));
+		}
+		break;
+
+
 
 	default:
 		break;

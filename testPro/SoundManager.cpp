@@ -8,14 +8,16 @@ SoundManager::SoundManager()
 	//MUSIC LOADING
 	//------------------------------------------------------
 
-	this->mainMenuMusic = LoadMusicStream("Sounds/Music.mp3"); // 0
+	this->mainMenuMusic = LoadMusicStream("Sounds/MainMenu_Music.mp3"); // 0
+	SetMusicVolume(this->mainMenuMusic, 0.3f);
 	this->tracks.push_back(&this->mainMenuMusic);
 
-	this->levelSelectMusic = LoadMusicStream("Sounds/music_credits.mp3"); // 1
+	this->levelSelectMusic = LoadMusicStream("Sounds/LevelSelect_Music.mp3"); // 1
+	SetMusicVolume(this->levelSelectMusic, 0.5f);
 	this->tracks.push_back(&this->levelSelectMusic);
 
-	this->inGameMusic1 = LoadMusicStream("Sounds/music_credits.mp3"); // 2
-	this->tracks.push_back(&this->inGameMusic1);
+	this->TutorialMusic = LoadMusicStream("Sounds/Tutorial_Music.mp3"); // 2
+	this->tracks.push_back(&this->TutorialMusic);
 
 	this->BigAndSmallMusic = LoadMusicStream("Sounds/BigAndSmall_Music.wav"); // 3
 	SetMusicVolume(BigAndSmallMusic, 0.4f);
@@ -37,6 +39,20 @@ SoundManager::SoundManager()
 	SetMusicVolume(DesertedMusic, 0.7f);
 	SetMusicPitch(DesertedMusic, 0.7f);
 	this->tracks.push_back(&this->DesertedMusic);
+
+	this->HappyTreeMusic = LoadMusicStream("Sounds/HappyTree_Music.mp3"); // 8
+	SetMusicVolume(HappyTreeMusic, 0.5f);
+	SetMusicPitch(HappyTreeMusic, 1.25f);
+	this->tracks.push_back(&this->HappyTreeMusic);
+
+	this->HighPressureMusic = LoadMusicStream("Sounds/HighPressure_Music.mp3"); // 9
+	SetMusicVolume(HighPressureMusic, 0.3f);
+	this->tracks.push_back(&this->HighPressureMusic);
+
+	this->ViolentTidesMusic = LoadMusicStream("Sounds/ViolentTides_Music.mp3"); // 10
+	SetMusicVolume(ViolentTidesMusic, 0.2f);
+	this->tracks.push_back(&this->ViolentTidesMusic);
+
 
 	this->currentMusic = this->mainMenuMusic; // default song is main menu
 
@@ -60,6 +76,7 @@ SoundManager::SoundManager()
 	this->sounds.push_back(&this->PlayLevelSound);
 
 	this->LevelWinSound = LoadSound("Sounds/Lose.mp3");
+	SetSoundVolume(this->LevelWinSound, 0.5f);
 	this->sounds.push_back(&this->LevelWinSound);
 
 	this->LevelLoseSound = LoadSound("Sounds/Detonate.mp3");

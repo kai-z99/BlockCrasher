@@ -22,5 +22,6 @@ public:
 	void GridPiece(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale, Vector2 center);
 	void Tree(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
 	void Hook(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
+	void VortexPiece(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale, Vector2 center);
 
 };

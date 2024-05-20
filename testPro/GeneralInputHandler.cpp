@@ -63,7 +63,7 @@ void GeneralInputHandler::HandleBack(Player* player, MenuHandler* menuHandler, L
 			levelHandler->SetLevelState(Inactive);
 			menuHandler->SetMenuState(LevelSelect);
 			player->SetCurrentColor(player->selectedColorIndex);
-			soundManager->PlayMusic(0); 
+			soundManager->PlayMusic(1); // 1 : level select track 
 			break;
 
 		case ChooseColor:
