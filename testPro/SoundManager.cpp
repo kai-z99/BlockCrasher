@@ -73,21 +73,21 @@ SoundManager::SoundManager()
 	//SOUND EFFECT LOADING
 	//------------------------------------------------------
 
-	this->CoinCollectSound = LoadSound("Sounds/1LineClear.mp3");
+	this->CoinCollectSound = LoadSound("Sounds/CoinCollect_Sound.mp3");
 	SetSoundVolume(this->CoinCollectSound, 0.5f);
 	this->sounds.push_back(&this->CoinCollectSound);
 
-	this->StarCoinCollectSound = LoadSound("Sounds/3LineClear.mp3");
+	this->StarCoinCollectSound = LoadSound("Sounds/StarCoinCollect_Sound.mp3");
 	SetSoundVolume(this->StarCoinCollectSound, 0.5f);
 	this->sounds.push_back(&this->StarCoinCollectSound);
 
-	this->ScrollSound = LoadSound("Sounds/EnemyRotate.mp3");
+	this->ScrollSound = LoadSound("Sounds/Scroll_Sound.mp3");
 	this->sounds.push_back(&this->ScrollSound);
 
-	this->PlayLevelSound = LoadSound("Sounds/EnemySpawn.mp3");
+	this->PlayLevelSound = LoadSound("Sounds/LoadLevel_Sound.mp3");
 	this->sounds.push_back(&this->PlayLevelSound);
 
-	this->LevelWinSound = LoadSound("Sounds/Lose.mp3");
+	this->LevelWinSound = LoadSound("Sounds/LevelWin_Sound.mp3");
 	SetSoundVolume(this->LevelWinSound, 0.5f);
 	this->sounds.push_back(&this->LevelWinSound);
 
@@ -96,7 +96,7 @@ SoundManager::SoundManager()
 	SetSoundPitch(this->LevelLoseSound, 1.5f);
 	this->sounds.push_back(&this->LevelLoseSound);
 
-	this->TransitionSound = LoadSound("Sounds/UndoRotate.mp3");
+	this->TransitionSound = LoadSound("Sounds/Transition_Sound.mp3");
 	SetSoundVolume(this->TransitionSound, 0.75f);
 	this->sounds.push_back(&this->TransitionSound);
 

@@ -53,7 +53,7 @@ void Game::Init()
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
