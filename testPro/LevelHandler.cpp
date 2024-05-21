@@ -527,8 +527,94 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		break;
 
+	case 11:
+	{
+		this->playerSpawnpoint = { screenWidth / 2, 100 };
+		this->currentLevelTimeLimit = 28;
+		this->currentTrackID = 13;
 
 
+		//---------
+		//Obstacles
+		//---------
+		float pillarHeight = (float)(screenHeight / 2) + 1;  // one more than half screenheight to avoid seeing bottom of block at peak
+
+		//bot crushers (bot start)
+		this->obstacleBuilder->ClassicRectangle(0, screenHeight, 500, pillarHeight, { 0,-13 }); // left									//0
+		this->obstacleBuilder->ClassicRectangle(screenWidth - 500, screenHeight, 500, pillarHeight, { 0,-13 }); // right					//1
+
+		//top crushers (bot start)
+		this->obstacleBuilder->ClassicRectangle(0, -pillarHeight, 500, pillarHeight, { 0,13 }); // left // 5								//2
+		this->obstacleBuilder->ClassicRectangle(screenWidth - 500, -pillarHeight, 500, pillarHeight, { 0,13 }); // right // 6			//3
+
+		//stoppers
+		
+		// left
+		this->obstacleBuilder->ClassicRectangle(0, (screenHeight / 2) - 50, 200, 100, { 0,0 }); 
+		this->obstacleBuilder->ClassicRectangle(300, (screenHeight / 2) - 50, 200, 100, { 0,0 });
+		//right
+		this->obstacleBuilder->ClassicRectangle(screenWidth - 500, (screenHeight / 2) - 50, 400, 100, { 0,0 });
+
+
+		//hammers
+		this->obstacleBuilder->Hammer((screenWidth / 2), screenHeight - 430, 0.04f, 0, 0.02f, { 0,0 }, 1); //lower hammer
+		this->obstacleBuilder->Hammer((screenWidth / 2), 210, -0.04f, 0, 0.02f, { 0,0 }, 1); // upper hammer
+
+	
+		//---------
+		//ITEMS
+		//---------
+		// 
+		// middle line of coins
+		for (float i = 200; i <= 1000; i += 150) 
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2, i));
+		}
+
+		//in left stopper
+		activeItems.push_back(new CoinItem(250, screenHeight / 2));
+
+		//in right stopper
+		activeItems.push_back(new CoinItem(screenWidth - 50, screenHeight / 2));
+
+		// coins next to stopper (left) close
+		for (float i = 50; i <= 500; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 100));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 100));
+		}
+
+		// coins next to stopper (left) far
+		for (float i = 150; i <= 350; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 200));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 200));
+		}
+
+		// coins next to stopper (right) far
+		for (float i = screenWidth - 400; i < screenWidth - 100; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 200));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 200));
+		}
+
+		// coins next to stopper (right) close
+		for (float i = screenWidth - 350; i <= screenWidth - 250; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 100));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 100));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 100));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 100));
+		}
+
+		activeItems.push_back(new StarCoin(screenWidth - 50, 160));
+
+		break;
+	}
+		
+
+
+		break;
 	default:
 
 		break;
@@ -740,6 +826,42 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 			ob->SetPosX(ob->GetPosX() + (1 * cosf(this->currentLevelFramecount * 0.01f)));
 		}
 		break;
+
+	case 11:
+
+		//check if bottom pillars should swtich velocity
+		for (int i = 0; i <= 1; i++)
+		{
+			//middle of screen
+			if (activeObstacles[i]->GetPosY() <= ((float)screenHeight / 2) + 51)
+			{
+				activeObstacles[i]->SetVelocity(0, 5);
+			}
+
+			//bottom of screen
+			if (activeObstacles[i]->GetPosY() >= screenHeight)
+			{
+				activeObstacles[i]->SetVelocity(0, -13);
+			}
+
+		}
+
+		//top pillar check
+		for (int i = 2; i <= 3; i++)
+		{
+			// middle of screen                   v check def of pillarheight for explanation
+			if (activeObstacles[i]->GetPosY() >= -51)
+			{
+				activeObstacles[i]->SetVelocity(0, -5);
+			}
+
+			//top of screen														v same here
+			if (activeObstacles[i]->GetPosY() <= ((float)(-screenHeight) / 2) + 1)
+			{
+				activeObstacles[i]->SetVelocity(0, 13);
+			}
+
+		}
 
 
 

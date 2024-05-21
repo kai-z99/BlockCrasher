@@ -53,7 +53,7 @@ void Game::Init()
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
@@ -242,7 +242,7 @@ void Game::HandleInput()
 
 void Game::HandleCollisions()
 {
-    if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles) && this->levelHandler->GetCurrentLevelState() != Fail)
+    if (this->collisionManager->CheckCollisions(this->player, this->activeObstacles) && this->levelHandler->GetCurrentLevelState() == Active)
     {
         this->levelHandler->SetLevelState(Fail);
         this->soundManager->PlaySoundFile(LevelLose_Sound);

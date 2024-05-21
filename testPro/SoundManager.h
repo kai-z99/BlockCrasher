@@ -35,6 +35,7 @@ private:
 	Music ViolentTidesMusic;
 	Music VortexMusic;
 	Music SwordSwingMusic;
+	Music IronSteelFactoryMusic;
 	
 	std::vector<Sound*> sounds;
 

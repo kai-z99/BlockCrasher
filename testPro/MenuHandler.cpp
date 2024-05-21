@@ -43,7 +43,7 @@ MenuHandler::MenuHandler()
 		"8: Happy Tree Carol",
 		"9: Deep Terrors",
 		"10: The Vortex",
-		"11: r4323e2ref",
+		"11: IronSteel Factory",
 		"12: rwerrew",
 		"13: gogogoog",
 
@@ -183,9 +183,9 @@ void MenuHandler::DrawPageArrows()
 	if (this->GetCurrentPage() != this->GetPageAmount()) // right arrow
 	{
 		DrawTriangleLines(
-			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 200, (screenHeight / 2) + 30},
-			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 180, (screenHeight / 2)  + 5 },
-			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 180, (screenHeight / 2) + 55 },
+			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 180, (screenHeight / 2) + 30},
+			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 160, (screenHeight / 2)  + 5 },
+			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 160, (screenHeight / 2) + 55 },
 			WHITE
 		);
 	}
@@ -193,9 +193,9 @@ void MenuHandler::DrawPageArrows()
 	if (this->GetCurrentPage() != 1) // left arrow
 	{
 		DrawTriangleLines(
-			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 200, (screenHeight / 2) + 30 },
-			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 180, (screenHeight / 2) + 5 },
-			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 180, (screenHeight / 2) + 55 },
+			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 180, (screenHeight / 2) + 30 },
+			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 160, (screenHeight / 2) + 5 },
+			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 160, (screenHeight / 2) + 55 },
 			WHITE
 		);
 	}

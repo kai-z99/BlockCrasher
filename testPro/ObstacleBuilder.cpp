@@ -414,4 +414,42 @@ void ObstacleBuilder::VortexPiece(float x, float y, float rr, float ri, float vo
     this->storage.push_back(d);
 }
 
+void ObstacleBuilder::Hammer(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale)
+{
+    std::vector<Vector2> v;
+
+    v.push_back({ 30, 0 });
+    v.push_back({ 30, 300 });
+    v.push_back({ 150, 300 });
+    v.push_back({ 150, 400 });
+    v.push_back({ 20, 400 });
+    v.push_back({ 20, 420 });
+    v.push_back({ -20, 420 });
+    v.push_back({ -20, 400 });
+    v.push_back({ -150, 400 });
+    v.push_back({ -150, 300 });
+    v.push_back({ -30, 300 });
+    v.push_back({ -30, 0 });
+    v.push_back({ 30, 0 });
+
+
+
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 0 * scale + x, 50 * scale + y }, v, rr, vo, vi, ri);
+    CircleObstacle* c = new CircleObstacle(x + 0 * scale, y + 50 * scale, 10 * scale, vi);
+    this->storage.push_back(d);
+    this->storage.push_back(c);
+}
+
 

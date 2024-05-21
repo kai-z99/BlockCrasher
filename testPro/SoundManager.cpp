@@ -62,8 +62,9 @@ SoundManager::SoundManager()
 	SetMusicPitch(this->SwordSwingMusic, 1.25f);
 	this->tracks.push_back(&this->SwordSwingMusic);
 
-
-
+	this->IronSteelFactoryMusic = LoadMusicStream("Sounds/Factory_Music.mp3"); // 13
+	SetMusicVolume(this->IronSteelFactoryMusic, 0.2f);
+	this->tracks.push_back(&this->IronSteelFactoryMusic);
 
 	this->currentMusic = this->mainMenuMusic; // default song is main menu
 
