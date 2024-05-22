@@ -611,10 +611,51 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		break;
 	}
-		
 
+	case 12:
+		this->playerSpawnpoint = { screenWidth / 2 - 85, screenHeight / 2 - 100 };
+		this->currentLevelTimeLimit = 19;
+		this->currentTrackID = 8;
+
+		//---------
+		//Obstacles
+		//---------
+
+
+		for (float i = 0; i <= screenWidth; i += 400)
+		{
+			for (float j = 300; j <= screenHeight; j += 400)
+			{
+				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -3,3 }, 0.6f);
+			}
+			
+		}
+
+		for (float i = 150; i <= screenWidth; i += 400)
+		{
+			for (float j = 150; j <= screenHeight; j += 400)
+			{
+				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -3,3 }, 1.0f);
+			}
+			
+		}
+		
+		//----------
+		//Items
+		//----------
+
+		for (float i = 250; i <= screenWidth - 200; i += 250)
+		{
+			for (float j = 200; j <= screenHeight; j += 250)
+			activeItems.push_back(new CoinItem(i, j));
+		}
+
+
+
+		activeItems.push_back(new StarCoin(screenWidth - 50, (screenHeight / 2)));
 
 		break;
+
 	default:
 
 		break;
@@ -832,8 +873,8 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		//check if bottom pillars should swtich velocity
 		for (int i = 0; i <= 1; i++)
 		{
-			//middle of screen
-			if (activeObstacles[i]->GetPosY() <= ((float)screenHeight / 2) + 51)
+			//middle of screen + blockers
+			if (activeObstacles[i]->GetPosY() <= ((float)screenHeight / 2) + 50)
 			{
 				activeObstacles[i]->SetVelocity(0, 5);
 			}
@@ -849,8 +890,8 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		//top pillar check
 		for (int i = 2; i <= 3; i++)
 		{
-			// middle of screen                   v check def of pillarheight for explanation
-			if (activeObstacles[i]->GetPosY() >= -51)
+			// middle of screen + blockers       
+			if (activeObstacles[i]->GetPosY() >= -50)
 			{
 				activeObstacles[i]->SetVelocity(0, -5);
 			}
@@ -862,8 +903,41 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 			}
 
 		}
+		break;
+
+	case 12:
+		for (Obstacle* ob : activeObstacles)
+		{
+			float dropSize = 100;
+			if (ob->GetPosX() <= -dropSize) // obj hits left side of screen
+			{
+				ob->SetPosX(ob->GetPosY() - dropSize);
+				ob->SetPosY(0);
+				
+			}
+
+			if (ob->GetPosY() >= screenHeight + dropSize) // obj hits bottom of the screen
+			{
+				float x0 = ob->GetPosX() + dropSize;
+				float y0 = ob->GetPosY() - dropSize;
+
+				float x1 = x0 + screenHeight;
+				float y1 = 0;
+
+				if (x1 > screenWidth)
+				{
+					x1 = screenWidth;
+					y1 = x0 - (screenWidth - screenHeight);
+				}
+
+				ob->SetPosY(y1);
+				ob->SetPosX(x1);  
+
+			}
 
 
+		}
+		break;
 
 	default:
 		break;
