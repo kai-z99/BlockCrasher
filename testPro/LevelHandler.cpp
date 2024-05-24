@@ -616,31 +616,50 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 12:
 		this->playerSpawnpoint = { screenWidth / 2 - 85, screenHeight / 2 - 100 };
-		this->currentLevelTimeLimit = 35;
-		this->currentTrackID = 8;
+		this->currentLevelTimeLimit = 20;
+		this->currentTrackID = 14;
 
 		//---------
 		//Obstacles
 		//---------
 
-
+		//small raindrops
 		for (float i = 0; i <= screenWidth; i += 400)
 		{
 			for (float j = 300; j <= screenHeight; j += 400)
 			{
-				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -7,7 }, 0.6f);
+				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -3,3 }, 0.6f);
 			}
 			
 		}
 
+		//large raindrops
 		for (float i = 150; i <= screenWidth; i += 400)
 		{
 			for (float j = 150; j <= screenHeight; j += 400)
 			{
-				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -7,7 }, 1.0f);
+				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -3,3 }, 1.0f);
 			}
 			
 		}
+
+		//ninja stars
+		this->obstacleBuilder->NinjaStar((screenWidth / 2), (screenHeight / 2) - 200, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth / 2) - 90, (screenHeight / 2) + 200, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth / 2) + 580, (screenHeight / 2), 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth / 2) + 580, (screenHeight / 2) - 450, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth / 2) + 200, (screenHeight / 2) + 400, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth / 2) - 600, (screenHeight / 2), 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth / 2) - 640, (screenHeight / 2) - 400, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth / 2) - 640, (screenHeight / 2) + 400, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+		this->obstacleBuilder->NinjaStar((screenWidth) - 75, (screenHeight) - 100, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
+
+
+
+
+
+
+		//this->obstacleBuilder->RotatingBar(screenWidth / 2, screenHeight / 2, -0.005, 0, 0, { 0,0 }, 18);
 		
 		//----------
 		//Items
@@ -654,7 +673,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 
 
-		activeItems.push_back(new StarCoin(screenWidth - 200, (screenHeight / 2) + 20));
+		activeItems.push_back(new StarCoin(screenWidth - 100, (screenHeight / 2) + 20));
 
 		break;
 
@@ -729,7 +748,7 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 	// if the player hasnt moved, draw the you are here circle.
 	if (p->GetPosX() == this->playerSpawnpoint.x && p->GetPosY() == this->playerSpawnpoint.y && this->currentLevelDisplayedYouAreHere == false)
 	{
-		p->DrawYouAreHere();
+		p->DrawYouAreHere(this->currentLevelFramecount);
 	}
 
 	else

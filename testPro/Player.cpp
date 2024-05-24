@@ -132,9 +132,10 @@ void Player::DrawHitbox()
     DrawCircleLines(x, y - 5, 1, GREEN);
 }
 
-void Player::DrawYouAreHere()
+void Player::DrawYouAreHere(unsigned int frame)
 {
-    DrawCircleLinesV(this->currentPosition, 30, RED);
+    // flash
+    DrawCircleLinesV(this->currentPosition, 10 + (frame % 20), RED);
 
 }
 

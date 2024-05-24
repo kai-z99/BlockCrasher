@@ -44,7 +44,7 @@ MenuHandler::MenuHandler()
 		"9: Deep Terrors",
 		"10: The Vortex",
 		"11: IronSteel Factory",
-		"12: Heavy Rain",
+		"12: Heavy Blizzard",
 		"13: COMING SOON",
 
 		"14: COMING SOON",

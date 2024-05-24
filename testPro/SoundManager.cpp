@@ -50,7 +50,7 @@ SoundManager::SoundManager()
 	this->tracks.push_back(&this->HighPressureMusic);
 
 	this->ViolentTidesMusic = LoadMusicStream("Sounds/ViolentTides_Music.mp3"); // 10
-	SetMusicVolume(this->ViolentTidesMusic, 0.2f);
+	SetMusicVolume(this->ViolentTidesMusic, 0.6f);
 	this->tracks.push_back(&this->ViolentTidesMusic);
 
 	this->VortexMusic = LoadMusicStream("Sounds/Vortex_Music.mp3"); // 11
@@ -65,6 +65,11 @@ SoundManager::SoundManager()
 	this->IronSteelFactoryMusic = LoadMusicStream("Sounds/Factory_Music.mp3"); // 13
 	SetMusicVolume(this->IronSteelFactoryMusic, 0.2f);
 	this->tracks.push_back(&this->IronSteelFactoryMusic);
+
+	this->HeavyBlizzardMusic = LoadMusicStream("Sounds/HeavyBlizzard_Music.mp3"); // 14
+	SetMusicVolume(this->HeavyBlizzardMusic, 0.2f);
+	SetMusicPitch(this->HeavyBlizzardMusic, 1.25f);
+	this->tracks.push_back(&this->HeavyBlizzardMusic);
 
 	this->currentMusic = this->mainMenuMusic; // default song is main menu
 
