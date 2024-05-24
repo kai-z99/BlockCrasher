@@ -26,8 +26,6 @@ private:
 	LevelState currentLevelState;
 	int currentTrackID;
 
-
-	
 public:
 	LevelHandler();
 

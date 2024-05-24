@@ -44,16 +44,16 @@ MenuHandler::MenuHandler()
 		"9: Deep Terrors",
 		"10: The Vortex",
 		"11: IronSteel Factory",
-		"12: rwerrew",
-		"13: gogogoog",
+		"12: Heavy Rain",
+		"13: COMING SOON",
 
-		"14: thrid",
-		"15: yap",
-		"16: hhhhh",
-		"17: 3241312132",
-		"18: cmoiw",
-		"19: 21",
-		"20: 211121212"
+		"14: COMING SOON",
+		"15: COMING SOON",
+		"16: COMING SOON",
+		"17: COMING SOON",
+		"18: COMING SOON",
+		"19: COMING SOON",
+		"20: COMING SOON"
 
 		//"Created by Kai @ Van"
 
@@ -345,6 +345,11 @@ void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler, Player* player)
 		this->DrawBackButton();
 
 	}
+}
+
+std::vector<LevelButton*>& MenuHandler::GetLevelButtons()
+{
+	return this->levelButtons;
 }
 
 void MenuHandler::SetSelectedLevel(int level)

@@ -10,7 +10,12 @@ int main() {
     return 0;
 }
 
-
+// file io for level remembrance (IOHandler::SaveLevelCompletions(MenuHandler), LoadLevelCompletions(MenuHandler)
+// IOManager::LoadLevelProgess(menuHandler*) goes through each levelButton in levelButtons and sets the completion state according to txt file.
+// IOManager::SaveLevelProgess(menuHandler*) goes through each levelButton and writes each compeltion state into the txt file.
+// 
+// you are here pointer that disapears when player first moves
+// MAYBE add a cetnral obstacle on downpour and make the raindrops slower
 // maybe make it more obvoius there are more pages on level select (idea, draw Polygon (not lines) insdie the arrow and flash it slowly using a sine wave)
 //change UI drawing section to use a menuHandler or something
 //upload ChooseLevel sound

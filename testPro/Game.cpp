@@ -48,6 +48,10 @@ void Game::Init()
     this->soundManager = new SoundManager();
 
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
+
+    // new IOManager
+
+
 }
 
 void Game::Run()
@@ -59,6 +63,9 @@ void Game::Run()
 
     this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
     this->soundManager->PlayMusic(0); // 0: main menu track 
+
+
+    //IOManager::LoadLevelProgess(menuHandler*)
 
     while (!WindowShouldClose()) {
         frameCount++;
@@ -73,6 +80,8 @@ void Game::Run()
         
         this->Draw();
     }
+       
+    //IOManager::SaveLevelProgress(MenuHandler*)
 
     CloseWindow();
 }
@@ -158,6 +167,8 @@ void Game::Update(unsigned int frame)
         if (this->levelHandler->levelIsLoaded)
         {
             this->levelHandler->UnloadCurrentLevel(this->activeObstacles, this->activeItems);
+
+            //IOManager::SaveLevelCompletions(MenuHandler*)
         }
 
         break;

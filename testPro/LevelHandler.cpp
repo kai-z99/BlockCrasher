@@ -614,7 +614,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 12:
 		this->playerSpawnpoint = { screenWidth / 2 - 85, screenHeight / 2 - 100 };
-		this->currentLevelTimeLimit = 19;
+		this->currentLevelTimeLimit = 35;
 		this->currentTrackID = 8;
 
 		//---------
@@ -626,7 +626,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		{
 			for (float j = 300; j <= screenHeight; j += 400)
 			{
-				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -3,3 }, 0.6f);
+				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -7,7 }, 0.6f);
 			}
 			
 		}
@@ -635,7 +635,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		{
 			for (float j = 150; j <= screenHeight; j += 400)
 			{
-				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -3,3 }, 1.0f);
+				this->obstacleBuilder->RainDrop(i, j, 0, 0, 0, { -7,7 }, 1.0f);
 			}
 			
 		}
@@ -652,7 +652,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 
 
-		activeItems.push_back(new StarCoin(screenWidth - 50, (screenHeight / 2)));
+		activeItems.push_back(new StarCoin(screenWidth - 200, (screenHeight / 2) + 20));
 
 		break;
 

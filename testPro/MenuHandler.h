@@ -93,7 +93,7 @@ public:
 	MenuState GetCurrentState() const;
 	void SetMenuState(MenuState state);
 	void DrawCurrentMenu(LevelHandler* levelHandler, Player* player);
-
+	std::vector<LevelButton*>& GetLevelButtons();
 
 	//----------
 	//LEVEL SELECT
