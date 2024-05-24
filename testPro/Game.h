@@ -11,6 +11,7 @@ class GeneralInputHandler;
 class LevelHandler;
 class MenuHandler;
 class SoundManager;
+class IOManager;
 
 
 class Game
@@ -34,6 +35,7 @@ protected:
 	LevelHandler* levelHandler;
 	MenuHandler* menuHandler;
 	SoundManager* soundManager;
+	IOManager* ioManager;
 
 public:
 	Game();

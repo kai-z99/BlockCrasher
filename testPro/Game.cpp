@@ -10,6 +10,7 @@
 #include "LevelStates.h"
 #include "MenuHandler.h"
 #include "SoundManager.h"
+#include "IOManager.h"
 
 Game::Game()
 {
@@ -46,26 +47,21 @@ void Game::Init()
     //this->menuHandler = new MenuHandler();
     this->levelHandler = new LevelHandler();
     this->soundManager = new SoundManager();
-
+    this->ioManager = new IOManager();
     this->player = new Player(this->levelHandler->GetPlayerSpawnpoint().x, this->levelHandler->GetPlayerSpawnpoint().y);
-
-    // new IOManager
-
-
 }
 
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Welcome");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
     this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
+    this->ioManager->LoadLevelProgress(this->menuHandler);
+    //this->ioManager->ResetLevelProgress(this->menuHandler);
     this->soundManager->PlayMusic(0); // 0: main menu track 
-
-
-    //IOManager::LoadLevelProgess(menuHandler*)
 
     while (!WindowShouldClose()) {
         frameCount++;
@@ -81,7 +77,7 @@ void Game::Run()
         this->Draw();
     }
        
-    //IOManager::SaveLevelProgress(MenuHandler*)
+    this->ioManager->SaveLevelProgress(this->menuHandler);
 
     CloseWindow();
 }
@@ -162,13 +158,12 @@ void Game::Update(unsigned int frame)
 {
     switch (this->levelHandler->GetCurrentLevelState())
     {
-    //unload level when level is compelete
+    //unload level and save level state in txt when level is compelete
     case Complete:
         if (this->levelHandler->levelIsLoaded)
         {
             this->levelHandler->UnloadCurrentLevel(this->activeObstacles, this->activeItems);
-
-            //IOManager::SaveLevelCompletions(MenuHandler*)
+            this->ioManager->SaveLevelProgress(this->menuHandler);
         }
 
         break;

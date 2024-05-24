@@ -137,6 +137,7 @@
     <ClCompile Include="DynamicShapeObstacle.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeneralInputHandler.cpp" />
+    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="LevelButton.cpp" />
     <ClCompile Include="LevelHandler.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="DynamicShapeObstacle.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GeneralInputHandler.h" />
+    <ClInclude Include="IOManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemTypes.h" />
     <ClInclude Include="LevelHandler.h" />
