@@ -15,7 +15,7 @@ void IOManager::SaveLevelProgress(MenuHandler* menuHandler)
 
     if (levelFile.is_open())
     {
-        std::vector<LevelButton*> levelButtons = menuHandler->GetLevelButtons();
+        std::vector<LevelButton*>& levelButtons = menuHandler->GetLevelButtons();
         int level = 0;
 
         for (LevelButton* b : levelButtons)
@@ -53,30 +53,33 @@ void IOManager::SaveLevelProgress(MenuHandler* menuHandler)
 void IOManager::LoadLevelProgress(MenuHandler* menuHandler)
 {
     std::ifstream levelFile(this->levelProgressFileName);
-    int level = 0;
+    
 
     if (levelFile.is_open())
     {
         std::string line;
+        std::vector<LevelButton*>& levelButtons = menuHandler->GetLevelButtons();
+        int level = 0;
+
         while (std::getline(levelFile, line))
         {
             char lastChar = line[line.size() - 1]; // this is the progress number
 
             if (lastChar == '0')
             {
-                menuHandler->GetLevelButtons()[level]->completed = false;
-                menuHandler->GetLevelButtons()[level]->starCoinCollected = false;
+                levelButtons[level]->completed = false;
+                levelButtons[level]->starCoinCollected = false;
             }
 
             else if (lastChar == '1') // line[]   '0' == 48 != 0
             {
-                menuHandler->GetLevelButtons()[level]->completed = true;
+                levelButtons[level]->completed = true;
             }
 
             else if (lastChar == '2')
             {
-                menuHandler->GetLevelButtons()[level]->completed = true;
-                menuHandler->GetLevelButtons()[level]->starCoinCollected = true;
+                levelButtons[level]->completed = true;
+                levelButtons[level]->starCoinCollected = true;
             }
 
             level++;

@@ -121,6 +121,7 @@ void GeneralInputHandler::HandleSelectLevelMenu(MenuHandler* menuHandler, LevelH
 
 		//play the level's theme
 		soundManager->PlayMusic(levelHandler->GetCurrentTrackID());
+
 	}
 
 	//check scroll down

@@ -5,12 +5,13 @@
 #include "PlayerMovementHandler.h"
 #include "GeneralInputHandler.h"
 #include "LevelHandler.h"
-#include "Obstacle.h"
-#include "CoinItem.h"
-#include "LevelStates.h"
 #include "MenuHandler.h"
 #include "SoundManager.h"
 #include "IOManager.h"
+#include "Obstacle.h"
+#include "CoinItem.h"
+#include "LevelStates.h"
+
 
 Game::Game()
 {

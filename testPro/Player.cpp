@@ -132,6 +132,12 @@ void Player::DrawHitbox()
     DrawCircleLines(x, y - 5, 1, GREEN);
 }
 
+void Player::DrawYouAreHere()
+{
+    DrawCircleLinesV(this->currentPosition, 30, RED);
+
+}
+
 void Player::SetDirection(Direction d)
 {
 	this->currentDirection = d;

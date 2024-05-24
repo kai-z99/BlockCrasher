@@ -29,6 +29,7 @@ public:
 
 	void Draw();
 	void DrawHitbox(); // debug use only DRAWS CIRCLE HITBOX IN RED, POINT HITBOX IN GREEN
+	void DrawYouAreHere();
 
 	float GetPosX();
 	float GetPosY();

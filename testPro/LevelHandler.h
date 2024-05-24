@@ -25,6 +25,7 @@ private:
 	unsigned int currentLevelTimeLimit;
 	LevelState currentLevelState;
 	int currentTrackID;
+	bool currentLevelDisplayedYouAreHere;
 
 public:
 	LevelHandler();
@@ -50,5 +51,6 @@ public:
 	
 	bool levelIsLoaded;
 	bool currentLevelStarCoinCollected;
+	
 
 };

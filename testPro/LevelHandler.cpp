@@ -1,5 +1,6 @@
 #include "Constants.h"
 #include "LevelHandler.h"
+#include "Player.h"
 #include "ObstacleBuilder.h"
 #include "Obstacle.h"
 #include "CoinItem.h"
@@ -24,6 +25,7 @@ LevelHandler::LevelHandler()
 	this->levelIsLoaded = false;
 	this->currentLevelStarCoinCollected = false;
 	this->currentTrackID = 0;
+	this->currentLevelDisplayedYouAreHere = false;
 }
 
 void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems)
@@ -370,7 +372,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 8: // Happy trees
 
-		this->playerSpawnpoint = { 200, screenHeight / 2 + 30 };
+		this->playerSpawnpoint = { 200, screenHeight / 2 };
 		this->currentLevelTimeLimit = 25;
 		this->currentTrackID = 8;
 
@@ -666,6 +668,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 	this->totalCoinsInLevel = (int)activeItems.size() - 1; //-1 because it includes starCoin
 	this->obstacleBuilder->Insert(activeObstacles);
 	this->levelIsLoaded = true;
+	this->currentLevelDisplayedYouAreHere = false; // this draws the circle after every death
 
 }
 
@@ -690,12 +693,6 @@ void LevelHandler::UnloadCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* p, MenuHandler* menuHandler, SoundManager* soundManager)
 {	
 	this->currentLevelFramecount += 1;
-
-	//start the current levels theme on frame 1
-	//if (this->currentLevelFramecount == 1)
-	//{
-	//	soundManager->PlayMusic(this->currentLevelTheme);
-	//}
 
 	//decrement timer every second (if not on fail screen)
 	if (this->currentLevelFramecount % 60 == 0 && this->currentLevelTime != 0 && this->currentLevelState == Active)
@@ -729,7 +726,17 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		soundManager->PlaySoundFile(TimesUp_Sound);
 	}
 
-	
+	// if the player hasnt moved, draw the you are here circle.
+	if (p->GetPosX() == this->playerSpawnpoint.x && p->GetPosY() == this->playerSpawnpoint.y && this->currentLevelDisplayedYouAreHere == false)
+	{
+		p->DrawYouAreHere();
+	}
+
+	else
+	{
+		this->currentLevelDisplayedYouAreHere = true;
+	}
+
 	//level specific handling
 	switch (this->currentLevel)
 	{
