@@ -20,7 +20,7 @@ void GeneralInputHandler::HandleTryAgain(LevelHandler* levelHandler, std::vector
 //check if space is pressed on level complete screen, if so go to next level
 void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, Player* player, SoundManager* soundManager)
 {
-	if (IsKeyPressed(KEY_SPACE) && levelHandler->GetCurrentLevelState() == Complete)
+	if (IsKeyPressed(KEY_SPACE) && levelHandler->GetCurrentLevelState() == Complete && levelHandler->GetCurrentLevel() < 20)
 	{
 		levelHandler->SetLevel(levelHandler->GetCurrentLevel() + 1);
 		levelHandler->ResetCurrentLevel(activeObstacles, activeItems);

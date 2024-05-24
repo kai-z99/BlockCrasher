@@ -123,12 +123,25 @@ void Game::Draw()
     {
     case Complete:
     {
-        int textWidth = MeasureText("LEVEL COMPLETE!", 50);
-        DrawText("LEVEL COMPLETE!", (screenWidth / 2) - (textWidth / 2), screenHeight / 2, 50, WHITE);
+        //DRAW LEVEL COMPELTE
+        std::string textString = "LEVEL COMPLETE";
+        int textWidth = MeasureText(textString.c_str(), 50);
+        DrawText(textString.c_str(), (screenWidth / 2) - (textWidth / 2), screenHeight / 2, 50, WHITE);
 
-        textWidth = MeasureText("Press SPACE to go to next level.", 20);
-        DrawText("Press SPACE to go to next level.", (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
+        //DRAW SUBTEXT
+        if (this->levelHandler->GetCurrentLevel() < 20)
+        {
+            textString = "Press SPACE to go to next level.";
+        }
+        else
+        {
+            textString = "Thank you for playing my game.";
+        }
+
+        textWidth = MeasureText(textString.c_str(), 20);
+        DrawText(textString.c_str(), (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
     }
+
     break;
 
     case Fail:
