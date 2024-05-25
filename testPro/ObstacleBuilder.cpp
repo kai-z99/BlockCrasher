@@ -482,6 +482,144 @@ void ObstacleBuilder::RainDrop(float x, float y, float rr, float ri, float vo, V
     this->storage.push_back(d);
 }
 
+void ObstacleBuilder::BattleShip(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale)
+{
+    std::vector<Vector2> v;
+
+    v.push_back({ 0, 0 });
+    v.push_back({ 400,0 });
+    v.push_back({ 600,200 });
+    v.push_back({ 450,200 });
+    v.push_back({ 450,250 });
+    v.push_back({ 500,250 });
+    v.push_back({ 500,300 });
+    v.push_back({ 400,300 });
+    v.push_back({ 400,200 });
+    v.push_back({ 300,200 });
+    v.push_back({ 300,225 });
+    v.push_back({ 200,225 });
+    v.push_back({ 200,200 });
+    v.push_back({ 50,200 });
+    v.push_back({ 50,500 });
+    v.push_back({ 200,500 });
+    v.push_back({ 200,540 });
+    v.push_back({ 50,540 });
+    v.push_back({ 50,600 });
+    v.push_back({ 100,650 });
+    v.push_back({ 50,650 });
+    v.push_back({ 50,700 });
+    v.push_back({ -50,700 });
+    v.push_back({ -50,650 });
+    v.push_back({ -100,650 });
+    v.push_back({ -50,600 });
+    v.push_back({ -50,540 });
+    v.push_back({ -200,540 });
+    v.push_back({ -200,500 });
+    v.push_back({ -50,500 });
+    v.push_back({ -50,200 });
+    v.push_back({ -200,200 });
+    v.push_back({ -200,350 });
+    v.push_back({ -300,350 });
+    v.push_back({ -300,300 });
+    v.push_back({ -220,300 });
+    v.push_back({ -220,200 });
+    v.push_back({ -400,200 });
+    v.push_back({ -450,250 });
+    v.push_back({ -500,200 });
+    v.push_back({ -600,200 });
+    v.push_back({ -400,0 });
+    v.push_back({ 0,0 });
+
+
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 0 * scale + x, 100 * scale + y }, v, rr, vo, vi, ri);
+    this->storage.push_back(d);
+}
+
+void ObstacleBuilder::Anchor(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale)
+{
+    std::vector<Vector2> v;
+
+    v.push_back({ 0, 0 });
+    v.push_back({ 100,0 });
+    v.push_back({ 200,100 });
+    v.push_back({ 210,90 });
+    v.push_back({ 210,120 });
+    v.push_back({ 180,120 });
+    v.push_back({ 190,110 });
+    v.push_back({ 30,70 });
+    v.push_back({ 30,210 });
+    v.push_back({ 80,210 });
+    v.push_back({ 80,200 });
+    v.push_back({ 100,200 });
+    v.push_back({ 100,240 });
+    v.push_back({ 80,240 });
+    v.push_back({ 80,230 });
+    v.push_back({ 30,240 });
+    v.push_back({ 20,300 });
+    v.push_back({ 30,320 });
+    v.push_back({ 28,330 });
+    v.push_back({ 20,342 });
+    v.push_back({ 10,348 });
+    v.push_back({ 0, 350 });
+    v.push_back({ -10, 348 });
+    v.push_back({ -20, 342 });
+    v.push_back({ -28, 330 });
+    v.push_back({ -30, 320 });
+    v.push_back({ -20, 300 });
+    v.push_back({ -30, 240 });
+    v.push_back({ -80, 230 });
+    v.push_back({ -80, 240 });
+    v.push_back({ -100, 240 });
+    v.push_back({ -100, 200 });
+    v.push_back({ -80, 200 });
+    v.push_back({ -80, 210 });
+    v.push_back({ -30, 210 });
+    v.push_back({ -30, 70 });
+    v.push_back({ -190, 110 });
+    v.push_back({ -180, 120 });
+    v.push_back({ -210, 120 });
+    v.push_back({ -210, 90 });
+    v.push_back({ -200, 100 });
+    v.push_back({ -100, 0 });
+    v.push_back({ 0, 0 });
+
+    for (Vector2& vec : v) // center at 0
+    {
+        vec.y -= 320;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x *= scale;
+        vec.y *= scale;
+    }
+
+    for (Vector2& vec : v)
+    {
+        vec.x += x;
+        vec.y += y;
+    }
+
+    DynamicShapeObstacle* d = new DynamicShapeObstacle(x, y, { 0 * scale + x, 0 * scale + y }, v, rr, vo, vi, ri);
+    this->storage.push_back(d);
+
+    CircleObstacle* c = new CircleObstacle(x + 0 * scale, y + 0 * scale, 10 * scale, vi);
+    this->storage.push_back(c);
+
+}
+
 
 
 

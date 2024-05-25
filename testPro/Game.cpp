@@ -54,8 +54,8 @@ void Game::Init()
 
 void Game::Run()
 {
-    InitWindow(screenWidth, screenHeight, "Welcome");
-    ToggleFullscreen();
+    InitWindow(screenWidth, screenHeight, "Block Crasher");
+    //ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 

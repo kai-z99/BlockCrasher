@@ -655,10 +655,6 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->NinjaStar((screenWidth) - 75, (screenHeight) - 100, 0.1f, 0.0f, 0.0f, { -1,1 }, 0.3f);
 
 
-
-
-
-
 		//this->obstacleBuilder->RotatingBar(screenWidth / 2, screenHeight / 2, -0.005, 0, 0, { 0,0 }, 18);
 		
 		//----------
@@ -676,6 +672,55 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		activeItems.push_back(new StarCoin(screenWidth - 100, (screenHeight / 2) + 20));
 
 		break;
+
+	case 13:
+		this->playerSpawnpoint = { screenWidth / 2 - 700, screenHeight / 2 + 300 };
+		this->currentLevelTimeLimit = 30;
+		this->currentTrackID = 15;
+
+		this->obstacleBuilder->BattleShip(screenWidth / 2, screenHeight / 2 + 270, 0.005f, PI, 0.015f, { 0,0 }, 1);
+
+		this->obstacleBuilder->Anchor(screenWidth / 2, 0, -0.03f, PI, 0.03f, { 1.5 * -3,1.5 * 1 }, 0.75);
+		this->obstacleBuilder->Anchor(300, 200, 0.03, PI, 0.03f, { 1.5 * -3,1.5 * 2 }, 0.75);
+		this->obstacleBuilder->Anchor(screenWidth - 300, 200, 0.03f, PI, 0.03f, { 1.5 * -3,1.5 * -1 }, 0.75);
+
+		// bot coins
+
+		//left side
+		for (float i = screenWidth / 2 - 100; i >= 100; i -= 100)
+		{
+			activeItems.push_back(new CoinItem(i, screenHeight - 150));
+		}
+
+		//right side
+		for (float i = screenWidth / 2 + 100; i <= screenWidth - 100; i += 100)
+		{
+			activeItems.push_back(new CoinItem(i, screenHeight - 150));
+		}
+
+		//top coin clusters
+		for (float i = screenWidth / 4; i <= 3 * (screenWidth / 4); i += (screenWidth / 4))
+		{
+			activeItems.push_back(new CoinItem(i, (150) + 50));
+			activeItems.push_back(new CoinItem(i, (150) - 50));
+			activeItems.push_back(new CoinItem(i + 50, (150)));
+			activeItems.push_back(new CoinItem(i - 50, (150)));
+		}
+
+		for (float i = screenWidth / 3; i <= 2 * (screenWidth / 3); i += (screenWidth / 3))
+		{
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 40));
+			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 40));
+			activeItems.push_back(new CoinItem(i + 40, (screenHeight / 2)));
+			activeItems.push_back(new CoinItem(i - 40, (screenHeight / 2)));
+			activeItems.push_back(new CoinItem(i - 100, (screenHeight / 2) - 100));
+			activeItems.push_back(new CoinItem(i + 100, (screenHeight / 2) + 100));
+			activeItems.push_back(new CoinItem(i - 100, (screenHeight / 2) + 100));
+			activeItems.push_back(new CoinItem(i + 100, (screenHeight / 2) - 100));
+		}
+
+		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight - 150));
+
 
 	default:
 
@@ -965,6 +1010,58 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 		}
 		break;
 
+	case 13:
+			
+
+			//ship check
+			activeObstacles[0]->SetPosX(activeObstacles[0]->GetPosX() + (2 * cosf(this->currentLevelFramecount * 0.01f)));
+			activeObstacles[0]->SetPosY(activeObstacles[0]->GetPosY() + (1 * sinf(this->currentLevelFramecount * 0.01f)));
+			
+
+
+
+			// Anchor check
+			for (int i = 1; i <= 5; i += 2)
+			{
+				if (activeObstacles[i]->GetPosX() < -230) // check if they hit left side of screen
+				{
+					dynamic_cast<DynamicShapeObstacle*>(activeObstacles[i])->SetPosX(screenWidth + 230);
+					dynamic_cast<DynamicShapeObstacle*>(activeObstacles[i])->SetPosY(1.7 * 240);
+					activeObstacles[i]->SetVelocity(1.5 * -3, 1.5 * -1);
+				}
+
+				else if (activeObstacles[i]->GetPosX() < screenWidth / 2) // check if they hit middle of screen
+				{
+					activeObstacles[i]->SetVelocity(1.5 * -3, 1.5 * 1);
+				}
+			}
+
+
+			//anchor circle check
+			for (int i = 2; i <= 6; i += 2)
+			{
+				if (activeObstacles[i]->GetPosX() < -230)  // check if they hit left side of screen
+				{
+					activeObstacles[i]->SetPosX(screenWidth + 230);
+					activeObstacles[i]->SetPosY(1.7 * 240);
+					activeObstacles[i]->SetVelocity(1.5 * -3, 1.5 * -1);
+				}
+
+				if (activeObstacles[i]->GetPosX() < screenWidth / 2)  // check if they hit middle of screen
+				{
+					activeObstacles[i]->SetVelocity(1.5 * -3, 1.5 * 1);
+				}
+			}
+
+
+			
+
+
+
+		break;
+
+
+		break;
 	default:
 		break;
 	}

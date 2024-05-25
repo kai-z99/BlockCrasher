@@ -67,10 +67,15 @@ SoundManager::SoundManager()
 	this->tracks.push_back(&this->IronSteelFactoryMusic);
 
 	this->HeavyBlizzardMusic = LoadMusicStream("Sounds/HeavyBlizzard_Music.mp3"); // 14
-	SetMusicVolume(this->HeavyBlizzardMusic, 0.2f);
+	SetMusicVolume(this->HeavyBlizzardMusic, 0.4f);
 	SetMusicPitch(this->HeavyBlizzardMusic, 1.25f);
 	this->tracks.push_back(&this->HeavyBlizzardMusic);
 
+	this->DreadnaughtMusic = LoadMusicStream("Sounds/Dreadnaught_Music.mp3"); // 15
+	SetMusicVolume(this->DreadnaughtMusic, 0.3f);
+	this->tracks.push_back(&this->DreadnaughtMusic);
+
+	
 	this->currentMusic = this->mainMenuMusic; // default song is main menu
 
 

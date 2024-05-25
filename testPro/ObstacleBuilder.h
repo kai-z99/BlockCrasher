@@ -25,5 +25,7 @@ public:
 	void VortexPiece(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale, Vector2 center);
 	void Hammer(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
 	void RainDrop(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
+	void BattleShip(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
+	void Anchor(float x, float y, float rr, float ri, float vo, Vector2 vi, float scale);
 
 };

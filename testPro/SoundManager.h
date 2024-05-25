@@ -37,7 +37,8 @@ private:
 	Music SwordSwingMusic;
 	Music IronSteelFactoryMusic;
 	Music HeavyBlizzardMusic;
-	
+	Music DreadnaughtMusic;
+
 	std::vector<Sound*> sounds;
 
 	Sound CoinCollectSound;
