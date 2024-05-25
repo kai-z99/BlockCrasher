@@ -616,7 +616,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 12:
 		this->playerSpawnpoint = { screenWidth / 2 - 85, screenHeight / 2 - 100 };
-		this->currentLevelTimeLimit = 20;
+		this->currentLevelTimeLimit = 19;
 		this->currentTrackID = 14;
 
 		//---------
@@ -674,7 +674,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		break;
 
 	case 13:
-		this->playerSpawnpoint = { screenWidth / 2 - 700, screenHeight / 2 + 300 };
+		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 - 250};
 		this->currentLevelTimeLimit = 30;
 		this->currentTrackID = 15;
 
@@ -684,18 +684,23 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->Anchor(300, 200, 0.03, PI, 0.03f, { 1.5 * -3,1.5 * 2 }, 0.75);
 		this->obstacleBuilder->Anchor(screenWidth - 300, 200, 0.03f, PI, 0.03f, { 1.5 * -3,1.5 * -1 }, 0.75);
 
-		// bot coins
 
-		//left side
+		//left side bot
 		for (float i = screenWidth / 2 - 100; i >= 100; i -= 100)
 		{
 			activeItems.push_back(new CoinItem(i, screenHeight - 150));
 		}
 
-		//right side
+		//right side bot
 		for (float i = screenWidth / 2 + 100; i <= screenWidth - 100; i += 100)
 		{
 			activeItems.push_back(new CoinItem(i, screenHeight - 150));
+		}
+
+		//bot middle to top
+		for (float i = screenHeight - 250; i >= 400; i -= 100)
+		{
+			activeItems.push_back(new CoinItem(screenWidth / 2, i));
 		}
 
 		//top coin clusters
@@ -709,14 +714,14 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 		for (float i = screenWidth / 3; i <= 2 * (screenWidth / 3); i += (screenWidth / 3))
 		{
-			activeItems.push_back(new CoinItem(i, (screenHeight / 2) + 40));
-			activeItems.push_back(new CoinItem(i, (screenHeight / 2) - 40));
-			activeItems.push_back(new CoinItem(i + 40, (screenHeight / 2)));
-			activeItems.push_back(new CoinItem(i - 40, (screenHeight / 2)));
-			activeItems.push_back(new CoinItem(i - 100, (screenHeight / 2) - 100));
-			activeItems.push_back(new CoinItem(i + 100, (screenHeight / 2) + 100));
-			activeItems.push_back(new CoinItem(i - 100, (screenHeight / 2) + 100));
-			activeItems.push_back(new CoinItem(i + 100, (screenHeight / 2) - 100));
+			//activeItems.push_back(new CoinItem(i, (screenHeight / 2 + 100) + 40));
+			//activeItems.push_back(new CoinItem(i, (screenHeight / 2 + 100) - 40));
+			//activeItems.push_back(new CoinItem(i + 40, (screenHeight / 2 + 100)));
+			//activeItems.push_back(new CoinItem(i - 40, (screenHeight / 2 + 100)));
+			activeItems.push_back(new CoinItem(i - 100, (screenHeight / 2 + 100) - 100));
+			activeItems.push_back(new CoinItem(i + 100, (screenHeight / 2 + 100) + 100));
+			activeItems.push_back(new CoinItem(i - 100, (screenHeight / 2 + 100) + 100));
+			activeItems.push_back(new CoinItem(i + 100, (screenHeight / 2 + 100) - 100));
 		}
 
 		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight - 150));

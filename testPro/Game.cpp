@@ -140,6 +140,12 @@ void Game::Draw()
 
         textWidth = MeasureText(textString.c_str(), 20);
         DrawText(textString.c_str(), (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
+
+        //DRAW HINT
+
+        textString = "      Hint: You can play levels in any order.\n\nJust press BACKSPACE to return to level select!";
+        textWidth = MeasureText(textString.c_str(), 18);
+        DrawText(textString.c_str(), (screenWidth / 2) - (textWidth / 2), screenHeight - 100, 18, WHITE);
     }
 
     break;

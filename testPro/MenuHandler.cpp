@@ -28,6 +28,7 @@ MenuHandler::MenuHandler()
 	this->levelSelectTitleText = "Select a Level!";
 	this->levelSelectTitleWidth = MeasureText(this->levelSelectTitleText, 75);
 	this->levelSelectInstructionText1 = "Choose a level with WASD / ARROW KEYS.\n\n     Press SPACE / ENTER to play!\n\n    Press 'C' to change player color!";
+	this->levelSelectDifficultyText = "Difficulty:";
 	
 	this->levelNames =
 	{
@@ -45,7 +46,7 @@ MenuHandler::MenuHandler()
 		"10: The Vortex",
 		"11: IronSteel Factory",
 		"12: Heavy Blizzard",
-		"13: Dreadnaught",
+		"13: Dreadnaught Seas",
 
 		"14: COMING SOON",
 		"15: COMING SOON",
@@ -142,6 +143,7 @@ void MenuHandler::DrawLevelSelectMenu()
 	this->DrawLevelSelectTitle();
 	this->DrawPageArrows();
 	this->DrawLevelSelectInstruction();
+	this->DrawDifficulty(0);
 }
 
 void MenuHandler::DrawLevelButtons(int page)
@@ -204,6 +206,76 @@ void MenuHandler::DrawPageArrows()
 void MenuHandler::DrawLevelSelectInstruction()
 {
 	DrawText(this->levelSelectInstructionText1, 20, screenHeight / 2, 20, WHITE);
+}
+
+void MenuHandler::DrawDifficulty(int type)
+{
+	// if its in levelSelect menu, write "Difficulty:"
+	if (type == 0)
+	{
+		DrawText(this->levelSelectDifficultyText, screenWidth - 300, screenHeight / 2, 20, WHITE);
+	}
+	
+	std::string difficulty;
+	Color col;
+
+	if (this->currentSelectedLevel >= 12 && this->currentSelectedLevel < 14)
+	{
+		difficulty = "Cruel";
+		col = { 105, 4, 4 , 255};
+	}
+
+	else if (this->currentSelectedLevel >= 10 && this->currentSelectedLevel < 12)
+	{
+		difficulty = "Extreme";
+		col = RED;
+	}
+
+	else if (this->currentSelectedLevel >= 7 && this->currentSelectedLevel < 10)
+	{
+		difficulty = "Insane";
+		col = { 252, 82, 3, 255 };
+	}
+
+	else if (this->currentSelectedLevel >= 5 && this->currentSelectedLevel < 7)
+	{
+		difficulty = "Very Hard";
+		col = ORANGE;
+	}
+
+	else if (this->currentSelectedLevel >= 3 && this->currentSelectedLevel < 5)
+	{
+		difficulty = "Challenging";
+		col = YELLOW;
+	}
+
+	else if (this->currentSelectedLevel >= 1 && this->currentSelectedLevel < 3)
+	{
+		difficulty = "Mild";
+		col = GREEN;
+	}
+
+	else
+	{
+		difficulty = "N/A";
+		col = GRAY;
+	}
+
+	
+
+	if (type == 0)
+	{
+		int textWidth = MeasureText(difficulty.c_str(), 40);
+		DrawText(difficulty.c_str(), (screenWidth - 250) - (textWidth / 2), screenHeight / 2 + 40, 40, col);
+	}
+
+	else
+	{
+		DrawText(difficulty.c_str(), 30, 60, 20, col);
+	}
+	
+
+
 }
 
 
@@ -331,6 +403,7 @@ void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler, Player* player)
 	case InGame:
 		this->DrawInGameTimer(levelHandler);
 		this->DrawLevelName();
+		this->DrawDifficulty(1);
 		break;
 
 	case ChooseColor:

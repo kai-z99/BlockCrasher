@@ -39,12 +39,14 @@ private:
 	void DrawLevelSelectTitle();
 	void DrawPageArrows();
 	void DrawLevelSelectInstruction();
+	void DrawDifficulty(int type); // type 0: for levelSelect, type 1: for InGame
 
 
 	const char* levelSelectTitleText;
 	int levelSelectTitleWidth;
 	
 	const char* levelSelectInstructionText1;
+	const char* levelSelectDifficultyText;
 	
 
 	//----------
