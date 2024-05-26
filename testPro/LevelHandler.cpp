@@ -108,10 +108,16 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		//----------
 
 		//big bar
-		for (float i = 190; i <= 900; i += 100)
+		for (float i = 190; i <= 390; i += 100)
 		{
 			activeItems.push_back(new CoinItem((float)screenWidth / 4 + 50, i));
 		}
+
+		for (float i = 690; i <= 890; i += 100)
+		{
+			activeItems.push_back(new CoinItem((float)screenWidth / 4 + 50, i));
+		}
+
 
 		for (float i = 180; i <= 900; i += 100)
 		{
@@ -675,8 +681,12 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 13:
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 - 250};
-		this->currentLevelTimeLimit = 30;
+		this->currentLevelTimeLimit = 27;
 		this->currentTrackID = 15;
+
+		//---------
+		//Obstacles
+		//---------
 
 		this->obstacleBuilder->BattleShip(screenWidth / 2, screenHeight / 2 + 270, 0.005f, PI, 0.015f, { 0,0 }, 1);
 
@@ -684,7 +694,10 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->Anchor(300, 200, 0.03, PI, 0.03f, { 1.5 * -3,1.5 * 2 }, 0.75);
 		this->obstacleBuilder->Anchor(screenWidth - 300, 200, 0.03f, PI, 0.03f, { 1.5 * -3,1.5 * -1 }, 0.75);
 
-
+		//----------
+		//Items
+		//----------
+		// 
 		//left side bot
 		for (float i = screenWidth / 2 - 100; i >= 100; i -= 100)
 		{
@@ -725,7 +738,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		}
 
 		activeItems.push_back(new StarCoin(screenWidth / 2, screenHeight - 150));
-
+		break;
 
 	default:
 
@@ -927,11 +940,15 @@ void LevelHandler::HandleCurrentLevel(std::vector<Obstacle*>& activeObstacles, s
 
 	case 9:
 		//hook movements
-			activeObstacles[0]->SetPosX(activeObstacles[0]->GetPosX() + (3.0f * cosf(this->currentLevelFramecount * 0.01f)));
-			activeObstacles[1]->SetPosX(activeObstacles[1]->GetPosX() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
-			activeObstacles[1]->SetPosY(activeObstacles[1]->GetPosY() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
-			activeObstacles[2]->SetPosY(activeObstacles[2]->GetPosY() + (2.0f * cosf(this->currentLevelFramecount * 0.015f)));
-			activeObstacles[3]->SetPosX(activeObstacles[3]->GetPosX() + (2.5f * cosf(this->currentLevelFramecount * 0.02f)));
+
+		activeObstacles[0]->SetPosX(activeObstacles[0]->GetPosX() + (3.0f * cosf(this->currentLevelFramecount * 0.01f)));
+
+		activeObstacles[1]->SetPosX(activeObstacles[1]->GetPosX() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
+		activeObstacles[1]->SetPosY(activeObstacles[1]->GetPosY() + (1.5f * cosf(this->currentLevelFramecount * 0.02f)));
+
+		activeObstacles[2]->SetPosY(activeObstacles[2]->GetPosY() + (2.0f * cosf(this->currentLevelFramecount * 0.015f)));
+
+		activeObstacles[3]->SetPosX(activeObstacles[3]->GetPosX() + (2.5f * cosf(this->currentLevelFramecount * 0.02f)));
 		
 		break;
 

@@ -136,12 +136,12 @@ void MenuHandler::InitLevelSelectMenuButtons()
 
 }																														
 
-void MenuHandler::DrawLevelSelectMenu()
+void MenuHandler::DrawLevelSelectMenu(unsigned int frame)
 {
 	this->DrawLevelButtons(this->currentPage);
-	this->DrawSelectedLevelIndicator();
+	this->DrawSelectedLevelIndicator(frame);
 	this->DrawLevelSelectTitle();
-	this->DrawPageArrows();
+	this->DrawPageArrows(frame);
 	this->DrawLevelSelectInstruction();
 	this->DrawDifficulty(0);
 }
@@ -163,13 +163,17 @@ void MenuHandler::DrawLevelButtons(int page)
 	}	
 }
 
-void MenuHandler::DrawSelectedLevelIndicator()
+void MenuHandler::DrawSelectedLevelIndicator(unsigned int frame)
 {
-	DrawTriangleLines(
+	//flashing white
+
+	Color col = { 255,255,255,255 * abs(sin(frame * 0.1))};
+	DrawTriangle(
+		//THIS IS CLOCKWISE (on standard axis)
 		{ 600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) }, 
 		{ 570, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) - 20},
 		{ 570, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) + 20 },
-		WHITE
+		col
 	
 	);
 }
@@ -180,26 +184,49 @@ void MenuHandler::DrawLevelSelectTitle()
 	DrawText(this->levelSelectTitleText, (screenWidth / 2) - this->levelSelectTitleWidth / 2, 100, 75, WHITE);
 }
 
-void MenuHandler::DrawPageArrows()
+void MenuHandler::DrawPageArrows(unsigned int frame)
 {
+	//flashing white
+	Color col = { 255,255,255,255 * abs(cos(frame * 0.05))};
+	
+
 	if (this->GetCurrentPage() != this->GetPageAmount()) // right arrow
 	{
-		DrawTriangleLines(
+		//inner flashing
+		DrawTriangle(
 			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 180, (screenHeight / 2) + 30},
 			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 160, (screenHeight / 2)  + 5 },
 			{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 160, (screenHeight / 2) + 55 },
-			WHITE
+			col
 		);
+
+		//white outline
+		//DrawTriangleLines(
+		//	{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 180, (screenHeight / 2) + 30 },
+		//	{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 160, (screenHeight / 2) + 5 },
+		//	{ ((float)screenWidth / 2) + (this->levelButtonWidth / 2) + 160, (screenHeight / 2) + 55 },
+		//	WHITE
+		//);
 	}
 
 	if (this->GetCurrentPage() != 1) // left arrow
 	{
-		DrawTriangleLines(
-			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 180, (screenHeight / 2) + 30 },
+		//inner flashing //THIS IS COUNTERCLOCKWISE (on standard axis)
+		DrawTriangle(
 			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 160, (screenHeight / 2) + 5 },
+			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 180, (screenHeight / 2) + 30 },
 			{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 160, (screenHeight / 2) + 55 },
-			WHITE
+			col
 		);
+
+		//white outline
+		//DrawTriangleLines(
+		//	{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 180, (screenHeight / 2) + 30 },
+		//	{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 160, (screenHeight / 2) + 5 },
+		//	{ ((float)screenWidth / 2) - (this->levelButtonWidth / 2) - 160, (screenHeight / 2) + 55 },
+		//	WHITE
+		//);
+		
 	}
 }
 
@@ -273,9 +300,6 @@ void MenuHandler::DrawDifficulty(int type)
 	{
 		DrawText(difficulty.c_str(), 30, 60, 20, col);
 	}
-	
-
-
 }
 
 
@@ -388,7 +412,7 @@ void MenuHandler::DrawChooseColorArrows()
 
 //draw menu func
 
-void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler, Player* player)
+void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler, Player* player, unsigned int frame)
 {
 	switch (this->currentState)
 	{
@@ -397,7 +421,7 @@ void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler, Player* player)
 		break;
 
 	case LevelSelect:
-		this->DrawLevelSelectMenu();
+		this->DrawLevelSelectMenu(frame);
 		break;
 
 	case InGame:

@@ -168,7 +168,7 @@ void Game::Draw()
     }
 
     //draw menu
-    this->menuHandler->DrawCurrentMenu(this->levelHandler, this->player);
+    this->menuHandler->DrawCurrentMenu(this->levelHandler, this->player, this->frameCount);
     EndDrawing();
 
 }

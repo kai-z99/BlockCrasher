@@ -32,12 +32,12 @@ private:
 	int levelButtonWidth;
 
 	void InitLevelSelectMenuButtons();
-	void DrawLevelSelectMenu();
+	void DrawLevelSelectMenu(unsigned int frame);
 
 	void DrawLevelButtons(int page);
-	void DrawSelectedLevelIndicator();
+	void DrawSelectedLevelIndicator(unsigned int frame);
 	void DrawLevelSelectTitle();
-	void DrawPageArrows();
+	void DrawPageArrows(unsigned int frame);
 	void DrawLevelSelectInstruction();
 	void DrawDifficulty(int type); // type 0: for levelSelect, type 1: for InGame
 
@@ -94,7 +94,7 @@ public:
 	MenuHandler();
 	MenuState GetCurrentState() const;
 	void SetMenuState(MenuState state);
-	void DrawCurrentMenu(LevelHandler* levelHandler, Player* player);
+	void DrawCurrentMenu(LevelHandler* levelHandler, Player* player, unsigned int frame);
 	std::vector<LevelButton*>& GetLevelButtons();
 
 	//----------
