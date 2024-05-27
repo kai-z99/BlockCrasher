@@ -7,5 +7,4 @@ enum MenuState
 	ChooseColor,
 	InGame,
 
-
 };

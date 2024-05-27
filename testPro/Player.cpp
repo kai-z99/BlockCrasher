@@ -135,8 +135,7 @@ void Player::DrawHitbox()
 void Player::DrawYouAreHere(unsigned int frame)
 {
     // flash
-    DrawCircleLinesV(this->currentPosition, 10 + (frame % 20), RED);
-
+    DrawCircleLinesV(this->currentPosition, 10.0f + (frame % 20), RED);
 }
 
 void Player::SetDirection(Direction d)
@@ -185,7 +184,7 @@ void Player::RotateColorChannels(int type)
 
 int Player::GetColorCount()
 {
-    return this->colors.size();
+    return (int)this->colors.size();
 }
 
 void Player::SetPosition(Vector2 pos)

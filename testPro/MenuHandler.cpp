@@ -71,6 +71,8 @@ MenuHandler::MenuHandler()
 	this->mainMenuTitleTextWidth = MeasureText(this->mainMenuTitleText, 80);
 	this->mainMenuSubtext = "Press Space/Enter to start!";
 	this->mainMenuSubtextWidth = MeasureText(this->mainMenuSubtext, 18);
+	this->creditsText = "Developed By: Kai Z";
+	this->creditsTextWidth = MeasureText(this->creditsText, 30);
 
 
 	//----------
@@ -167,7 +169,8 @@ void MenuHandler::DrawSelectedLevelIndicator(unsigned int frame)
 {
 	//flashing white
 
-	Color col = { 255,255,255,255 * abs(sin(frame * 0.1))};
+	Color col = { 255,255,255,(unsigned char)(255 * abs(sin(frame * 0.1)))};
+
 	DrawTriangle(
 		//THIS IS CLOCKWISE (on standard axis)
 		{ 600, (this->levelButtons[currentSelectedLevel]->GetPosY()) + ((float)this->levelButtonHeight / 2) }, 
@@ -187,7 +190,7 @@ void MenuHandler::DrawLevelSelectTitle()
 void MenuHandler::DrawPageArrows(unsigned int frame)
 {
 	//flashing white
-	Color col = { 255,255,255,255 * abs(cos(frame * 0.05))};
+	Color col = { 255,255,255,(unsigned char)(255 * abs(cos(frame * 0.05)))};
 	
 
 	if (this->GetCurrentPage() != this->GetPageAmount()) // right arrow
@@ -320,6 +323,7 @@ void MenuHandler::DrawMainMenuTitle()
 void MenuHandler::DrawMainMenuSubtext()
 {
 	DrawText(this->mainMenuSubtext, (screenWidth / 2) - (this->mainMenuSubtextWidth / 2), (screenHeight / 2) + 80, 18, WHITE);
+	DrawText(this->creditsText, screenWidth - this->creditsTextWidth - 10, screenHeight - 35, 30, WHITE);
 }
 
 //----------
@@ -406,9 +410,6 @@ void MenuHandler::DrawChooseColorArrows()
 	);
 
 }
-
-
-
 
 //draw menu func
 

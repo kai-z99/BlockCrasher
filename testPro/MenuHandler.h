@@ -58,6 +58,9 @@ private:
 	const char* mainMenuSubtext;
 	int mainMenuSubtextWidth;
 
+	const char* creditsText;
+	int creditsTextWidth;
+
 	void DrawMainMenu();
 
 	void DrawMainMenuTitle();

@@ -681,7 +681,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 
 	case 13:
 		this->playerSpawnpoint = { screenWidth / 2, screenHeight / 2 - 250};
-		this->currentLevelTimeLimit = 27;
+		this->currentLevelTimeLimit = 28; //28
 		this->currentTrackID = 15;
 
 		//---------
@@ -691,7 +691,7 @@ void LevelHandler::LoadCurrentLevel(std::vector<Obstacle*>& activeObstacles, std
 		this->obstacleBuilder->BattleShip(screenWidth / 2, screenHeight / 2 + 270, 0.005f, PI, 0.015f, { 0,0 }, 1);
 
 		this->obstacleBuilder->Anchor(screenWidth / 2, 0, -0.03f, PI, 0.03f, { 1.5 * -3,1.5 * 1 }, 0.75);
-		this->obstacleBuilder->Anchor(300, 200, 0.03, PI, 0.03f, { 1.5 * -3,1.5 * 2 }, 0.75);
+		this->obstacleBuilder->Anchor(300, 200, 0.03f, PI, 0.03f, { 1.5 * -3,1.5 * 2 }, 0.75);
 		this->obstacleBuilder->Anchor(screenWidth - 300, 200, 0.03f, PI, 0.03f, { 1.5 * -3,1.5 * -1 }, 0.75);
 
 		//----------

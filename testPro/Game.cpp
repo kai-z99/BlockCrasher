@@ -45,7 +45,7 @@ void Game::Init()
     this->collisionManager = new CollisionManager();
     this->movementHandler = new PlayerMovementHandler();
     this->inputHandler = new GeneralInputHandler();
-    //this->menuHandler = new MenuHandler();
+    //this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
     this->levelHandler = new LevelHandler();
     this->soundManager = new SoundManager();
     this->ioManager = new IOManager();
@@ -55,13 +55,12 @@ void Game::Init()
 void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Block Crasher");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     DisableCursor();
     SetTargetFPS(60);
 
     this->menuHandler = new MenuHandler(); // MeasureText only works when window is init.
     this->ioManager->LoadLevelProgress(this->menuHandler);
-    //this->ioManager->ResetLevelProgress(this->menuHandler);
     this->soundManager->PlayMusic(0); // 0: main menu track 
 
     while (!WindowShouldClose()) {
@@ -125,21 +124,23 @@ void Game::Draw()
     {
         //DRAW LEVEL COMPELTE
         std::string textString = "LEVEL COMPLETE";
+        Color col = WHITE;
         int textWidth = MeasureText(textString.c_str(), 50);
         DrawText(textString.c_str(), (screenWidth / 2) - (textWidth / 2), screenHeight / 2, 50, WHITE);
 
         //DRAW SUBTEXT
-        if (this->levelHandler->GetCurrentLevel() < 20)
+        if (this->levelHandler->GetCurrentLevel() < 13)
         {
             textString = "Press SPACE to go to next level.";
         }
         else
         {
-            textString = "Thank you for playing my game.";
+            col = GREEN;
+            textString = "Thank you! More levels coming soon!";
         }
 
         textWidth = MeasureText(textString.c_str(), 20);
-        DrawText(textString.c_str(), (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 60, 20, WHITE);
+        DrawText(textString.c_str(), (screenWidth / 2) - (textWidth / 2), (screenHeight / 2) + 60, 20, col);
 
         //DRAW HINT
 
