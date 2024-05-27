@@ -7,6 +7,7 @@
 
 IOManager::IOManager()
 {
+    // AppDataPath function in seperate file due to raylib and windows.h naming collision
     this->levelProgressFileName  = GetAppDataPath() + "/BlockCrasher/levelProgress.txt";
     std::cout << this->levelProgressFileName;
 }
