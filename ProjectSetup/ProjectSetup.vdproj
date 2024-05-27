@@ -111,12 +111,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3451DC00873643EDA2B008E211836B70"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_43F1436317B077188229D9ABF28DCE23"
         "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
         "MsmSig" = "8:_UNDEFINED"
@@ -281,6 +275,12 @@
         {
         "MsmKey" = "8:_F82F174CA0BE8B6764BCB6D37461D351"
         "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FFFA96BCACD64F0680CDBF7F77D0A8E7"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -676,26 +676,6 @@
             "TargetName" = "8:Factory_Music.mp3"
             "Tag" = "8:"
             "Folder" = "8:_27B17A87B44F48D38EF93DF25DD8B1FA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3451DC00873643EDA2B008E211836B70"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\AppData\\Roaming\\BlockCrasher\\levelProgress.txt"
-            "TargetName" = "8:levelProgress.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_89983EF28E5846FA866F126723702363"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1250,6 +1230,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FFFA96BCACD64F0680CDBF7F77D0A8E7"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\Documents\\levelProgress.txt"
+            "TargetName" = "8:levelProgress.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_89983EF28E5846FA866F126723702363"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -1340,7 +1340,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Block Crasher"
         "ProductCode" = "8:{54578094-59E3-45BC-9546-16A53E0D6349}"
-        "PackageCode" = "8:{1129B840-2D0E-47A7-9D14-E4E029F8988C}"
+        "PackageCode" = "8:{59DB9871-8C9D-4E46-BEC2-A60091BA89D1}"
         "UpgradeCode" = "8:{9D61B2A6-9D4E-4EAE-9ED2-9641996D93F5}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1351,7 +1351,7 @@
         "Manufacturer" = "8:KZ"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:ProjectSetup"
+        "Title" = "8:BlockCrasherSetup"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Kai Z"
         "Keywords" = "8:"

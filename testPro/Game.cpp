@@ -56,6 +56,7 @@ void Game::Run()
 {
     InitWindow(screenWidth, screenHeight, "Block Crasher");
     ToggleFullscreen();
+    SetExitKey(0);
     DisableCursor();
     SetTargetFPS(60);
 
@@ -65,6 +66,12 @@ void Game::Run()
 
     while (!WindowShouldClose()) {
         frameCount++;
+
+        if (IsKeyPressed(KEY_ESCAPE) && this->menuHandler->GetCurrentState() == Main)
+        {
+            break;
+        }
+
         this->HandleInput();
         this->Update(frameCount);
 
@@ -72,6 +79,7 @@ void Game::Run()
         {
             this->HandleCollisions();
         }
+
         
         
         this->Draw();
@@ -263,6 +271,8 @@ void Game::HandleInput()
     }
 
     this->inputHandler->HandleBack(this->player, this->menuHandler, this->levelHandler, this->activeObstacles, this->activeItems, this->soundManager);
+
+    
 }
 
 

@@ -14,7 +14,7 @@ MenuHandler::MenuHandler()
 	//----------
 
 	this->currentState = Main;
-	this->backButtonText = "BACKSPACE to exit.";
+	this->backButtonText = "ESC to exit.";
 	this->backButtonTextWidth = MeasureText(this->backButtonText, 20);
 
 	//----------
@@ -437,12 +437,10 @@ void MenuHandler::DrawCurrentMenu(LevelHandler* levelHandler, Player* player, un
 
 	}
 
-	//draw the go back button
-	if (this->currentState != Main)
-	{
-		this->DrawBackButton();
 
-	}
+	this->DrawBackButton();
+
+	
 }
 
 std::vector<LevelButton*>& MenuHandler::GetLevelButtons()

@@ -48,11 +48,12 @@ void GeneralInputHandler::HandleLevelComplete(MenuHandler* menuHandler, LevelHan
 
 void GeneralInputHandler::HandleBack(Player* player, MenuHandler* menuHandler, LevelHandler* levelHandler, std::vector<Obstacle*>& activeObstacles, std::vector<Item*>& activeItems, SoundManager* soundManager)
 {
-	if (IsKeyPressed(KEY_BACKSPACE))
+	if (IsKeyPressed(KEY_ESCAPE))
 	{
 		switch (menuHandler->GetCurrentState())
 		{
 		case Main:
+			//handled in Game loop
 			break;
 
 		case LevelSelect:
