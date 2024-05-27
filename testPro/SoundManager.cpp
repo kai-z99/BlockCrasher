@@ -19,12 +19,12 @@ SoundManager::SoundManager()
 	this->TutorialMusic = LoadMusicStream("Sounds/Tutorial_Music.mp3"); // 2
 	this->tracks.push_back(&this->TutorialMusic);
 
-	this->BigAndSmallMusic = LoadMusicStream("Sounds/BigAndSmall_Music.wav"); // 3
+	this->BigAndSmallMusic = LoadMusicStream("Sounds/BigAndSmall_Music.mp3"); // 3
 	SetMusicVolume(this->BigAndSmallMusic, 0.4f);
 	SetMusicPitch(this->BigAndSmallMusic, 1.2f);
 	this->tracks.push_back(&this->BigAndSmallMusic);
 
-	this->BounceDungeonMusic = LoadMusicStream("Sounds/BounceDungeon_Music.wav"); // 4
+	this->BounceDungeonMusic = LoadMusicStream("Sounds/BounceDungeon_Music.mp3"); // 4
 	this->tracks.push_back(&this->BounceDungeonMusic);
 
 	this->CubedMusic = LoadMusicStream("Sounds/Cubed_Music.mp3"); // 5
@@ -35,12 +35,12 @@ SoundManager::SoundManager()
 	this->GridLockMusic = LoadMusicStream("Sounds/GridLock_Music.mp3"); // 6
 	this->tracks.push_back(&this->GridLockMusic);
 	
-	this->DesertedMusic = LoadMusicStream("Sounds/Deserted_Music.wav"); // 7
+	this->DesertedMusic = LoadMusicStream("Sounds/Deserted_Music.mp3"); // 7
 	SetMusicVolume(this->DesertedMusic, 0.7f);
 	SetMusicPitch(this->DesertedMusic, 0.7f);
 	this->tracks.push_back(&this->DesertedMusic);
 
-	this->HappyTreeMusic = LoadMusicStream("Sounds/HappyTree_Music2.wav"); // 8
+	this->HappyTreeMusic = LoadMusicStream("Sounds/HappyTree_Music2.mp3"); // 8
 	SetMusicVolume(this->HappyTreeMusic, 0.2f);
 	SetMusicPitch(this->HappyTreeMusic, 1.25f);
 	this->tracks.push_back(&this->HappyTreeMusic);
