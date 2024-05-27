@@ -111,6 +111,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3451DC00873643EDA2B008E211836B70"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_39C1CB529E8C43C2AD86B932238C1A60"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -301,6 +307,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -317,6 +331,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -644,6 +674,26 @@
             "TargetName" = "8:Factory_Music.mp3"
             "Tag" = "8:"
             "Folder" = "8:_27B17A87B44F48D38EF93DF25DD8B1FA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3451DC00873643EDA2B008E211836B70"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\AppData\\Roaming\\BlockCrasher\\levelProgress.txt"
+            "TargetName" = "8:levelProgress.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_89983EF28E5846FA866F126723702363"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1247,6 +1297,28 @@
                     }
                 }
             }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_9C0DC4C967C54E21B6F1E82CAE4FD9AC"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_89983EF28E5846FA866F126723702363"
+                    {
+                    "Name" = "8:BlockCrasher"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_DDD2A10636AC4CB882FE37FDF4177A03"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_BC49800BA8634FE1A9117D3E4EC168B3"
             {
             "Name" = "8:#1916"
@@ -1286,7 +1358,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Block Crasher"
         "ProductCode" = "8:{54578094-59E3-45BC-9546-16A53E0D6349}"
-        "PackageCode" = "8:{E1D61F9E-7A87-49E4-BB50-B21D7FE05EC5}"
+        "PackageCode" = "8:{1129B840-2D0E-47A7-9D14-E4E029F8988C}"
         "UpgradeCode" = "8:{9D61B2A6-9D4E-4EAE-9ED2-9641996D93F5}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

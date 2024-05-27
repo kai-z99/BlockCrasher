@@ -3,11 +3,14 @@
 #include <fstream>
 #include "MenuHandler.h"
 #include "LevelButton.h"
+#include "WindowsFunctions.h"
 
 IOManager::IOManager()
 {
-    this->levelProgressFileName = "levelProgress.txt";
+    this->levelProgressFileName  = GetAppDataPath() + "/BlockCrasher/levelProgress.txt";
+    std::cout << this->levelProgressFileName;
 }
+
 
 void IOManager::SaveLevelProgress(MenuHandler* menuHandler)
 {

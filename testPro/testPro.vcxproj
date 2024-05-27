@@ -153,6 +153,7 @@
     <ClCompile Include="RectangleObstacle.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StarCoin.cpp" />
+    <ClCompile Include="WindowsFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircleObstacle.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StarCoin.h" />
+    <ClInclude Include="WindowsFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Block Crasher.rc" />
