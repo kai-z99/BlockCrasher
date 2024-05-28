@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_02BA2938F684705AEA58D38FE6403886"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0BF84939A7074600808020E269498A37"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -33,19 +27,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2058DA1D1A03EBEDD022F78532A166F0"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_245310948C3A460492B772CD292E8D68"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_24C719199A734045B788B76AF100A6C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -57,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2DE4963985C31E20CCE6E96F1951A654"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_374FC5F6BEBA463EB051A5C7BA7EB579"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -70,6 +46,12 @@
         "Entry"
         {
         "MsmKey" = "8:_38CC013108874A6983B4BE0A39375BBD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D459391A15D4340B31BA2BA90031C94"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,20 +69,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_43F1436317B077188229D9ABF28DCE23"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_46D114AB9DC343B18AB9A640CF24D335"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_490623E8B37B8D709C35D1C8EA446F72"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -135,6 +105,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6793391C5BDB49F0A90945803A6DB044"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6C0C903ABBC145BF8B116DFA78E44CB9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -159,25 +135,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_97DD7BEAE73AB53D83C000521FDD3953"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A21554BEF3705755633E11156B6D2953"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A22C3B07A88D425780C36D53B6197892"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A559201C4A1F436E9D2C26932585122E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -219,12 +177,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C636B2945D0EF3E596240B7F970CAC71"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D15B9DF439814B0FBEB28BB9FA61CEDE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -251,12 +203,6 @@
         {
         "MsmKey" = "8:_F33A2E8E88E644508A3516B6FC9E7BF7"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F82F174CA0BE8B6764BCB6D37461D351"
-        "OwnerKey" = "8:_A559201C4A1F436E9D2C26932585122E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -364,26 +310,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_02BA2938F684705AEA58D38FE6403886"
-            {
-            "SourcePath" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-stdio-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0BF84939A7074600808020E269498A37"
             {
             "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\gesture_show_eye_hand_icon_262046.ico"
@@ -424,52 +350,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2058DA1D1A03EBEDD022F78532A166F0"
-            {
-            "SourcePath" = "8:api-ms-win-crt-heap-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-heap-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_245310948C3A460492B772CD292E8D68"
             {
             "SourcePath" = "8:..\\testPro\\Sounds\\4LineClear.mp3"
             "TargetName" = "8:4LineClear.mp3"
             "Tag" = "8:"
             "Folder" = "8:_27B17A87B44F48D38EF93DF25DD8B1FA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_24C719199A734045B788B76AF100A6C7"
-            {
-            "SourcePath" = "8:..\\x64\\Debug\\raylib.dll"
-            "TargetName" = "8:raylib.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -502,26 +388,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2DE4963985C31E20CCE6E96F1951A654"
-            {
-            "SourcePath" = "8:VCRUNTIME140_1.dll"
-            "TargetName" = "8:VCRUNTIME140_1.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_374FC5F6BEBA463EB051A5C7BA7EB579"
@@ -604,26 +470,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_43F1436317B077188229D9ABF28DCE23"
-            {
-            "SourcePath" = "8:api-ms-win-crt-locale-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-locale-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46D114AB9DC343B18AB9A640CF24D335"
             {
             "SourcePath" = "8:..\\testPro\\Sounds\\Tetris.mp3"
@@ -642,26 +488,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_490623E8B37B8D709C35D1C8EA446F72"
-            {
-            "SourcePath" = "8:MSVCP140.dll"
-            "TargetName" = "8:MSVCP140.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4F9C2AB2794F45459741E11C00D1899B"
@@ -764,6 +590,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6793391C5BDB49F0A90945803A6DB044"
+            {
+            "SourcePath" = "8:..\\x64\\Release\\raylib.dll"
+            "TargetName" = "8:raylib.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C0C903ABBC145BF8B116DFA78E44CB9"
             {
             "SourcePath" = "8:..\\testPro\\Sounds\\HappyTree_Music2.mp3"
@@ -842,46 +688,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_97DD7BEAE73AB53D83C000521FDD3953"
-            {
-            "SourcePath" = "8:api-ms-win-crt-math-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-math-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A21554BEF3705755633E11156B6D2953"
-            {
-            "SourcePath" = "8:VCRUNTIME140.dll"
-            "TargetName" = "8:VCRUNTIME140.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A22C3B07A88D425780C36D53B6197892"
@@ -1024,26 +830,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C636B2945D0EF3E596240B7F970CAC71"
-            {
-            "SourcePath" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-runtime-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D15B9DF439814B0FBEB28BB9FA61CEDE"
             {
             "SourcePath" = "8:..\\testPro\\Sounds\\ViolentTides_Music.mp3"
@@ -1142,26 +928,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F82F174CA0BE8B6764BCB6D37461D351"
-            {
-            "SourcePath" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
-            "TargetName" = "8:api-ms-win-crt-filesystem-l1-1-0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F938CBF572294A73B003B3EB488CAAEB"
@@ -1314,7 +1080,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Block Crasher"
         "ProductCode" = "8:{54578094-59E3-45BC-9546-16A53E0D6349}"
-        "PackageCode" = "8:{C42FC05F-6A7F-4ECA-8814-BD27E1DB9B58}"
+        "PackageCode" = "8:{9F28AC7C-0C81-4E2E-B704-5D06DAC98CBD}"
         "UpgradeCode" = "8:{9D61B2A6-9D4E-4EAE-9ED2-9641996D93F5}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1434,7 +1200,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_640784888EBD46DC9D14500D17839CE8"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4618C0AEB9DF4AF7B0947D20672A5DEC"
             {
             "Name" = "8:Block Crasher"
             "Arguments" = "8:"
@@ -1442,13 +1208,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_A559201C4A1F436E9D2C26932585122E"
-            "Folder" = "8:_F20F528F2A704E24A95707720E1B1CB9"
+            "Target" = "8:_3D459391A15D4340B31BA2BA90031C94"
+            "Folder" = "8:_BC49800BA8634FE1A9117D3E4EC168B3"
             "WorkingFolder" = "8:_300A2D3BD82441078DB98E621D8A837F"
-            "Icon" = "8:_0BF84939A7074600808020E269498A37"
+            "Icon" = "8:_3E2DA467B868487DB95F093FAF960CE5"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F42E479190CF401FA6D7ED43412139B1"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C4CFD52E48224219BF20A75B65EAF868"
             {
             "Name" = "8:Block Crasher"
             "Arguments" = "8:"
@@ -1456,8 +1222,8 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_A559201C4A1F436E9D2C26932585122E"
-            "Folder" = "8:_BC49800BA8634FE1A9117D3E4EC168B3"
+            "Target" = "8:_3D459391A15D4340B31BA2BA90031C94"
+            "Folder" = "8:_F20F528F2A704E24A95707720E1B1CB9"
             "WorkingFolder" = "8:_300A2D3BD82441078DB98E621D8A837F"
             "Icon" = "8:_3E2DA467B868487DB95F093FAF960CE5"
             "Feature" = "8:"
@@ -1861,7 +1627,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A559201C4A1F436E9D2C26932585122E"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3D459391A15D4340B31BA2BA90031C94"
             {
             "SourcePath" = "8:..\\x64\\Release\\Block Crasher.exe"
             "TargetName" = "8:"
@@ -1881,7 +1647,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Release|x64"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{D62D6438-B4DE-489E-93F3-96429573D447}"
             "ShowKeyOutput" = "11:TRUE"
